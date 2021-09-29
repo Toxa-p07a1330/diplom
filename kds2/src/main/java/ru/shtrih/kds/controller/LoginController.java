@@ -30,16 +30,37 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@Valid @RequestBody Map<String, String> credentials) {
-        String login = credentials.get("login");
-        String pwd = credentials.get("password");
-        if (!pwd.isEmpty() && !login.isEmpty()) {
+        System.out.println("HERE");
+        String login="";
+        String pwd="";
+        try {
+            login = credentials.get("login");
+            pwd = credentials.get("password");
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
 
+        System.out.println("login");
+        System.out.println(login);
+        System.out.println("pwd");
+        System.out.println(pwd);
+        if (!pwd.isEmpty() && !login.isEmpty()) {
             Optional<User> uu = userRepository.findByLogin(login);
             if (uu.isPresent()) {
                 User u2 = uu.get();
                 String hash1 = u2.getPwd();
                 String salt = u2.getSalt();
                 String hash2 = Utils.ComputeHash(pwd, salt);
+                System.out.println("H1");
+                System.out.println(hash1);
+                System.out.println("H2");
+                System.out.println(hash2);
+                System.out.println("s");
+                System.out.println(salt);
+                String tem = Utils.ComputeHash("password", "1234");
+                System.out.println("IN BD should be");
+                System.out.println(tem);
                 if (hash1.equals(hash2)) {
                     String token = UUID.randomUUID().toString();
                     u2.setToken(token);
