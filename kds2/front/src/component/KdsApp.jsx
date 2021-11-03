@@ -38,6 +38,8 @@ import LogListComponent from "./LogListComponent";
 import ApplicationListComponent from "./ApplicationListComponent";
 import ApplicationComponent from "./ApplicationComponent";
 import DesktopOnly from "./DesktopOnly";
+import MobileOnly from "./MobileOnly";
+import SideMenu from "./SideMenu";
 
 
 class KdsApp extends Component {
@@ -55,11 +57,7 @@ class KdsApp extends Component {
             <Router history = { history }>
                 <Header/>
                 <div className="wrapper">
-                    <DesktopOnly isOpen={1}>
-                            { this.props.loggedIn &&
-                                <SideBar/>
-                            }
-                    </DesktopOnly>
+                    <SideMenu loggedIn={this.props.loggedIn}/>
                     <div id="content" className="container-fluid">
                         {this.props.message &&
                             <div className="alert alert-danger mt-1 mr-0 ml-0">{this.props.message}</div>}
