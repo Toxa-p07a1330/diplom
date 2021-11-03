@@ -6,6 +6,12 @@ import MobileOnly from "./MobileOnly";
 
 let SideMenu = (props)=>{
 
+    let hide = ()=>{
+        let context_ = JSON.parse(JSON.stringify(mobileSideMenuContext))
+        context_.data.isSideMenuExpanded = false
+        mobileSideMenuContext.setData(context_.data)
+        console.log(mobileSideMenuContext.data)
+    }
     let mobileSideMenuContext = useContext(MobileSideMenuContext)
     return <>
         <DesktopOnly isOpen={1}>
@@ -14,9 +20,11 @@ let SideMenu = (props)=>{
             }
         </DesktopOnly>
         <MobileOnly isOpen={mobileSideMenuContext.data.isSideMenuExpanded}>
-            { props.loggedIn &&
-            <SideBar/>
-            }
+            <div onClick = {hide}>
+                { props.loggedIn &&
+                <SideBar/>
+                }
+            </div>
         </MobileOnly>
     </>
 }

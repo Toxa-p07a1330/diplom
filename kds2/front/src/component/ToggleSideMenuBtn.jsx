@@ -5,6 +5,12 @@ import {MobileSideMenuContext} from "../context/MobileSideMenuContextProvider";
 let ToggleSideMenuBtn = ()=>{
 
     let mobileSideMenuContext = useContext(MobileSideMenuContext)
+    let toggle= ()=>{
+        let context_ = JSON.parse(JSON.stringify(mobileSideMenuContext))
+        context_.data.isSideMenuExpanded = !context_.data.isSideMenuExpanded
+        mobileSideMenuContext.setData(context_.data)
+        console.log(mobileSideMenuContext.data)
+    }
     return <>
         <div>
             {
@@ -15,12 +21,7 @@ let ToggleSideMenuBtn = ()=>{
                             height: "30px",
                             cursor: "pointer"
                         }}
-                             onClick={()=>{
-                                 let context_ = JSON.parse(JSON.stringify(mobileSideMenuContext))
-                                 context_.data.isSideMenuExpanded = !context_.data.isSideMenuExpanded
-                                 mobileSideMenuContext.setData(context_.data)
-                                 console.log(mobileSideMenuContext.data)
-                             }}/>
+                             onClick={toggle}/>
                     </>:
                     <>
                         <img src={hamburger} style={{
@@ -28,12 +29,7 @@ let ToggleSideMenuBtn = ()=>{
                             height: "30px",
                             cursor: "pointer"
                         }}
-                             onClick={()=>{
-                                 let context_ = JSON.parse(JSON.stringify(mobileSideMenuContext))
-                                 context_.data.isSideMenuExpanded = !context_.data.isSideMenuExpanded
-                                 mobileSideMenuContext.setData(context_.data)
-                                 console.log(mobileSideMenuContext.data)
-                             }}/>
+                             onClick={toggle}/>
                     </>
             }
         </div>

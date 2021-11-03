@@ -45,9 +45,11 @@ class Header extends React.Component {
               </>
               }
             </DesktopOnly>
-            <MobileOnly isOpen={1}>
+          { this.props.loggedIn &&
+          <MobileOnly isOpen={true}>
                 <ToggleSideMenuBtn/>
             </MobileOnly>
+          }
 
       </Navbar>
     </div>
