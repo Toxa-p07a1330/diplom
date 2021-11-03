@@ -12,6 +12,7 @@ import {
   NavLink,
   NavbarText
 } from 'reactstrap';
+import MobileOnly from "./MobileOnly";
 
 class NavigationBar extends React.Component {
 
@@ -40,6 +41,11 @@ class NavigationBar extends React.Component {
           </>
           }
         </Collapse>
+          <MobileOnly isOpen={1}>
+              <div>
+                  test
+              </div>
+          </MobileOnly>
       </Navbar>
     </div>
     );

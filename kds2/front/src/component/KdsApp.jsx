@@ -8,7 +8,7 @@ import TerminalListComponent from './TerminalListComponent';
 import TerminalComponent from './TerminalComponent';
 import { Router, Switch, Route } from "react-router-dom";
 import { SideBar } from './SideBar'
-import NavigationBar from './NavigationBar'
+import Header from './NavigationBar'
 import Home from './Home'
 import { history } from '../helpers/history'
 import {PrivateRoute} from './PrivateRoute'
@@ -52,7 +52,7 @@ class KdsApp extends Component {
         return (
         <div>
             <Router history = { history }>
-                <NavigationBar/>
+                <Header/>
                 <div className="wrapper">
                     { this.props.loggedIn &&
                     <SideBar/>
