@@ -13,6 +13,8 @@ import {
   NavbarText
 } from 'reactstrap';
 import MobileOnly from "./MobileOnly";
+import DesktopOnly from "./DesktopOnly";
+import LogoutBtn from "./LogoutBtn";
 
 class NavigationBar extends React.Component {
 
@@ -31,21 +33,17 @@ class NavigationBar extends React.Component {
     <div>
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">jTMS</NavbarBrand>
-        <Collapse navbar>
-          <Nav className="mr-auto" navbar>
-          </Nav>
-          { this.props.loggedIn &&
-          <>
-          <NavbarText>{this.props.user.login}</NavbarText>
-          <NavLink href="#" onClick={this.logout}><FontAwesomeIcon icon={faPowerOff} fixedWidth />{' '}Logout</NavLink>
-          </>
-          }
-        </Collapse>
-          <MobileOnly isOpen={1}>
-              <div>
-                  test
-              </div>
-          </MobileOnly>
+            <DesktopOnly isOpen={1}>
+              <Nav className="mr-auto" navbar>
+              </Nav>
+              { this.props.loggedIn &&
+              <>
+              <LogoutBtn/>
+              </>
+              }
+            </DesktopOnly>
+
+
       </Navbar>
     </div>
     );

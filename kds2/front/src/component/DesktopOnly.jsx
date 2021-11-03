@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-let DesktopOnly = ()=>{
+let DesktopOnly = (props)=>{
     const keyWidth = 500
-    const [isDesktop, setDesktop] = useState()
+    const [isDesktop, setDesktop] = useState(keyWidth<window.innerWidth)
     let isOpen = props.isOpen
     useEffect(()=>{
         window.addEventListener("resize", ()=>{

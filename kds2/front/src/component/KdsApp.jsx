@@ -37,6 +37,7 @@ import MerchantImportComponent from "./MerchantImportComponent";
 import LogListComponent from "./LogListComponent";
 import ApplicationListComponent from "./ApplicationListComponent";
 import ApplicationComponent from "./ApplicationComponent";
+import DesktopOnly from "./DesktopOnly";
 
 
 class KdsApp extends Component {
@@ -54,9 +55,11 @@ class KdsApp extends Component {
             <Router history = { history }>
                 <Header/>
                 <div className="wrapper">
-                    { this.props.loggedIn &&
-                    <SideBar/>
-                    }
+                    <DesktopOnly isOpen={1}>
+                            { this.props.loggedIn &&
+                                <SideBar/>
+                            }
+                    </DesktopOnly>
                     <div id="content" className="container-fluid">
                         {this.props.message &&
                             <div className="alert alert-danger mt-1 mr-0 ml-0">{this.props.message}</div>}
