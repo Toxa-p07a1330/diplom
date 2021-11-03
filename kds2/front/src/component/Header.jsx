@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPowerOff } from '@fortawesome/fontawesome-free-solid'
 import { userActions } from '../rdx/rdx';
+import hamburger from "../static/hamburger.png"
 
 import {
   Collapse,
@@ -15,8 +16,10 @@ import {
 import MobileOnly from "./MobileOnly";
 import DesktopOnly from "./DesktopOnly";
 import LogoutBtn from "./LogoutBtn";
+import {MobileSideMenuContext} from "../context/MobileSideMenuContextProvider";
+import ToggleSideMenuBtn from "./ToggleSideMenuBtn";
 
-class NavigationBar extends React.Component {
+class Header extends React.Component {
 
     constructor(props) {
       super(props);
@@ -28,7 +31,7 @@ class NavigationBar extends React.Component {
         this.props.dispatch(userActions.logout());
     }
 
- render() {
+    render() {
     return (
     <div>
       <Navbar color="light" light expand="md">
@@ -42,7 +45,9 @@ class NavigationBar extends React.Component {
               </>
               }
             </DesktopOnly>
-
+            <MobileOnly isOpen={1}>
+                <ToggleSideMenuBtn/>
+            </MobileOnly>
 
       </Navbar>
     </div>
@@ -57,4 +62,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(NavigationBar);
+export default connect(mapStateToProps)(Header);

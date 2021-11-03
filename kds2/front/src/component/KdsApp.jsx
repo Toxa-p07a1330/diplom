@@ -8,7 +8,7 @@ import TerminalListComponent from './TerminalListComponent';
 import TerminalComponent from './TerminalComponent';
 import { Router, Switch, Route } from "react-router-dom";
 import { SideBar } from './SideBar'
-import Header from './NavigationBar'
+import Header from './Header'
 import Home from './Home'
 import { history } from '../helpers/history'
 import {PrivateRoute} from './PrivateRoute'

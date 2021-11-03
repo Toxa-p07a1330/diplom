@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 let MobileOnly = (props)=>{
     const keyWidth = 500
-    const [isMobile, setMobile] = useState()
+    const [isMobile, setMobile] = useState(keyWidth>window.innerWidth)
     let isOpen = props.isOpen
     useEffect(()=>{
         window.addEventListener("resize", ()=>{
