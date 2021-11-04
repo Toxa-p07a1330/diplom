@@ -58,7 +58,10 @@ class KdsApp extends Component {
                 <Header/>
                 <div className="wrapper">
                     <SideMenu loggedIn={this.props.loggedIn}/>
-                    <div id="content" className="container-fluid">
+                    <div id="content" className="container-fluid" style={{
+                        width: "100%",
+                        boxSizing: "border-box",
+                    }}>
                         {this.props.message &&
                             <div className="alert alert-danger mt-1 mr-0 ml-0">{this.props.message}</div>}
                         <Switch>

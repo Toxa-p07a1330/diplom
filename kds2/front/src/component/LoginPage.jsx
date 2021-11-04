@@ -1,9 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import {getTranslations} from "../static/transltaions";
 import { userActions } from '../rdx/rdx';
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 class LoginPage extends React.Component {
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
     constructor(props) {
         super(props);
         // reset login status
@@ -17,6 +20,12 @@ class LoginPage extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        console.log(this.context)
+    }
+
+    componentDidMount() {
+        this.activeTranslation = getTranslations("login", this.context.data.lang);
+        console.log(this.activeTranslation)
     }
 
     handleChange(e) {
@@ -39,20 +48,20 @@ class LoginPage extends React.Component {
         const { username, password, submitted } = this.state;
         return (
             <div className="col-md-6 col-md-offset-3">
-                <h2>Login</h2>
+                <h2>{this.activeTranslation.login}</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">{this.activeTranslation.username}</label>
                         <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
                         {submitted && !username &&
-                            <div className="help-block">Username is required</div>
+                            <div className="help-block">{this.activeTranslation.name_is_required}</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">{this.activeTranslation.pass}</label>
                         <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
                         {submitted && !password &&
-                            <div className="help-block">Password is required</div>
+                            <div className="help-block">{this.activeTranslation.pass_is_required}</div>
                         }
                     </div>
                     <div className="form-group">
