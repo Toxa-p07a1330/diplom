@@ -8,6 +8,8 @@ import SelectObject from "./SelectObject";
 import PaginationComponent from "./PaginationComponent";
 import {alertActions} from "../rdx/rdx";
 import {connect} from "react-redux";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class MerchantComponent extends Component {
 
@@ -124,7 +126,10 @@ class MerchantComponent extends Component {
             })
     }
 
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
     componentDidMount() {
+        this.activeTranslation = getTranslations("merchantComponent", this.context.data.lang);
         UserDataService.retrieveAllAcquirers()
             .then((aresp) => {
                 if (parseInt(this.state.id) !== -1) {
@@ -162,19 +167,19 @@ class MerchantComponent extends Component {
         let e = null
         let errors = {}
         if (!values.name) {
-            e = 'Please enter merchant name'
+            e = this.activeTranslation.eName
         }
         else if (!values.tag) {
-            e = 'Please enter merchant tag'
+            e = this.activeTranslation.eTag
         }
         else if (values.mid && values.mid.toString().length !== 15) {
-            e = 'Merchant Id length should be 15 characters'
+            e = this.activeTranslation.idLen
         }
         else if (values.categoryCode && values.categoryCode.toString().length !== 2) {
-            e = 'Merchant category code should be 2 characters'
+            e = this.activeTranslation.codeLen
         }
         else if (!this.state.acquirer) {
-            e = 'PLease select acquirer'
+            e = this.activeTranslation.selectA
         }
         if (e != null)
             errors.error = "error"
@@ -190,8 +195,8 @@ class MerchantComponent extends Component {
             <div>
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Merchant</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                    <h3>{this.activeTranslation.title}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}</button>
                 </div>
                 <Formik
                     initialValues={{ id, name, description, nameAndLocation, mid, categoryCode, tag }}
@@ -205,31 +210,31 @@ class MerchantComponent extends Component {
                         (props) => (
                             <Form>
                                 <fieldset className="form-group">
-                                    <label>Name</label>
+                                    <label>{this.activeTranslation.Name}</label>
                                     <Field className="form-control" type="text" name="name"  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Tag</label>
+                                    <label>{this.activeTranslation.Tag}</label>
                                     <Field className="form-control" type="text" name="tag" autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Merchant ID</label>
+                                    <label>{this.activeTranslation.id}</label>
                                     <Field className="form-control" type="text" name="mid" autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Category code</label>
+                                    <label>{this.activeTranslation.code}</label>
                                     <Field className="form-control" type="text" name="categoryCode" autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Merchant name and Location</label>
+                                    <label>{this.activeTranslation.nl}</label>
                                     <Field className="form-control" type="text" name="nameAndLocation" autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Description</label>
+                                    <label>{this.activeTranslation.Description}</label>
                                     <Field className="form-control" type="text" name="description" autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Acquirer</label>
+                                    <label>{this.activeTranslation.Acquirer}</label>
                                     <div className="input-group">
                                         <Field className="form-control" type="text" name="merchant" value={this.state.acquirer ? this.state.acquirer.name : ''} disabled/>
                                         <div className="input-group-append">
@@ -247,15 +252,15 @@ class MerchantComponent extends Component {
                         { this.state.id !== -1 &&
                             <>
                             <div className="row mt-4">
-                                <h3>Merchant terminals ({this.state.merchantTermCount}):</h3>
+                                <h3>{this.activeTranslation.terminals} ({this.state.merchantTermCount}):</h3>
                                 <PaginationComponent totalRecords={this.state.merchantTermCount} pageLimit={this.state.mechantTermPageLimit} pageNeighbours={1} onPageChanged={this.onPageChanged} />
                                 <Table className="table-sm table-striped ml-2">
                                     <thead className="thead-light">
                                         <tr>
-                                            <th>Model</th>
-                                            <th>Serial number</th>
-                                            <th>Acquirer</th>
-                                            <th>TID</th>
+                                            <th>{this.activeTranslation.Model}</th>
+                                            <th>{this.activeTranslation.sn}</th>
+                                            <th>{this.activeTranslation.Acquirer}</th>
+                                            <th>{this.activeTranslation.TID}</th>
                                             <th></th>
                                         </tr>
                                     </thead>

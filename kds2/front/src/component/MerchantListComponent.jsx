@@ -5,6 +5,8 @@ import {faTrash, faEdit, faPlus, faCube} from '@fortawesome/fontawesome-free-sol
 import { Table } from 'reactstrap';
 import Alert from './Alert'
 import PaginationComponent from './PaginationComponent'
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 
 class MerchantListComponent extends Component {
@@ -74,11 +76,11 @@ class MerchantListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
-                msg = "Please confirm you will remove " + x.length + " merchants";
+                msg = this.activeTranslation.conf_m + x.length + this.activeTranslation.merchants;
             }
             else
             {
-                msg = "Please confirm you will remove merchant " + x[0].name;
+                msg = this.activeTranslation.conf_1 + x[0].name;
             }
             this.setState({ show_alert: true, selected_merchants: x, message: msg });
         }
@@ -96,8 +98,11 @@ class MerchantListComponent extends Component {
                 }
             ).catch(()=>{ this.setState( {hidden: true })});
     }
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
 
     componentDidMount() {
+        this.activeTranslation = getTranslations("merchantListComponent", this.context.data.lang);
         this.refreshMerchants()
     }
 
@@ -141,20 +146,20 @@ class MerchantListComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Merchants</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() =>  this.props.history.push(`/import/merchants`)}><FontAwesomeIcon icon={faCube}/>{' '}Import</button>
-                    <button className="btn btn-outline-secondary ml-2" onClick={this.addMerchantClicked}><FontAwesomeIcon icon={faPlus}/>{' '}Create</button>
-                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteMerchantsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Delete</button>
+                    <h3>{this.activeTranslation.Merchants}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() =>  this.props.history.push(`/import/merchants`)}><FontAwesomeIcon icon={faCube}/>{' '}{this.activeTranslation.Import}</button>
+                    <button className="btn btn-outline-secondary ml-2" onClick={this.addMerchantClicked}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.Create}</button>
+                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteMerchantsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.Delete}</button>
                 </div>
                 <div component="container">
                     <PaginationComponent totalRecords={this.state.merchantCount} pageLimit={this.state.pageLimit} pageNeighbours={1} onPageChanged={this.onPageChanged} />
                     <Table className="table-sm">
                         <thead className="thead-light">
                             <tr>
-                                <th>Tag</th>
-                                <th>Name</th>
-                                <th>Acquirer</th>
-                                <th>Merchant ID</th>
+                                <th>{this.activeTranslation.Tag}</th>
+                                <th>{this.activeTranslation.Name}</th>
+                                <th>{this.activeTranslation.Acquirer}</th>
+                                <th>{this.activeTranslation.Merchant}</th>
                                 <th>
                                     <div className="btn-toolbar pb-1">
                                         <div className="btn-group  ml-auto">
@@ -189,7 +194,7 @@ class MerchantListComponent extends Component {
                     </Table>
                 </div>
                 <Alert
-                    title="Delete merchant"
+                    title={this.activeTranslation.deleteM}
                     message={this.state.message}
                     ok={this.OnDelete}
                     close={this.CloseAlert}

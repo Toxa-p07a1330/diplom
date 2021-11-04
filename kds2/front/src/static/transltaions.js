@@ -2,6 +2,7 @@ import GroupListComponent from "../component/GroupListComponent";
 import TerminalListComponent from "../component/TerminalListComponent";
 import TemplateListComponent from "../component/TemplateListComponent";
 import ConfigPackListComponent from "../component/ConfigPackListComponent";
+import MerchantListComponent from "../component/MerchantListComponent";
 
 let translations = {
     login: {
@@ -223,26 +224,73 @@ let translations = {
         }
     },
     configPackComponent: {
-        conf_m: "Please confirm you will remove ",
-        templated: " templates",
-        conf1: "Please confirm you will remove template ",
-        enterName: 'Please enter pack name',
-        enterTag: 'Please enter tag',
-        Back: "Back",
-        Tag: "Tag",
-        Name: "Name",
-        Description: "Description",
-        Data: "Data",
-        Save: "Save",
-        title: "Include configuration templates:",
-        Add: "Add",
-        Remove: "Remove",
-        Section: "Section",
-        Stage: "Stage",
-        removeT: "Remove template from pack",
-        selectT: "Select template",
+        en :{
+            conf_m: "Please confirm you will remove ",
+            templated: " templates",
+            conf1: "Please confirm you will remove template ",
+            enterName: 'Please enter pack name',
+            enterTag: 'Please enter tag',
+            Back: "Back",
+            Tag: "Tag",
+            Name: "Name",
+            Description: "Description",
+            Data: "Data",
+            Save: "Save",
+            title: "Include configuration templates:",
+            Add: "Add",
+            Remove: "Remove",
+            Section: "Section",
+            Stage: "Stage",
+            removeT: "Remove template from pack",
+            selectT: "Select template",
+        },
+        ru: {
 
+        }
+    },
+    merchantListComponent: {
+        en: {
+            conf_m: "Please confirm you will remove ",
+            merchants: " merchants",
+            conf_1: "Please confirm you will remove merchant ",
+            Import: "Import",
+            Create: "Create",
+            Delete: "Delete",
+            Tag: "Tag",
+            Name: "Name",
+            Acquirer: "Acquirer",
+            Merchant: "Merchant ID",
+            deleteM :"Delete merchant",
+            Merchants: "Merchants",
+        },
+        ru: {
 
+        }
+    },
+    merchantComponent: {
+        en: {
+            eName: 'Please enter merchant name',
+            eTag: 'Please enter merchant tag',
+            idLen: 'Merchant Id length should be 15 characters',
+            codeLen: 'Merchant category code should be 2 characters',
+            selectA: 'PLease select acquirer',
+            title: "Merchant",
+            Back: "Back",
+            Name: "Name",
+            Tag: "Tag",
+            id: "Merchant ID",
+            code: "Category code",
+            nl: "Merchant name and Location",
+            Description: "Description",
+            Acquirer: "Acquirer",
+            terminals: "Merchant terminals",
+            Model: "Model",
+            sn: "Serial number",
+            TID: "TID",
+        },
+        ru: {
+
+        }
     }
 }
 
