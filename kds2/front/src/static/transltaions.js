@@ -1,6 +1,7 @@
 import GroupListComponent from "../component/GroupListComponent";
 import TerminalListComponent from "../component/TerminalListComponent";
 import TemplateListComponent from "../component/TemplateListComponent";
+import ConfigPackListComponent from "../component/ConfigPackListComponent";
 
 let translations = {
     login: {
@@ -200,6 +201,21 @@ let translations = {
             edit_off: " Turn editing off",
             Prettify: "Prettify",
             upload: "Upload configuration data",
+
+        },
+        ru: {
+
+        },
+    },
+    configPackListComponent: {
+        en: {
+            conf_m: "Please confirm you will delete ",
+            confs: " configurations",
+            conf1: "Please confirm you will delete configuration ",
+            title: "Configuration packages",
+            Tag: "Tag",
+            Name: "Name",
+            deleteP: "Delete pack",
 
         },
         ru: {

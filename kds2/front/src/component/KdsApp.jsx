@@ -73,6 +73,8 @@ class KdsApp extends Component {
                                 <PrivateRoute path="/terminals/:id" exact component={TerminalComponent} />
                                 <PrivateRoute path="/conftemplates/" exact component={TemplateListComponent} />
                                 <PrivateRoute path="/conftemplates/:id" component={TemplateComponent} />
+
+
                                 <PrivateRoute path="/confpacks/" exact component={ConfigPackListComponent} />
                                 <PrivateRoute path="/confpacks/:id" exact component={ConfigPackComponent} />
                                 <PrivateRoute path="/merchants/" exact component={MerchantListComponent} />

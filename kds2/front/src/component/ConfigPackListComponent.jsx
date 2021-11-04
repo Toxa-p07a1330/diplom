@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faEdit, faPlus } from '@fortawesome/fontawesome-free-solid'
 import { Table } from 'reactstrap';
 import Alert from './Alert'
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class ConfigPackListComponent extends Component {
 
@@ -64,11 +66,11 @@ class ConfigPackListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
-                msg = "Please confirm you will delete " + x.length + " configurations";
+                msg = this.activeTranslation.conf_m + x.length + this.activeTranslation.confs;
             }
             else
             {
-                msg = "Please confirm you will delete configuration " + x[0].name;
+                msg = this.activeTranslation.conf1 + x[0].name;
             }
             this.setState({ show_alert: true, selected_packs: x, message: msg });
         }
@@ -87,9 +89,13 @@ class ConfigPackListComponent extends Component {
             ).catch(()=>{ this.setState({ hidden: true })})
     }
 
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
+
     componentDidMount() {
         this.refreshConfigPacks()
-    }
+        this.activeTranslation = getTranslations("configPackListComponent", this.context.data.lang);
+        }
 
     showMessage(text)
     {
@@ -131,7 +137,7 @@ class ConfigPackListComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Configuration packages</h3>
+                    <h3>{this.activeTranslation.title}</h3>
                     <button className="btn btn-outline-secondary ml-auto" onClick={this.addConfigPackClicked}><FontAwesomeIcon icon={faPlus}/>{' '}Create</button>
                     <button className="btn btn-outline-secondary ml-2" onClick={this.deletePacksClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Delete</button>
                 </div>
@@ -139,8 +145,8 @@ class ConfigPackListComponent extends Component {
                     <Table className="table-sm">
                         <thead className="thead-light">
                             <tr>
-                                <th>Tag</th>
-                                <th>Name</th>
+                                <th>{this.activeTranslation.Tag}</th>
+                                <th>{this.activeTranslation.Name}</th>
                                 <th>
                                     <div className="btn-toolbar pb-1">
                                         <div className="btn-group  ml-auto">
@@ -173,7 +179,7 @@ class ConfigPackListComponent extends Component {
                     </Table>
                 </div>
                 <Alert
-                    title="Delete pack"
+                    title={this.activeTranslation.deleteP}
                     message={this.state.message}
                     ok={this.OnDelete}
                     close={this.CloseAlert}
