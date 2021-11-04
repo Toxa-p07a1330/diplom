@@ -221,6 +221,28 @@ let translations = {
         ru: {
 
         }
+    },
+    configPackComponent: {
+        conf_m: "Please confirm you will remove ",
+        templated: " templates",
+        conf1: "Please confirm you will remove template ",
+        enterName: 'Please enter pack name',
+        enterTag: 'Please enter tag',
+        Back: "Back",
+        Tag: "Tag",
+        Name: "Name",
+        Description: "Description",
+        Data: "Data",
+        Save: "Save",
+        title: "Include configuration templates:",
+        Add: "Add",
+        Remove: "Remove",
+        Section: "Section",
+        Stage: "Stage",
+        removeT: "Remove template from pack",
+        selectT: "Select template",
+
+
     }
 }
 

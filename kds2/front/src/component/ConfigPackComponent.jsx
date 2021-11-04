@@ -8,6 +8,8 @@ import Alert from './Alert'
 import SelectObject from "./SelectObject";
 import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class ConfigPackComponent extends Component {
 
@@ -120,11 +122,11 @@ class ConfigPackComponent extends Component {
             var msg;
             if (x.length > 1)
             {
-                msg = "Please confirm you will remove " + x.length + " templates";
+                msg = this.activeTranslation.conf_m + x.length + this.activeTranslation.templates;
             }
             else
             {
-                msg = "Please confirm you will remove template " + x[0].name;
+                msg = this.activeTranslation.conf1+ x[0].name;
             }
             this.setState({ show_alert: true, selected_templates: x, message: msg });
         }
@@ -163,7 +165,10 @@ class ConfigPackComponent extends Component {
         }
     }
 
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
     componentDidMount() {
+        this.activeTranslation = getTranslations("configPackComponent", this.context.data.lang);
         UserDataService.retrieveAllConfigTemplates()
             .then ((tresp) => {
             if (parseInt(this.state.id) === -1) {
@@ -188,10 +193,10 @@ class ConfigPackComponent extends Component {
         let e = null
         let errors = {}
         if (!values.name) {
-            e = 'Please enter pack name'
+            e = this.activeTranslation.enterName
         }
         else if (!values.tag) {
-            e = 'Please enter tag'
+            e = this.activeTranslation.enterTag
         }
         if (e != null)
             errors.error = "error"
@@ -208,7 +213,9 @@ class ConfigPackComponent extends Component {
             <div className="container">
                 <div className="row my-2 mr-0">
                     <h3>Configuration package</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}{
+                        this.activeTranslation.Back
+                    }</button>
                 </div>
                 <Formik
                     initialValues={{ id, name, description, tag }}
@@ -222,18 +229,18 @@ class ConfigPackComponent extends Component {
                         (props) => (
                             <Form>
                                 <fieldset className="form-group">
-                                    <label>Name</label>
+                                    <label>{this.activeTranslation.Name}</label>
                                     <Field className="form-control" type="text" name="name" autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Tag</label>
+                                    <label>{this.activeTranslation.Tag}</label>
                                     <Field className="form-control" type="text" name="tag" autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Description</label>
+                                    <label>{this.activeTranslation.Description}</label>
                                     <Field className="form-control" type="text" name="description" autoComplete="off"/>
                                 </fieldset>
-                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}Save</button>
+                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}{this.activeTranslation.Save}</button>
                             </Form>
                         )
                     }
@@ -241,17 +248,17 @@ class ConfigPackComponent extends Component {
 { parseInt(this.state.id) !== -1 &&
             <>
             <div className="row mt-4 mb-2 mr-0">
-                <h3>Include configuration templates:</h3>
-                <button className="btn btn-outline-secondary ml-auto" onClick={() => this.selectTemplateClicked()}><FontAwesomeIcon icon={faPlus}/>{' '}Add</button>
-                <button className="btn btn-outline-secondary ml-2" onClick={this.removeTemplatesClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Remove</button>
+                <h3>{this.activeTranslation.title}</h3>
+                <button className="btn btn-outline-secondary ml-auto" onClick={() => this.selectTemplateClicked()}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.Add}</button>
+                <button className="btn btn-outline-secondary ml-2" onClick={this.removeTemplatesClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.Remove}</button>
             </div>
             <div className="row mt-4 mx-0">
                 <Table className="table-sm ml-2 table-striped">
                     <thead className="thead-light">
                         <tr>
-                            <th>Section</th>
-                            <th>Name</th>
-                            <th>Stage</th>
+                            <th>{this.activeTranslation.Section}</th>
+                            <th>{this.activeTranslation.Name}</th>
+                            <th>{this.activeTranslation.Stage}</th>
                             <th>
                                 <div className="btn-toolbar pb-1">
                                     <div className="btn-group  ml-auto">
@@ -288,14 +295,14 @@ class ConfigPackComponent extends Component {
            }
            </div>
            <Alert
-               title="Remove template from pack"
+               title={this.activeTranslation.removeT}
                message={this.state.message}
                ok={this.removeTemplateConfirmed}
                close={this.closeAlert}
                modal={this.state.show_alert}
                arg={this.state.selected_template}/>
                 <SelectObject
-                    title="Select template"
+                    title={this.activeTranslation.selectT}
                     headers = {['Tag', 'Name', 'Stage']}
                     columns={ ['tag', 'name', 'stage']}
                     ok={this.selectTemplate}
