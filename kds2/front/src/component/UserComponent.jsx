@@ -5,6 +5,8 @@ import {alertActions} from "../rdx/rdx";
 import { connect } from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSave} from "@fortawesome/fontawesome-free-solid";
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 class UserComponent extends Component {
 
@@ -59,7 +61,10 @@ class UserComponent extends Component {
         }
     }
 
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
     componentDidMount() {
+        this.activeTranslation = getTranslations("userComponent", this.context.data.lang);
         if (parseInt(this.state.id) === -1) {
             return
         }
@@ -82,13 +87,13 @@ class UserComponent extends Component {
         let e = null
         let errors = {}
         if (!values.name) {
-            e = 'Please enter user name'
+            e = this.activeTranslation.name
         } else if (!values.login) {
-            e = 'Please enter login'
+            e = this.activeTranslation.enter_login
         }
         else if (!values.email)
         {
-            e = 'Please enter e-mail'
+            e = this.activeTranslation.enter_email
         }
         else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 e = 'Invalid email address';
@@ -130,15 +135,15 @@ class UserComponent extends Component {
                                 {this.state.error && <div className="alert alert-danger">{this.state.error}</div>}
 
                                 <fieldset className="form-group">
-                                    <label>Name</label>
+                                    <label>{this.activeTranslation.nm}</label>
                                     <Field className="form-control" type="text" name="name"  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group"{ ...( (parseInt(id) !== -1) && { disabled: true } ) } >
-                                    <label>Login</label>
+                                    <label>{this.activeTranslation.login}</label>
                                     <Field className="form-control" type="text" name="login"  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>EMail</label>
+                                    <label>{this.activeTranslation.email}</label>
                                     <Field className="form-control" type="text" name="email" validate="validateEmail"  autoComplete="off"/>
                                 </fieldset>
                               <div className="form-group form-check">
@@ -149,24 +154,24 @@ class UserComponent extends Component {
                                 {
                                 this.state.show_pwd &&
                                 <fieldset className="form-group">
-                                    <label>Password</label>
+                                    <label>{this.activeTranslation.pass}</label>
                                     <Field className="form-control" type="password" name="pwd"  autoComplete="off"/>
                                 </fieldset>
                                 }
                                 {
                                this.state.show_pwd &&
                                 <fieldset className="form-group">
-                                    <label>Repeat password</label>
+                                    <label>{this.activeTranslation.repeat}</label>
                                     <Field className="form-control" type="password" name="pwd2"  autoComplete="off"/>
                                 </fieldset>
                                 }
                                 {
                                    !this.state.show_pwd &&
                                    <fieldset className="form-group">
-                                        <button className="btn btn-outline-secondary" onClick={this.onSetPasswordClick}>Change password</button>
+                                        <button className="btn btn-outline-secondary" onClick={this.onSetPasswordClick}>{this.activeTranslation.change}</button>
                                    </fieldset>
                                 }
-                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}Save</button>
+                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}{this.activeTranslation.save}</button>
                             </Form>
                         )
                     }

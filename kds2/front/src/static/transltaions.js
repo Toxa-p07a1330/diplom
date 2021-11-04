@@ -40,6 +40,25 @@ let translations = {
             admin: "Права администратора",
             users_title: "Пользователи"
         }
+    },
+
+    userComponent: {
+        en: {
+            name: 'Please enter user name',
+            enter_login: 'Please enter login',
+            enter_email: 'Please enter e-mail',
+            nm: "Name",
+            login: "Login",
+            email: "EMail",
+            pass: "Password",
+            repeat: "Repeat password",
+            change: "Change password",
+            save: "Save",
+
+        },
+        ru: {
+
+        }
     }
 }
 
