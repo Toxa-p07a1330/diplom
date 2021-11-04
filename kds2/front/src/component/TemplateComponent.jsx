@@ -10,6 +10,8 @@ import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-textmate";
 import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 // const customTheme = {
 //   "tagColor": "#2980b9",
@@ -144,7 +146,11 @@ class TemplateComponent extends Component {
         }
     }
 
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
+
     componentDidMount() {
+        this.activeTranslation = getTranslations("templateComponent", this.context.data.lang);
         if (parseInt(this.state.id) === -1) {
             return;
         }
@@ -165,17 +171,17 @@ class TemplateComponent extends Component {
         let e = null
         let errors = {}
         if (!values.name) {
-            e = 'Template name should not be empty'
+            e = this.activeTranslation.nameAlert
         }
         else if (parseInt(values.id) !== -1 && !values.tag) {
-            e = 'Template section should not be empty'
+            e = this.activeTranslation.sectionAlert
         }
         else if (parseInt(values.id) !== -1 && !values.stage) {
-            e = 'Template stage should be defined'
+            e = this.activeTranslation.stageAlert
         }
         else  if (this.state.xml_errors)
         {
-            e = "Invalid XML. Please refer to annotations in XML editor"
+            e = this.activeTranslation.invXML
         }
         if (e != null)
             errors.error = "error"
@@ -191,8 +197,9 @@ class TemplateComponent extends Component {
             <div>
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Configuration template</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                    <h3>{this.activeTranslation.title}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}
+                        {this.activeTranslation.Back}</button>
                 </div>
                 <Formik
                     initialValues={{ id, name, stage, tag, description, xml }}
@@ -225,28 +232,29 @@ class TemplateComponent extends Component {
                                 }
                                { this.state.id && parseInt(this.state.id) !== -1 &&
                                <fieldset className="form-pack">
-                                    <label>Section</label>
+                                    <label>{this.activeTranslation.Section}</label>
                                     <Field className="form-control" type="text" name="tag" disabled/>
                                 </fieldset>
                                }
                                 <fieldset className="form-pack">
-                                    <label>Description</label>
+                                    <label>{this.activeTranslation.Description}</label>
                                     <Field className="form-control" type="text" name="description" onChange={this.handleChange} value={this.state.description}  autoComplete="off"/>
                                 </fieldset>
                                 { this.state.id && parseInt(this.state.id) !== -1 &&
                                 <>
                                     <div className="row mt-4 mb-2 ml-0 mr-0">
-                                        <label>Data</label>
+                                        <label>{this.activeTranslation.Data}</label>
                                         <button type="button" className="btn btn-outline-secondary ml-auto mb-2"
                                                 onClick={() => { this.setState({ xmlReadOnly: !this.state.xmlReadOnly })}}>
-                                            <FontAwesomeIcon icon={faEdit}/>{this.state.xmlReadOnly ? " Turn editing on" : " Turn editing off"}
+                                            <FontAwesomeIcon icon={faEdit}/>{this.state.xmlReadOnly ? this.activeTranslation.edit_on
+                                            : this.activeTranslation.edit_off}
                                         </button>
                                         <button type="button" className="btn btn-outline-secondary ml-2 mb-2"
                                                 onClick={ this.prettifyXml}>
-                                            <FontAwesomeIcon icon={faFeather}/>Prettify
+                                            <FontAwesomeIcon icon={faFeather}/>{this.activeTranslation.Prettify}
                                         </button>
                                         <label className="btn btn-outline-secondary ml-2" >
-                                            <FontAwesomeIcon icon={faUpload}/>{' '}Upload configuration data
+                                            <FontAwesomeIcon icon={faUpload}/>{' '}{this.activeTranslation.upload}
                                             <input
                                                 className="d-none"
                                                 type="file"
@@ -278,7 +286,7 @@ class TemplateComponent extends Component {
                                   </div>
                                         </>
                                         }
-                                <button className="btn btn-outline-secondary mt-2" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}Save</button>
+                                <button className="btn btn-outline-secondary mt-2" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}{this.activeTranslation.Save}</button>
                             </Form>
                         )
                     }

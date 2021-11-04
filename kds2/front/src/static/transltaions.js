@@ -179,6 +179,31 @@ let translations = {
             Section: "Section",
             Description: "Description",
             Delete: "Delete",
+        },
+        ru: {
+
+        }
+    },
+    templateComponent:{
+        en: {
+            title: "Configuration template",
+            Back: "Back",
+            nameAlert: 'Template name should not be empty',
+            sectionAlert: 'Template section should not be empty',
+            stageAlert: 'Template stage should be defined',
+            invXML: "Invalid XML. Please refer to annotations in XML editor",
+            Section: "Section",
+            Description: "Description",
+            Data: "Data",
+            Save: "Save",
+            edit_on: " Turn editing on",
+            edit_off: " Turn editing off",
+            Prettify: "Prettify",
+            upload: "Upload configuration data",
+
+        },
+        ru: {
+
         }
     }
 }
