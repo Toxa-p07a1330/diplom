@@ -14,6 +14,32 @@ let translations = {
             pass_is_required: "Password is required",
             login: "Login"
         }
+    },
+    userListComponent: {
+        en: {
+            conf_mult: "Please confirm you will delete ",
+            users: " users",
+            conf_single:"Please confirm you will delete user ",
+            create: "Create",
+            delete: "Delete",
+            name: "Name",
+            login: "Login",
+            email: "Email",
+            admin: "Admin",
+            users_title: "Users"
+        },
+        ru: {
+            conf_mult: "Пожайлуйста, подтвердите удаление ",
+            users: " пользователей",
+            conf_single:"Пожайлуйста, подтвержите удаление  ",
+            create: "Создать",
+            delete: "Удалить",
+            name: "Имя",
+            login: "Логин",
+            email: "Электронная почта",
+            admin: "Права администратора",
+            users_title: "Пользователи"
+        }
     }
 }
 

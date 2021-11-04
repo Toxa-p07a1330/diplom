@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faTrash, faEdit, faPlus} from '@fortawesome/fontawesome-free-solid'
 import { Table } from 'reactstrap';
 import Alert from './Alert'
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class UserListComponent extends Component {
 
@@ -28,6 +30,7 @@ class UserListComponent extends Component {
         this.setChecked = this.setChecked.bind(this)
         this.deleteUsersClicked = this.deleteUsersClicked.bind(this)
     }
+
 
     setChecked(v)
     {
@@ -64,11 +67,11 @@ class UserListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
-                msg = "Please confirm you will delete " + x.length + " users";
+                msg =this.activeTranslation.conf_mult + x.length + " users";
             }
             else
             {
-                msg = "Please confirm you will delete user " + x[0].name;
+                msg = this.activeTranslation.conf_single + x[0].name;
             }
             this.setState({ show_alert: true, selected_users: x, message: msg });
         }
@@ -89,9 +92,15 @@ class UserListComponent extends Component {
             .catch(()=> this.setState({ hidden: true }))
     }
 
+
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
     componentDidMount() {
         this.refreshUsers()
+        this.activeTranslation = getTranslations("userListComponent", this.context.data.lang);
+
     }
+
 
     showMessage(text)
     {
@@ -133,18 +142,18 @@ class UserListComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Users</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addUserClicked}><FontAwesomeIcon icon={faPlus}/>{' '}Create</button>
-                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteUsersClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Delete</button>
+                    <h3>{this.activeTranslation.users_title}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addUserClicked}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.create}</button>
+                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteUsersClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.delete}</button>
                 </div>
                 <div component="container">
                     <Table className="table-sm">
                         <thead className="thead-light">
                             <tr>
-                                <th>Name</th>
-                                <th>Login</th>
-                                <th>EMail</th>
-                                <th>Admin</th>
+                                <th>{this.activeTranslation.name}</th>
+                                <th>{this.activeTranslation.login}</th>
+                                <th>{this.activeTranslation.email}</th>
+                                <th>{this.activeTranslation.admin}</th>
                                 <th>
                                     <div className="btn-toolbar pb-1">
                                         <div className="btn-group  ml-auto">

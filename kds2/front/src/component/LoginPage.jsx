@@ -5,8 +5,7 @@ import { userActions } from '../rdx/rdx';
 import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 class LoginPage extends React.Component {
-    static contextType = LangSelectorContext;
-    activeTranslation = {}
+
     constructor(props) {
         super(props);
         // reset login status
@@ -20,12 +19,12 @@ class LoginPage extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        console.log(this.context)
     }
 
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
     componentDidMount() {
         this.activeTranslation = getTranslations("login", this.context.data.lang);
-        console.log(this.activeTranslation)
     }
 
     handleChange(e) {
