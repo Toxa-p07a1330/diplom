@@ -9,6 +9,8 @@ import SelectObject from "./SelectObject";
 import PaginationComponent from "./PaginationComponent";
 import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 class GroupComponent extends Component {
 
@@ -206,8 +208,10 @@ class GroupComponent extends Component {
         })
         .catch(error => {})
     }
-
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
     componentDidMount() {
+        this.activeTranslation = getTranslations("groupComponent", this.context.data.lang);
         UserDataService.retrieveAllTerminals(this.state.termPage, this.state.termPageLimit)
         .then ((presp) => {
             if (parseInt(this.state.id) === -1) {
@@ -240,10 +244,10 @@ class GroupComponent extends Component {
         let e = null
         let errors = {}
         if (!values.legend) {
-            e = 'Please enter group name'
+            e = this.activeTranslation.enterName
         }
         else if (!values.tag) {
-            e = 'Please enter tag'
+            e = this.activeTranslation.enterTag
         }
         if (e != null)
             errors.error = "error"
@@ -259,11 +263,11 @@ class GroupComponent extends Component {
             <div>
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Group</h3>
+                    <h3>{this.activeTranslation.title}</h3>
                     <button
                         className="btn btn-outline-secondary ml-auto"
                         onClick={() => this.props.history.goBack()}>
-                        <FontAwesomeIcon icon={faChevronLeft}/>{' '}Back
+                        <FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.back}
                     </button>
                 </div>
                 <Formik
@@ -278,7 +282,7 @@ class GroupComponent extends Component {
                         (props) => (
                             <Form>
                                 <fieldset className="form-group">
-                                    <label>Name</label>
+                                    <label>{this.activeTranslation.name}</label>
                                     <Field className="form-control" type="text" name="legend" autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
@@ -289,7 +293,7 @@ class GroupComponent extends Component {
                                     <label>Description</label>
                                     <Field className="form-control" type="text" name="description" autoComplete="off"/>
                                 </fieldset>
-                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}Save</button>
+                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}{this.activeTranslation.save}</button>
                             </Form>
                         )
                     }
@@ -298,17 +302,17 @@ class GroupComponent extends Component {
                             <>
                                 <div className="row mt-4 mb-2 mr-0">
                                     <h3>Terminals in the group:</h3>
-                                    <button className="btn btn-outline-secondary ml-auto" onClick={this.selectTerminalClicked}><FontAwesomeIcon icon={faPlus}/>{' '}Append</button>
-                                    <button className="btn btn-outline-secondary ml-2" onClick={this.removeTerminalsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Remove</button>
+                                    <button className="btn btn-outline-secondary ml-auto" onClick={this.selectTerminalClicked}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.append}</button>
+                                    <button className="btn btn-outline-secondary ml-2" onClick={this.removeTerminalsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.remove}</button>
                                 </div>
                                 <PaginationComponent totalRecords={this.state.groupTermCount} pageLimit={this.state.groupTermPageLimit} pageNeighbours={1} onPageChanged={this.onPageChanged} />
                                 <Table className="table-sm ml-2 table-striped">
                                     <thead className="thead-light">
                                         <tr>
-                                            <th>Model</th>
-                                            <th>Serial number</th>
-                                            <th>Acquirer</th>
-                                            <th>TID</th>
+                                            <th>{this.activeTranslation.model}</th>
+                                            <th>{this.activeTranslation.sn}</th>
+                                            <th>{this.activeTranslation.acquirer}</th>
+                                            <th>{this.activeTranslation.tid}</th>
                                             <th>
                                                 <div className="btn-toolbar pb-1">
                                                     <div className="btn-group  ml-auto">

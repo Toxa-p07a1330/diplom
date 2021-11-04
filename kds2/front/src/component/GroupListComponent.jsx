@@ -147,7 +147,7 @@ class GroupListComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Groups</h3>
+                    <h3>{this.activeTranslation.Groups}</h3>
                     <button className="btn btn-outline-secondary ml-auto" onClick={this.addGroupClicked}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.create}</button>
                     <button className="btn btn-outline-secondary ml-2" onClick={this.removeGroupsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.delete}</button>
                 </div>

@@ -71,6 +71,26 @@ let translations = {
             delete: "Delete",
             tag: "Tag",
             name: "Name",
+            Groups: "Groups"
+
+        },
+        ru: {
+
+        }
+    },
+    groupComponent: {
+        en: {
+            enterName: 'Please enter group name',
+            enterTag: 'Please enter tag',
+            title: "Group",
+            back: "Back",
+            save: "Save",
+            append: "Append",
+            remove: "Remove",
+            model: "Model",
+            sn: "Serial number",
+            acquirer: "Acquirer",
+            tid: "TID",
 
         }
     }
