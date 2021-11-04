@@ -107,10 +107,57 @@ let translations = {
             model: "Model",
             sn: "Serial number",
             acquirer: "Acquirer",
-            tid: "tid",
+            tid: "TID",
             Merchant: "Merchant",
             Configuration: "Configuration",
-            
+
+        },
+        ru: {
+
+        }
+    },
+
+    terminalComponent: {
+        en: {
+            enterSn: 'Please enter terminal serial number',
+            stageDef: 'Stage must be defined',
+            tidLen: 'Terminal Id length should be 8 characters',
+            select_model: 'Please select terminal model',
+            select_merch: 'Merchant must be defined',
+            ipCheck: 'Please enter valid IP Address',
+            xmlCheck: "Invalid XML. Please refer to annotations in XML editor",
+            Actions: "Actions",
+            Back: "Back",
+            sn: "Serial Number",
+            tn: "Terminal Number",
+            Stage: "Stage",
+            Description: "Description",
+            ip: "IP Address",
+            conf: "Configuration package",
+            Merchant: "Merchant",
+            Certificate: "Certificate",
+            Upload: "Upload",
+            private: "Private data",
+            edit_on: " Turn editing on",
+            edit_off:  " Turn editing off",
+            Prettify: "Prettify",
+            Save: "Save",
+            Create: "Create",
+            delete: "Delete",
+            Tag: "Tag",
+            Name: "Name",
+            Add: "Add",
+            Remove: "Remove",
+            participants: "Participate in groups",
+            addG: "Add to groups",
+            removeG: "Remove from groups",
+            removeT: "Remove terminal from group",
+            deleteK: "Delete key",
+            deleteA: "Delete application",
+            selectM: "Select Merchant",
+            selectG :"Select group",
+            selectA: "Select application",
+
         }
     }
 }

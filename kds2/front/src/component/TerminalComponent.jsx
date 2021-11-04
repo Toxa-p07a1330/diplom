@@ -18,6 +18,8 @@ import SelectObject from "./SelectObject";
 import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
 import AceEditor from "react-ace";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class TerminalComponent extends Component {
 
@@ -514,8 +516,10 @@ class TerminalComponent extends Component {
                 .catch(() => {})
         }
     }
-
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
     componentDidMount() {
+        this.activeTranslation = getTranslations("terminalComponent", this.context.data.lang);
         UserDataService.retrieveAllConfigPacks()
         .then((presp) => {
             UserDataService.retrieveAllGroups(1, 100)
@@ -584,27 +588,27 @@ class TerminalComponent extends Component {
         let e = null;
         let errors = {}
         if (!this.state.sn) {
-            e = 'Please enter terminal serial number'
+            e = this.activeTranslation.enterSn
         }
         else if (!this.state.stage) {
-            e = 'Stage must be defined'
+            e = this.activeTranslation.stageDef
         }
         else if (this.state.tid && this.state.tid.toString().length !== 8) {
-            e = 'Terminal Id length should be 8 characters'
+            e = this.activeTranslation.tidLen
         }
         else if (!this.state.model) {
-            e = 'Please select terminal model'
+            e = this.activeTranslation.select_model
         }
         else if (!this.state.merchant) {
-            e = 'Merchant must be defined'
+            e = this.activeTranslation.select_merch
         }
         else if (this.state.ip && !  /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(this.state.ip))
         {
-            e = 'Please enter valid IP Address'
+            e = this.activeTranslation.ipCheck
         }
         else  if (this.state.xml_errors)
         {
-            e = "Invalid XML. Please refer to annotations in XML editor"
+            e = this.activeTranslation.xmlCheck
         }
         if (e != null)
             errors.error = "error"
@@ -624,15 +628,15 @@ class TerminalComponent extends Component {
                         <>
                     <button className="btn btn-outline-secondary ml-auto"
                             onClick={() => this.props.history.push(`/terminalactions/${this.state.id}`)}>
-                        <FontAwesomeIcon icon={faBolt}/>{' '}Actions</button>
+                        <FontAwesomeIcon icon={faBolt}/>{' '}{this.activeTranslation.Actions}</button>
                     <button className="btn btn-outline-secondary ml-2" onClick={() => this.props.history.goBack()}>
-                        <FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                        <FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}</button>
                     </>
                     }
                     { parseInt(this.state.id) === -1 &&
                     <>
                         <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}>
-                            <FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                            <FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}</button>
                     </>
                     }
                 </div>
@@ -664,15 +668,15 @@ class TerminalComponent extends Component {
                                     </Field>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Serial Number</label>
+                                    <label>{this.activeTranslation.sn}</label>
                                     <Field className="form-control" type="text" name="sn" onChange={this.handleChange} value={this.state.sn} autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Terminal Number</label>
+                                    <label>{this.activeTranslation.tn}</label>
                                     <Field className="form-control" type="text" name="tid" onChange={this.handleChange} value={this.state.tid} autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Stage</label>
+                                    <label>{this.activeTranslation.Stage}</label>
                                     <div className="input-group">
                                         <Field className="form-control" type="text" name="stage" onChange={this.handleChange} value={this.state.stage} autoComplete="off"/>
                                         <div className="input-group-append">
@@ -681,15 +685,15 @@ class TerminalComponent extends Component {
                                     </div>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Description</label>
+                                    <label>{this.activeTranslation.Description}</label>
                                     <Field className="form-control" type="text" name="description" onChange={this.handleChange} value={this.state.description} autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>IP Address</label>
+                                    <label>{this.activeTranslation.ip}</label>
                                     <Field className="form-control" type="text" name="ip" onChange={this.handleChange} value={this.state.ip} autoComplete="off"/>
                                 </fieldset>
                             <fieldset className="form-group">
-                            <label>Configuration package</label>
+                            <label>{this.activeTranslation.conf}</label>
                                 <div className="input-group">
                                     <Field className="form-control" type="text" name="confpack" value={this.state.conf ? this.state.conf.name : ''} autoComplete="off" disabled/>
                                         <div className="input-group-append">
@@ -699,7 +703,7 @@ class TerminalComponent extends Component {
                                 </div>
                            </fieldset>
                             <fieldset className="form-group">
-                                <label>Merchant</label>
+                                <label>{this.activeTranslation.Merchant}</label>
                                 <div className="input-group">
                                     <Field className="form-control" type="text" name="merchant" value={this.state.merchant ? this.state.merchant.name : ''} autoComplete="off" disabled />
                                     <div className="input-group-append">
@@ -709,13 +713,13 @@ class TerminalComponent extends Component {
                                 </div>
                             </fieldset>
                             <fieldset className="form-group">
-                                <label>Certificate</label>
+                                <label>{this.activeTranslation.Certificate}</label>
                                 <div className="input-group">
                                     <Field className="form-control mb-2" type="text" name="keyloadercert" disabled
                                            onChange={this.handleChange} value={this.state.keyloadercert}/>
                                     <div className="input-group-append">
                                         <label className="btn btn-outline-secondary" >
-                                            Upload
+                                            {this.activeTranslation.Upload}
                                             <input
                                                 className="d-none"
                                                 type="file"
@@ -727,14 +731,14 @@ class TerminalComponent extends Component {
                             </fieldset>
                                 <>
                                     <div className="row mt-4 mb-2 ml-0 mr-0">
-                                        <label>Private data</label>
+                                        <label>{this.activeTranslation.private}</label>
                                         <button type="button" className="btn btn-outline-secondary ml-auto mb-2"
                                                 onClick={() => { this.setState({ xmlReadOnly: !this.state.xmlReadOnly })}}>
-                                            <FontAwesomeIcon icon={faEdit}/>{this.state.xmlReadOnly ? " Turn editing on" : " Turn editing off"}
+                                            <FontAwesomeIcon icon={faEdit}/>{this.state.xmlReadOnly ? this.activeTranslation.edit_on :this.activeTranslation.edit_off}
                                         </button>
                                         <button type="button" className="btn btn-outline-secondary ml-2 mb-2"
                                                 onClick={ this.prettifyXml}>
-                                            <FontAwesomeIcon icon={faFeather}/>Prettify
+                                            <FontAwesomeIcon icon={faFeather}/>{this.activeTranslation.Prettify}
                                         </button>
                                     </div>
 
@@ -762,7 +766,7 @@ class TerminalComponent extends Component {
                                 </>
 
 
-                                <button className="btn btn-outline-secondary mt-3" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}Save</button>
+                                <button className="btn btn-outline-secondary mt-3" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}{this.activeTranslation.Save}</button>
                             </Form>
                         )
                     }
@@ -773,14 +777,14 @@ class TerminalComponent extends Component {
                     <Tab eventKey="keys" title="Keys">
                         <div className="row mt-4 mb-2 mr-0">
                             <h3>Keys</h3>
-                            <button className="btn btn-outline-secondary ml-auto" onClick={() => this.createKeyClicked()}><FontAwesomeIcon icon={faPlus}/>{' '}Create</button>
-                            <button className="btn btn-outline-secondary ml-2" onClick={this.deleteKeysClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Delete</button>
+                            <button className="btn btn-outline-secondary ml-auto" onClick={() => this.createKeyClicked()}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.Create}</button>
+                            <button className="btn btn-outline-secondary ml-2" onClick={this.deleteKeysClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.delete}</button>
                         </div>
                         <Table className="table-sm mt-2">
                             <thead className="thead-light">
                             <tr>
-                                <th>Tag</th>
-                                <th>Name</th>
+                                <th>{this.activeTranslation.Tag}</th>
+                                <th>{this.activeTranslation.Name}</th>
                                 <th>
                                     <div className="btn-toolbar pb-1">
                                         <div className="btn-group  ml-auto">
@@ -816,14 +820,14 @@ class TerminalComponent extends Component {
                     <Tab eventKey="apps" title="Applications">
                         <div className="row mt-4 mb-2 mr-0">
                             <h3>Applications</h3>
-                            <button className="btn btn-outline-secondary ml-auto" onClick={() => this.addApplicationsClicked()}><FontAwesomeIcon icon={faPlus}/>{' '}Add</button>
-                            <button className="btn btn-outline-secondary ml-2" onClick={this.removeApplicationsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Remove</button>
+                            <button className="btn btn-outline-secondary ml-auto" onClick={() => this.addApplicationsClicked()}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.Add}</button>
+                            <button className="btn btn-outline-secondary ml-2" onClick={this.removeApplicationsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.Remove}</button>
                         </div>
                         <Table className="table-sm mt-2">
                             <thead className="thead-light">
                             <tr>
-                                <th>Tag</th>
-                                <th>Name</th>
+                                <th>{this.activeTranslation.Tag}</th>
+                                <th>{this.activeTranslation.Name}</th>
                                 <th>
                                     <div className="btn-toolbar pb-1">
                                         <div className="btn-group  ml-auto">
@@ -856,16 +860,16 @@ class TerminalComponent extends Component {
                     </Tab>
                     <Tab eventKey="groups" title="Groups">
                         <div className="row mt-4 mb-2 mr-0">
-                            <h3>Participate in groups</h3>
-                            <button className="btn btn-outline-secondary ml-auto" onClick={() => this.selectGroupClicked()}><FontAwesomeIcon icon={faPlus}/>{' '}Add to groups</button>
-                            <button className="btn btn-outline-secondary ml-2" onClick={this.removeGroupsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Remove from groups</button>
+                            <h3>{this.activeTranslation.participants}</h3>
+                            <button className="btn btn-outline-secondary ml-auto" onClick={() => this.selectGroupClicked()}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.addG}</button>
+                            <button className="btn btn-outline-secondary ml-2" onClick={this.removeGroupsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.removeG}</button>
 
                         </div>
                         <Table className="table-sm mt-2">
                             <thead className="thead-light">
                             <tr>
-                                <th>Tag</th>
-                                <th>Name</th>
+                                <th>{this.activeTranslation.Tag}</th>
+                                <th>{this.activeTranslation.Name}</th>
                                 <th>
                                     <div className="btn-toolbar pb-1">
                                         <div className="btn-group  ml-auto">
@@ -902,28 +906,28 @@ class TerminalComponent extends Component {
            }
            </div>
            <Alert
-               title="Remove terminal from group"
+               title={this.activeTranslation.removeT}
                message={this.state.message}
                ok={this.removeGroupConfirmed}
                close={this.closeAlert}
                modal={this.state.show_alert}
                arg={this.state.selected_groups}/>
             <Alert
-                    title="Delete key"
+                    title={this.activeTranslation.deleteK}
                     message={this.state.message}
                     ok={this.deleteKeyConfirmed}
                     close={this.closeKeyAlert}
                     modal={this.state.show_tkey_alert}
                     arg={this.state.selected_tkeys}/>
                 <Alert
-                    title="Delete application"
+                    title={deleteA}
                     message={this.state.message}
                     ok={this.removeApplicationsConfirmed}
                     close={this.closeApplicationAlert}
                     modal={this.state.show_application_alert}
                     arg={this.state.selected_applications}/>
                 <SelectObject
-                    title="Select Merchant"
+                    title={this.activeTranslation.selectM}
                     headers = {['Name', 'Description', 'Merchant Id']}
                     columns={ ['name', 'description', 'mid']}
                     ok={this.selectMerchant}
@@ -943,7 +947,7 @@ class TerminalComponent extends Component {
                     placeholder="Config name ..."
                     options={this.state.allpacks}/>
                 <SelectObject
-                    title="Select group"
+                    title={this.activeTranslation.selectG}
                     headers = {['Name', 'Description']}
                     columns={ ['legend', 'description']}
                     ok={this.selectGroup}
@@ -954,7 +958,7 @@ class TerminalComponent extends Component {
                     placeholder="Group name ..."
                     options={this.state.allgroups}/>
                 <SelectObject
-                    title="Select application"
+                    title={this.activeTranslation.selectA}
                     headers = {['Name', 'Tag', 'Version']}
                     columns={ ['name', 'tag', 'version']}
                     ok={this.selectApplications}
