@@ -7,6 +7,8 @@ import Alert from './Alert'
 import PaginationComponent from './PaginationComponent'
 import {alertActions} from "../rdx/rdx";
 import {connect} from "react-redux";
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 class GroupListComponent extends Component {
 
@@ -73,11 +75,11 @@ class GroupListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
-                msg = "Please confirm you will remove " + x.length + " groups";
+                msg = this.activeTranslation.conf_mult + x.length + this.activeTranslation.groups;
             }
             else
             {
-                msg = "Please confirm you will remove group " + x[0].legend;
+                msg = this.activeTranslation.conf1 + x[0].legend;
             }
             this.setState({ show_alert: true, selected_groups: x, message: msg });
         }
@@ -98,8 +100,10 @@ class GroupListComponent extends Component {
                 }
             ).catch(error=>{this.setState ({ hidden: true}) })
     }
-
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
     componentDidMount() {
+        this.activeTranslation = getTranslations("groupListComponent", this.context.data.lang);
         this.refreshGroups()
     }
 
@@ -144,16 +148,16 @@ class GroupListComponent extends Component {
             <div className="container">
                 <div className="row my-2 mr-0">
                     <h3>Groups</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addGroupClicked}><FontAwesomeIcon icon={faPlus}/>{' '}Create</button>
-                    <button className="btn btn-outline-secondary ml-2" onClick={this.removeGroupsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Delete</button>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addGroupClicked}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.create}</button>
+                    <button className="btn btn-outline-secondary ml-2" onClick={this.removeGroupsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.delete}</button>
                 </div>
                 <div component="container">
                     <PaginationComponent totalRecords={this.state.groupCount} pageLimit={this.state.pageLimit} pageNeighbours={1} onPageChanged={this.onPageChanged} />
                     <Table className="table-sm">
                         <thead className="thead-light">
                             <tr>
-                                <th>Tag</th>
-                                <th>Name</th>
+                                <th>{this.activeTranslation.tag}</th>
+                                <th>{this.activeTranslation.name}</th>
                                 <th>
                                     <div className="btn-toolbar pb-1">
                                         <div className="btn-group  ml-auto">

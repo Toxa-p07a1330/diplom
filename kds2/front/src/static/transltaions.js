@@ -1,3 +1,5 @@
+import GroupListComponent from "../component/GroupListComponent";
+
 let translations = {
     login: {
         ru: {
@@ -57,6 +59,18 @@ let translations = {
 
         },
         ru: {
+
+        }
+    },
+    groupListComponent: {
+        en: {
+            conf_mult: "Please confirm you will remove ",
+            groups: " groups",
+            conf1:  "Please confirm you will remove group ",
+            create: "Create",
+            delete: "Delete",
+            tag: "Tag",
+            name: "Name",
 
         }
     }
