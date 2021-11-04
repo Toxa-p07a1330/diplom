@@ -44,9 +44,8 @@ function login(username, password) {
                 }
             )
             .catch( () => {
-                //const err = 'Authorization failed';
-                //dispatch(failure(err));
-                //dispatch(error(err));
+                const err = 'Authorization failed';
+                dispatch(error(err));
             });
     };
 
