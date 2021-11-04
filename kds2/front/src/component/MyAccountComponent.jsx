@@ -3,6 +3,8 @@ import { Formik, Form, Field } from 'formik';
 import UserDataService from '../service/UserDataService';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft} from "@fortawesome/fontawesome-free-solid";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class MyAccountComponent extends Component {
 
@@ -43,7 +45,10 @@ class MyAccountComponent extends Component {
             })
     }
 
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
     componentDidMount() {
+        this.activeTranslation = getTranslations("myAccountComponent", this.context.data.lang);
         UserDataService.retrieveUser(this.state.id)
             .then(response => this.setState({
                 name: response.data.name,
@@ -64,11 +69,11 @@ class MyAccountComponent extends Component {
         if (values.pwd)
         {
             if (values.pwd2.length < 8)
-                e = 'Password length should be 8 or greater'
+                e = this.activeTranslation.pwdCheck
             else if (!values.pwd2)
-                e = 'Please repeat password'
+                e = this.activeTranslation.repeat
             else if (values.pwd !== values.pwd2)
-                e = 'Passwords do not match'
+                e = this.activeTranslation.match
         }
         if (e != null)
             errors.error = "error"
@@ -82,8 +87,8 @@ class MyAccountComponent extends Component {
             <div>
                 <div className="container">
                     <div className="row my-2 mr-0">
-                        <h3>My Account</h3>
-                        <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                        <h3>{this.activeTranslation.title}</h3>
+                        <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}</button>
                     </div>
                 <Formik
                     initialValues={{ id, name, login, email, pwd, pwd2, admin }}
@@ -97,45 +102,45 @@ class MyAccountComponent extends Component {
                         (props) => (
                             <Form>
                                 {this.state.error && <div className="alert alert-danger">{this.state.error}</div>}
-                                {this.state.account_updated && <div className="alert btn-outline-secondary">Account information is updated</div>}
+                                {this.state.account_updated && <div className="alert btn-outline-secondary">{this.activeTranslation.update}</div>}
                                 <fieldset className="form-group">
-                                    <label>Name</label>
+                                    <label>{this.activeTranslation.Name}</label>
                                     <Field className="form-control" type="text" name="name" disabled/>
                                 </fieldset>
                                 <fieldset className="form-group" disabled >
-                                    <label>Login</label>
+                                    <label>{this.activeTranslation.Login}</label>
                                     <Field className="form-control" type="text" name="login" />
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>EMail</label>
+                                    <label>{this.activeTranslation.EMail}</label>
                                     <Field className="form-control" type="text" name="email" disabled validate="validateEmail"/>
                                 </fieldset>
                               <div className="form-group form-check">
                                   <Field type="checkbox" name="admin" className="form-check-input" disabled />
-                                  <label htmlFor="admin" className="form-check-label">User is administrator</label>
+                                  <label htmlFor="admin" className="form-check-label">{this.activeTranslation.admin}</label>
                               </div>
 
                                 {
                                 this.state.show_pwd &&
                                 <fieldset className="form-group">
-                                    <label>Password</label>
+                                    <label>{this.activeTranslation.Password}</label>
                                     <Field className="form-control" type="password" name="pwd"/>
                                 </fieldset>
                                 }
                                 {
                                this.state.show_pwd &&
                                 <fieldset className="form-group">
-                                    <label>Repeat password</label>
+                                    <label>{this.activeTranslation.repeatPass}</label>
                                     <Field className="form-control" type="password" name="pwd2"/>
                                 </fieldset>
                                 }
                                 {
                                    !this.state.show_pwd &&
                                    <fieldset className="form-group">
-                                        <button className="btn btn-outline-secondary" onClick={this.onSetPasswordClick}>Change password</button>
+                                        <button className="btn btn-outline-secondary" onClick={this.onSetPasswordClick}>{this.activeTranslation.change}</button>
                                    </fieldset>
                                 }
-                                <button className="btn btn-outline-secondary" type="submit">Save</button>
+                                <button className="btn btn-outline-secondary" type="submit">{this.activeTranslation.save}</button>
                             </Form>
                         )
                     }

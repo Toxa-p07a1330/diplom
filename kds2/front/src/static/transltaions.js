@@ -3,6 +3,7 @@ import TerminalListComponent from "../component/TerminalListComponent";
 import TemplateListComponent from "../component/TemplateListComponent";
 import ConfigPackListComponent from "../component/ConfigPackListComponent";
 import MerchantListComponent from "../component/MerchantListComponent";
+import MyAccountComponent from "../component/MyAccountComponent";
 
 let translations = {
     login: {
@@ -289,6 +290,25 @@ let translations = {
             TID: "TID",
         },
         ru: {
+
+        }
+    },
+    myAccountComponent: {
+        en: {
+            pwdCheck: 'Password length should be 8 or greater',
+            repeat: 'Please repeat password',
+            match: 'Passwords do not match',
+            Back: "Back",
+            title: "My Account",
+            update: "Account information is updated",
+            Name: "Name",
+            Login: "Login",
+            EMail: "EMail",
+            admin: "User is administrator",
+            Password: "Password",
+            repeatPass: "Repeat password",
+            change: "Change password",
+            save: "Save",
 
         }
     }
