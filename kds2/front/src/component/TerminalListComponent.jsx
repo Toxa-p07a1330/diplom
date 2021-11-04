@@ -5,6 +5,8 @@ import {faTrash, faEdit, faPlus, faPlay, faCube} from '@fortawesome/fontawesome-
 import { Table } from 'reactstrap';
 import Alert from './Alert'
 import PaginationComponent from "./PaginationComponent";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class TerminalListComponent extends Component {
 
@@ -71,11 +73,11 @@ class TerminalListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
-                msg = "Please confirm you will delete " + x.length + " terminals";
+                msg = this.activeTranslation.conf_m + x.length + this.activeTranslation.terms;
             }
             else
             {
-                msg = "Please confirm you will delete terminal " + x[0].sn;
+                msg = this.activeTranslation.conf1+ x[0].sn;
             }
             this.setState({ show_alert: true, selected_terminals: x, message: msg });
         }
@@ -103,7 +105,10 @@ class TerminalListComponent extends Component {
 
     componentDidMount() {
         this.refreshTerminals()
+        this.activeTranslation = getTranslations("terminalListComponent", this.context.data.lang);
     }
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
 
     showMessage(text)
     {
@@ -149,10 +154,10 @@ class TerminalListComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Terminals</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() =>  this.props.history.push(`/import/terminals`)}><FontAwesomeIcon icon={faCube}/>{' '}Import</button>
-                    <button className="btn btn-outline-secondary ml-2" onClick={this.addTerminalClicked}><FontAwesomeIcon icon={faPlus}/>{' '}Create</button>
-                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteTerminalsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Delete</button>
+                    <h3>{this.activeTranslation.terminals}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() =>  this.props.history.push(`/import/terminals`)}><FontAwesomeIcon icon={faCube}/>{' '}{this.activeTranslation.import}</button>
+                    <button className="btn btn-outline-secondary ml-2" onClick={this.addTerminalClicked}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.create}</button>
+                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteTerminalsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.delete}</button>
 
                 </div>
                 <div component="container">
@@ -160,12 +165,12 @@ class TerminalListComponent extends Component {
                     <Table className="table-sm">
                         <thead className="thead-light">
                             <tr>
-                                <th>Model</th>
-                                <th>Serial number</th>
-                                <th>Acquirer</th>
-                                <th>TID</th>
-                                <th>Merchant</th>
-                                <th>Configuration</th>
+                                <th>{this.activeTranslation.model}</th>
+                                <th>{this.activeTranslation.sn}</th>
+                                <th>{this.activeTranslation.acquirer}</th>
+                                <th>{this.activeTranslation.tid}</th>
+                                <th>{this.activeTranslation.Merchant}</th>
+                                <th>{this.activeTranslation.Configuration}</th>
                                 <th>
                                     <div className="btn-toolbar pb-1">
                                         <div className="btn-group  ml-auto">

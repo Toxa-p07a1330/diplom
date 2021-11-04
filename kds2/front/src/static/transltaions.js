@@ -1,4 +1,5 @@
 import GroupListComponent from "../component/GroupListComponent";
+import TerminalListComponent from "../component/TerminalListComponent";
 
 let translations = {
     login: {
@@ -92,6 +93,24 @@ let translations = {
             acquirer: "Acquirer",
             tid: "TID",
 
+        }
+    },
+    terminalListComponent: {
+        en: {
+            conf_m: "Please confirm you will delete ",
+            terms: " terminals",
+            conf1: "Please confirm you will delete terminal ",
+            terminals: "Terminals",
+            import: "Import",
+            create: "Create",
+            delete: "Delete",
+            model: "Model",
+            sn: "Serial number",
+            acquirer: "Acquirer",
+            tid: "tid",
+            Merchant: "Merchant",
+            Configuration: "Configuration",
+            
         }
     }
 }
