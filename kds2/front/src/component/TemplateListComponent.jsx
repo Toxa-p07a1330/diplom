@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faTrash, faEdit, faPlus} from '@fortawesome/fontawesome-free-solid'
 import { Table } from 'reactstrap';
 import Alert from './Alert'
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class TemplateListComponent extends Component {
 
@@ -52,6 +54,13 @@ class TemplateListComponent extends Component {
         this.setChecked(isChecked);
     }
 
+    componentDidMount() {
+        this.refreshTemplates()
+        this.activeTranslation = getTranslations("templateListComponent", this.context.data.lang);
+    }
+    static contextType = LangSelectorContext;
+    activeTranslation = {}
+
     deleteTemplatesClicked() {
         let x = [];
         this.state.templates.map ((t, idx) => {
@@ -64,11 +73,11 @@ class TemplateListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
-                msg = "Please confirm you will delete " + x.length + " templates";
+                msg = this.activeTranslation.conf_m + x.length + this.activeTranslation.temps;
             }
             else
             {
-                msg = "Please confirm you will delete template " + x[0].name;
+                msg = this.activeTranslation.conf1 + x[0].name;
             }
             this.setState({ show_alert: true, selected_templates: x, message: msg });
         }
@@ -90,9 +99,7 @@ class TemplateListComponent extends Component {
             .catch(()=>{ this.setState({ hidden: true})})
     }
 
-    componentDidMount() {
-        this.refreshTemplates()
-    }
+
 
     showMessage(text)
     {
@@ -134,18 +141,18 @@ class TemplateListComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Configuration templates</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addTemplateClicked}><FontAwesomeIcon icon={faPlus}/>{' '}Create</button>
-                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteTemplatesClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Delete</button>
+                    <h3>{this.activeTranslation.title}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addTemplateClicked}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.Create}</button>
+                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteTemplatesClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.Delete}</button>
                 </div>
                 <div component="container">
                     <Table className="table-sm">
                         <thead className="thead-light">
                             <tr>
-                                <th>Name</th>
-                                <th>Stage</th>
-                                <th>Section</th>
-                                <th>Description</th>
+                                <th>{this.activeTranslation.Name}</th>
+                                <th>{this.activeTranslation.Stage}</th>
+                                <th>{this.activeTranslation.Section}</th>
+                                <th>{this.activeTranslation.Description}</th>
                                 <th>
                                     <div className="btn-toolbar pb-1">
                                         <div className="btn-group  ml-auto">

@@ -1,5 +1,6 @@
 import GroupListComponent from "../component/GroupListComponent";
 import TerminalListComponent from "../component/TerminalListComponent";
+import TemplateListComponent from "../component/TemplateListComponent";
 
 let translations = {
     login: {
@@ -157,7 +158,27 @@ let translations = {
             selectM: "Select Merchant",
             selectG :"Select group",
             selectA: "Select application",
+        },
+        ru: {
 
+        }
+    },
+    templateListComponent: {
+        en: {
+            conf_m:"Please confirm you will delete ",
+            temps: " templates",
+            conf1: "Please confirm you will delete template ",
+            title: "Configuration templates",
+            Create: "Create",
+            delete: "Delete",
+            Tag: "Tag",
+            Name: "Name",
+            Add: "Add",
+            Remove: "Remove",
+            Stage: "Stage",
+            Section: "Section",
+            Description: "Description",
+            Delete: "Delete",
         }
     }
 }

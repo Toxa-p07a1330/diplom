@@ -920,7 +920,7 @@ class TerminalComponent extends Component {
                     modal={this.state.show_tkey_alert}
                     arg={this.state.selected_tkeys}/>
                 <Alert
-                    title={deleteA}
+                    title={this.activeTranslation.deleteA}
                     message={this.state.message}
                     ok={this.removeApplicationsConfirmed}
                     close={this.closeApplicationAlert}
