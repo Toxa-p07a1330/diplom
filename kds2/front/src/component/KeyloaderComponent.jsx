@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronLeft, faSave} from '@fortawesome/fontawesome-free-solid'
 import {alertActions} from "../rdx/rdx";
 import {connect} from "react-redux";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class KeyloaderComponent extends Component {
 
@@ -56,7 +58,11 @@ class KeyloaderComponent extends Component {
         }
     }
 
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("keyloaderComponent", this.context.data.lang);
+        this.forceUpdate();
         if (parseInt(this.state.id) !== -1) {
             UserDataService.retrieveKeyloader(this.state.id)
                 .then((response) => {
@@ -76,13 +82,13 @@ class KeyloaderComponent extends Component {
         let e = null
         let errors = {}
         if (!values.name) {
-            e = 'Please enter keyloader name'
+            e = this.activeTranslation.enterN
         }
         else if (!values.url) {
-            e = 'Please enter keyloader URL'
+            e = this.activeTranslation.enterU
         }
         else if (!values.sn) {
-            e = 'Please enter keyloader serial number'
+            e = this.activeTranslation.enterSn
         }
         if (e != null)
             errors.error = "error"
@@ -98,8 +104,8 @@ class KeyloaderComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Keyloader</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                    <h3>{this.activeTranslation.Keyloader}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}</button>
                 </div>
                 <Formik
                     initialValues={ {id, name, description, url, sn, keytag }}
@@ -113,26 +119,26 @@ class KeyloaderComponent extends Component {
                         (props) => (
                             <Form>
                                 <fieldset className="form-group">
-                                    <label>Name</label>
+                                    <label>{this.activeTranslation.Name}</label>
                                     <Field className="form-control" type="text" name="name"  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Description</label>
+                                    <label>{this.activeTranslation.Description}</label>
                                     <Field className="form-control" type="text" name="description"  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>IP Address</label>
+                                    <label>{this.activeTranslation.ip}</label>
                                     <Field className="form-control" type="text" name="url"  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Serial Number</label>
+                                    <label>{this.activeTranslation.sn}</label>
                                     <Field className="form-control" type="text" name="sn"  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Key tag</label>
+                                    <label>{this.activeTranslation.keytag}</label>
                                     <Field className="form-control" type="text" name="keytag"  autoComplete="off"/>
                                 </fieldset>
-                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}Save</button>
+                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}{this.activeTranslation.Save}</button>
                             </Form>
                         )
                     }

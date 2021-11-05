@@ -507,7 +507,6 @@ let translations = {
             repeatPass: "Повторите пароль",
             change: "Изменить пароль",
             save: "Сохранить",
-
         }
     },
     groupActionsComponent: {
@@ -713,8 +712,29 @@ let translations = {
             Create: "Create",
             Delete: "Delete",
             deleteKload: "Delete keyloader",
+        },
+        ru: {
+
         }
-    }
+    },
+    keyloaderComponent: {
+        en: {
+            enterN: 'Please enter keyloader name',
+            enterU :'Please enter keyloader URL',
+            enterSn: 'Please enter keyloader serial number',
+            Keyloader: "Keyloader",
+            Back: "Back",
+            Name: "Name",
+            Description: "Description",
+            ip: "IP Address",
+            sn: "Serial Number",
+            keytag: "Key tag",
+            Save: "Save",
+        },
+        ru: {
+        }
+    },
+    
 }
 
 let getTranslations = (page, lang) => {

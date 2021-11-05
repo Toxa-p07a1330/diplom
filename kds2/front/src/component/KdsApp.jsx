@@ -83,7 +83,6 @@ class KdsApp extends Component {
                                 <PrivateRoute path="/activators/" exact component={ActivatorListComponent} />
                                 <PrivateRoute path="/activators/:id" exact component={ActivatorComponent} />
                                 <PrivateRoute path="/activatoractions/:id" exact component={ActivatorActionsComponent} />
-
                                 <PrivateRoute path="/keys/" exact component={TerminalKeyListComponent} />
                                 <PrivateRoute path="/keys/:id/:tid" exact component={TerminalKeyComponent} />
                                 <PrivateRoute path="/keyloaders/" exact component={KeyloaderListComponent} />

@@ -5,6 +5,8 @@ import {faTrash, faEdit, faCube} from '@fortawesome/fontawesome-free-solid'
 import { Table } from 'reactstrap';
 import Alert from './Alert'
 import PaginationComponent from './PaginationComponent'
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 class TerminalKeyListComponent extends Component {
 
