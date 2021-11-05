@@ -1,5 +1,6 @@
 import GroupActionsComponent from "../component/GroupActionsComponent";
 import TerminalActionsComponent from "../component/TerminalActionsComponent";
+import ActivatorListComponent from "../component/ActivatorListComponent";
 
 
 let translations = {
@@ -597,6 +598,21 @@ let translations = {
             kca: "Keyloader CA:",
             kcc: "Keyloader client cert:",
             RemoveG: "Remove terminal from group",
+        }
+    },
+    activatorListComponent: {
+        en: {
+            confm: "Please confirm you will delete ",
+            activators: " activators",
+            conf1: "Please confirm you will delete activator ",
+            Create: "Create",
+            Delete: "Delete",
+            Activators: "Activators",
+            Name: "Name",
+            tm: "Terminal model",
+            Description: "Description",
+            delete: "Delete activator",
+
         }
     }
 }

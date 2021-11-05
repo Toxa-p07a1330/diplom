@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faEdit, faPlus, faPlay } from '@fortawesome/fontawesome-free-solid'
 import { Table } from 'reactstrap';
 import Alert from './Alert'
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class ActivatorListComponent extends Component {
 
@@ -65,11 +67,11 @@ class ActivatorListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
-                msg = "Please confirm you will delete " + x.length + " activators";
+                msg = this.activeTranslation.confm + x.length + this.activeTranslation.activators;
             }
             else
             {
-                msg = "Please confirm you will delete activator " + x[0].name;
+                msg = this.activeTranslation.conf1 + x[0].name;
             }
             this.setState({ show_alert: true, selected_acts: x, message: msg });
         }
@@ -90,7 +92,11 @@ class ActivatorListComponent extends Component {
             ).catch(()=> { this.setState({ hidden: true })})
     }
 
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("activatorListComponent", this.context.data.lang);
+        this.forceUpdate();
         this.refreshActivators()
     }
 
@@ -138,17 +144,17 @@ class ActivatorListComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Activators</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addActivatorClicked}><FontAwesomeIcon icon={faPlus}/>{' '}Create</button>
-                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteActivatorsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Delete</button>
+                    <h3>{this.activeTranslation.Activators}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addActivatorClicked}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.Create}</button>
+                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteActivatorsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.Delete}</button>
                 </div>
                 <div component="container">
                     <Table className="table-sm">
                         <thead className="thead-light">
                             <tr>
-                                <th>Name</th>
-                                <th>Terminal model</th>
-                                <th>Description</th>
+                                <th>{this.activeTranslation.Name}</th>
+                                <th>{this.activeTranslation.tm}</th>
+                                <th>{this.activeTranslation.Description}</th>
                                 <th>
                                     <div className="btn-toolbar pb-1">
                                         <div className="btn-group  ml-auto">
@@ -185,7 +191,7 @@ class ActivatorListComponent extends Component {
                     </Table>
                 </div>
                 <Alert
-                    title="Delete activator"
+                    title={this.activeTranslation.delete}
                     message={this.state.message}
                     ok={this.OnDelete}
                     close={this.CloseAlert}
