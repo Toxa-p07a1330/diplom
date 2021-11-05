@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faTrash, faEdit, faPlus} from '@fortawesome/fontawesome-free-solid'
 import { Table } from 'reactstrap';
 import Alert from './Alert'
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 class AcquirerListComponent extends Component {
 
@@ -65,11 +67,11 @@ class AcquirerListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
-                msg = "Please confirm you will delete " + x.length + " acquirers";
+                msg = this.activeTranslation.confm + x.length + this.activeTranslation.acq;
             }
             else
             {
-                msg = "Please confirm you will delete acquirer " + x[0].name;
+                msg = this.activeTranslation.conf1 + x[0].name;
             }
             this.setState({ show_alert: true, selected_acquirers: x, message: msg });
         }
@@ -89,8 +91,11 @@ class AcquirerListComponent extends Component {
             )
             .catch(()=>{ this.setState({ hidden: true })})
     }
-
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("acquirerListComponent", this.context.data.lang);
+        this.forceUpdate();
         this.refreshAcquirers()
     }
 
@@ -134,16 +139,16 @@ class AcquirerListComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Acquirers</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addAcquirerClicked}><FontAwesomeIcon icon={faPlus}/>{' '}Create</button>
-                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteAcquirersClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Delete</button>
+                    <h3>{this.activeTranslation.Acquirers}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addAcquirerClicked}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.Create}</button>
+                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteAcquirersClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.Delete}</button>
                 </div>
                 <div component="container">
                     <Table className="table-sm">
                         <thead className="thead-light">
                             <tr>
-                                <th>Tag</th>
-                                <th>Name</th>
+                                <th>{this.activeTranslation.Tag}</th>
+                                <th>{this.activeTranslation.Name}</th>
                                 <th>
                                     <div className="btn-toolbar pb-1">
                                         <div className="btn-group  ml-auto">
@@ -176,7 +181,7 @@ class AcquirerListComponent extends Component {
                     </Table>
                 </div>
                 <Alert
-                    title="Delete acquirer"
+                    title={this.activeTranslation.deleteA}
                     message={this.state.message}
                     ok={this.OnDelete}
                     close={this.CloseAlert}

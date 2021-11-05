@@ -4,6 +4,7 @@ import ActivatorListComponent from "../component/ActivatorListComponent";
 import ActivatorActionsComponent from "../component/ActivatorActionsComponent";
 import TerminalKeyListComponent from "../component/TerminalKeyListComponent";
 import KeyloaderListComponent from "../component/KeyloaderListComponent";
+import AcquirerListComponent from "../component/AcquirerListComponent";
 
 
 let translations = {
@@ -734,7 +735,22 @@ let translations = {
         ru: {
         }
     },
-    
+        acquirerListComponent: {
+        en: {
+            confm: "Please confirm you will delete ",
+            acq:  " acquirers",
+            conf1: "Please confirm you will delete acquirer ",
+            Acquirers:"Acquirers",
+            Create: "Create",
+            Delete: "Delete",
+            Tag: "Tag",
+            Name: "Name",
+            deleteA: "Delete acquirer"
+        },
+        ru: {
+
+        }
+    }
 }
 
 let getTranslations = (page, lang) => {
