@@ -613,6 +613,40 @@ let translations = {
             Description: "Description",
             delete: "Delete activator",
 
+        },
+        ru: {
+
+        }
+    },
+        activatorComponent: {
+        en: {
+            conf: "Please confirm you will remove ",
+            fact: " from act",
+            enterN: 'Please enter activator name',
+            enterIp: 'Please enter terminal IP address',
+            enterURL: 'Please enter configuration URL',
+            upCCA: 'Please upload configuration CA bundle',
+            upACA: 'Please upload acquirer CA bundle',
+            upKCA :  'Please upload keyloader CA bundle',
+            upTCA :'Please upload TMS CA',
+            upTCAS: 'Please upload TMS CA signature',
+            Activator: "Activator",
+            Back: "Back",
+            Name: "Name",
+            Description: "Description",
+            ip: "Terminal IP address",
+            url: "Configuration URL",
+            tm: "Terminal model",
+            CSCA: "Configuration Server CA",
+            CSCAS: ">Configuration Server CA signature",
+            Upload: "Upload",
+            CCA: "Configuration CA bundle",
+            ACA: "Acquirer CA bundle",
+            KCA: "Keyloader CA bundle",
+            Save: "Save",
+        },
+        ru: {
+
         }
     }
 }

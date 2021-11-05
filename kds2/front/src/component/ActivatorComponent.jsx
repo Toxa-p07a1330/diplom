@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronLeft, faSave} from '@fortawesome/fontawesome-free-solid'
 import {alertActions} from "../rdx/rdx";
 import { connect } from "react-redux";
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 class ActivatorComponent extends Component {
 
@@ -145,7 +147,7 @@ class ActivatorComponent extends Component {
 
     removeTemplateClicked(template) {
         this.setState({ show_alert: true,  selected_template: template,
-            message: "Please confirm you will remove " + template.name + " from act" });
+            message: this.activeTranslation.conf + template.name + this.activeTranslation.fact });
     }
 
     viewTemplateClicked(template) {
@@ -186,8 +188,11 @@ class ActivatorComponent extends Component {
                 .catch(() => {})
         }
     }
-
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("activatorComponent", this.context.data.lang);
+        this.forceUpdate();
         UserDataService.retrieveAllTerminalModels()
             .then((tresp) => {
                 if (parseInt(this.state.id) !== -1) {
@@ -221,28 +226,28 @@ class ActivatorComponent extends Component {
         let e = null
         let errors = {}
         if (!values.name) {
-            e = 'Please enter activator name'
+            e = this.activeTranslation.enterN
         }
         else if (!values.terminalIp) {
-            e = 'Please enter terminal IP address'
+            e = this.activeTranslation.enterIp
         }
         else if (!values.confUrl) {
-            e = 'Please enter configuration URL'
+            e = this.activeTranslation.enterURL
         }
         else if (!values.confCa) {
-            e = 'Please upload configuration CA bundle'
+            e = this.activeTranslation.upCCA
         }
         else if (!values.acquirerCa) {
-            e = 'Please upload acquirer CA bundle'
+            e = this.activeTranslation.upACA
         }
         else if (!values.kldCa) {
-            e = 'Please upload keyloader CA bundle'
+            e =this.activeTranslation.upKCA
         }
         else if (!values.tmsCa) {
-            e = 'Please upload TMS CA'
+            e = this.activeTranslation.upTCA
         }
         else if (!values.tmsCaSign) {
-            e = 'Please upload TMS CA signature'
+            e = this.activeTranslation.upTCAS
         }
         if (e != null)
             errors.error = "error"
@@ -257,8 +262,8 @@ class ActivatorComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Activator</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                    <h3>{this.activeTranslation.Activator}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}</button>
                 </div>
                 <Formik
                     initialValues={ {id, name, description, terminalIp, confUrl, confCa, acquirerCa, kldCa, tmsCa, tmsCaSign, model  }}
@@ -274,23 +279,23 @@ class ActivatorComponent extends Component {
                                 {this.state.error && <div className="alert alert-danger">{this.state.error}</div>}
 
                                 <fieldset className="form-group">
-                                    <label>Name</label>
+                                    <label>{this.activeTranslation.Name}</label>
                                     <Field className="form-control" type="text" name="name" onChange={this.handleChange} value={this.state.name}  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Description</label>
+                                    <label>{this.activeTranslation.Description}</label>
                                     <Field className="form-control" type="text" name="description" onChange={this.handleChange} value={this.state.description}  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Terminal IP address</label>
+                                    <label>{this.activeTranslation.ip}</label>
                                     <Field className="form-control" type="text" name="terminalIp" onChange={this.handleChange} value={this.state.terminalIp}  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Configuration URL</label>
+                                    <label>{this.activeTranslation.url}</label>
                                     <Field className="form-control" type="text" name="confUrl" onChange={this.handleChange} value={this.state.confUrl}  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Terminal model</label>
+                                    <label>{this.activeTranslation.tm}</label>
                                     <Field className="form-control" as="select" name="model"
                                            value={this.state.model && this.state.model.id}
                                            onChange={(v) => { this.setState( {model: {id: v.target.value, name: ''}})} }
@@ -304,7 +309,7 @@ class ActivatorComponent extends Component {
                                     </Field>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Configuration Server CA</label>
+                                    <label>{this.activeTranslation.CSCA}</label>
                                     <div className="input-group">
                                         <Field className="form-control mb-2" type="text" name="tmsCa" disabled/>
                                         <div className="input-group-append">
@@ -320,12 +325,12 @@ class ActivatorComponent extends Component {
                                     </div>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Configuration Server CA signature</label>
+                                    <label>{this.activeTranslation.CSCAS}</label>
                                     <div className="input-group">
                                         <Field className="form-control mb-2" type="text" name="tmsCaSign" disabled/>
                                         <div className="input-group-append">
                                             <label className="btn btn-outline-secondary" >
-                                                Upload
+                                                {this.activeTranslation.Upload}
                                                 <input
                                                     className="d-none"
                                                     type="file"
@@ -336,12 +341,12 @@ class ActivatorComponent extends Component {
                                     </div>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Configuration CA bundle</label>
+                                    <label>{this.activeTranslation.CCA}</label>
                                     <div className="input-group">
                                         <Field className="form-control mb-2" type="text" name="confCa" disabled/>
                                         <div className="input-group-append">
                                             <label className="btn btn-outline-secondary" >
-                                                Upload
+                                                {this.activeTranslation.Upload}
                                                 <input
                                                     className="d-none"
                                                     type="file"
@@ -352,12 +357,12 @@ class ActivatorComponent extends Component {
                                     </div>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Acquirer CA bundle</label>
+                                    <label>{this.activeTranslation.ACA}</label>
                                     <div className="input-group">
                                         <Field className="form-control mb-2" type="text" name="acquirerCa" disabled/>
                                         <div className="input-group-append">
                                             <label className="btn btn-outline-secondary" >
-                                                Upload
+                                                {this.activeTranslation.Upload}
                                                 <input
                                                     className="d-none"
                                                     type="file"
@@ -368,12 +373,12 @@ class ActivatorComponent extends Component {
                                     </div>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Keyloader CA bundle</label>
+                                    <label>{this.activeTranslation.KCA}</label>
                                     <div className="input-group">
                                         <Field className="form-control mb-2" type="text" name="kldCa" disabled/>
                                         <div className="input-group-append">
                                             <label className="btn btn-outline-secondary" >
-                                                Upload
+                                                {this.activeTranslation.Upload}
                                                 <input
                                                     className="d-none"
                                                     type="file"
@@ -383,7 +388,7 @@ class ActivatorComponent extends Component {
                                         </div>
                                     </div>
                                 </fieldset>
-                                <button className="btn btn-outline-secondary mb-4" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}Save</button>
+                                <button className="btn btn-outline-secondary mb-4" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}{this.activeTranslation.Save}</button>
                             </Form>
                         )
                     }
