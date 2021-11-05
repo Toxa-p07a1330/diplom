@@ -1,4 +1,5 @@
 import GroupActionsComponent from "../component/GroupActionsComponent";
+import TerminalActionsComponent from "../component/TerminalActionsComponent";
 
 
 let translations = {
@@ -546,6 +547,57 @@ let translations = {
         ru: {
 
         },
+    },
+    terminalActionsComponent: {
+        en: {
+            Terminal: "Terminal",
+            Back: "Back",
+            Model: "Model:",
+            sn: "Serial number:",
+            Acquirer: "Acquirer:",
+            tn: "Terminal number:",
+            Stage:"Stage:",
+            Description:"Description:",
+            id: "Merchant ID:",
+            Configuration:"Configuration:",
+            keys: "Keys:",
+            Applications:"Applications:",
+            groups: "Groups:",
+            get: "Get Info",
+            update: "Update config",
+            getLog: "Get Log",
+            loadKey: "Load keys",
+            upSoft: "Update software",
+            Command: "Command",
+            Status: "Status",
+            aId: "Acquirer ID:",
+            tId: "Terminal ID:",
+            dId: "Device ID:",
+            mId: "Merchant ID:",
+            mnl: "Merchant name and location:",
+            appv: "Application version:",
+            intV: "Internal version:",
+            os: "OS:",
+            secM: "Security module:",
+            sdk: "SDK:",
+            tcn: "Terminal config name:",
+            tcs: "Terminal config stage:",
+            ccn: "Common config name:",
+            ccs: "Common config stage:",
+            ecn: "EMV config name:",
+            ecs: "EMV config stage:",
+            Ccn: "CAPK config name:",
+            Ccs: "CAPK config stage:",
+            tmsH: "TMS host:",
+            tmsca: "TMS host CA:",
+            tmscert: "TMS client cert:",
+            ahca: "Acquirer host CA:",
+            aca: "Acquirer CA:",
+            acc: "Acquirer client cert:",
+            kca: "Keyloader CA:",
+            kcc: "Keyloader client cert:",
+            RemoveG: "Remove terminal from group",
+        }
     }
 }
 

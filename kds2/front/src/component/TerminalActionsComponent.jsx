@@ -3,6 +3,8 @@ import UserDataService from '../service/UserDataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faTimes  } from '@fortawesome/fontawesome-free-solid'
 import Alert from './Alert'
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class TerminalActionsComponent extends Component {
 
@@ -175,7 +177,11 @@ class TerminalActionsComponent extends Component {
         this.setState({ show_alert: false })
     }
 
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("terminalActionsComponent", this.context.data.lang);
+        this.forceUpdate();
         UserDataService.retrieveTerminal(this.state.id)
             .then((response) => {
                 this.setState({
@@ -207,31 +213,31 @@ class TerminalActionsComponent extends Component {
                 {this.state.info && <div className="alert alert-info">{this.state.info}</div>}
                 {this.state.success && <div className="alert alert-success">{this.state.success}</div>}
                 <div className="row my-2">
-                    <h3>Terminal</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                    <h3>{this.activeTranslation.Terminal}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}</button>
                 </div>
                 <div className="row my-2">
                     <table className="table-borderless table-sm">
                         <tbody>
-                        <tr><th scope="row">Model:</th><td>{model && model.name}</td></tr>
-                        <tr><th scope="row">Serial number:</th><td>{sn}</td></tr>
-                        <tr><th scope="row">Acquirer:</th><td>{acquirer && acquirer.name}</td></tr>
-                        <tr><th scope="row">Terminal number:</th><td>{tid}</td></tr>
-                        <tr><th scope="row">Stage:</th><td>{stage}</td></tr>
-                        <tr><th scope="row">Description:</th><td>{description}</td></tr>
-                        <tr><th scope="row">Merchant ID:</th><td>{merchant && merchant.mid}</td></tr>
-                        <tr><th scope="row">Configuration:</th><td>{conf && conf.name}</td></tr>
-                        <tr><th scope="row">Keys:</th><td/></tr>
+                        <tr><th scope="row">{this.activeTranslation.Model}</th><td>{model && model.name}</td></tr>
+                        <tr><th scope="row">{this.activeTranslation.sn}</th><td>{sn}</td></tr>
+                        <tr><th scope="row">{this.activeTranslation.Acquirer}</th><td>{acquirer && acquirer.name}</td></tr>
+                        <tr><th scope="row">{this.activeTranslation.tn}</th><td>{tid}</td></tr>
+                        <tr><th scope="row">{this.activeTranslation.Stage}</th><td>{stage}</td></tr>
+                        <tr><th scope="row">{this.activeTranslation.Description}</th><td>{description}</td></tr>
+                        <tr><th scope="row">{this.activeTranslation.id}</th><td>{merchant && merchant.mid}</td></tr>
+                        <tr><th scope="row">{this.activeTranslation.Configuration}</th><td>{conf && conf.name}</td></tr>
+                        <tr><th scope="row">{this.activeTranslation.keys}</th><td/></tr>
                         {
                             this.state.tkeys && this.state.tkeys.map(tkey =>
                                 <tr key={tkey.id}><th scope="row"/><td>{tkey && tkey.name + " (" + tkey.tag + ")"}</td></tr>
                             )}
-                        <tr><th scope="row">Applications:</th><td/></tr>
+                        <tr><th scope="row">{this.activeTranslation.Applications}</th><td/></tr>
                         {
                             this.state.applications && this.state.applications.map(app =>
                                 <tr key={app.id}><th scope="row"/><td>{app && app.name} ({app && app.version})</td></tr>
                             )}
-                        <tr><th scope="row">Groups:</th><td/></tr>
+                        <tr><th scope="row">{this.activeTranslation.groups}</th><td/></tr>
                         {
                         this.state.groups && this.state.groups.map(group =>
                             <tr key={group.id}><th scope="row"/><td>{group && group.legend}</td></tr>
@@ -242,19 +248,19 @@ class TerminalActionsComponent extends Component {
                 <div className="row my-2">
                     <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div className="btn-group mr-2" role="group">
-                                <button type="button" className="btn btn-outline-secondary" onClick={this.actionGetInfo}>Get Info</button>
+                                <button type="button" className="btn btn-outline-secondary" onClick={this.actionGetInfo}>{this.activeTranslation.get}</button>
                         </div>
                         <div className="btn-group mr-2" role="group">
-                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionUpdate}>Update config</button>
+                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionUpdate}>{this.activeTranslation.update}</button>
                         </div>
                         <div className="btn-group mr-2" role="group">
-                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionGetLog}>Get Log</button>
+                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionGetLog}>{this.activeTranslation.getLog}</button>
                         </div>
                         <div className="btn-group mr-2" role="group">
-                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionLoadKeys}>Load keys</button>
+                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionLoadKeys}>{this.activeTranslation.loadKey}</button>
                         </div>
                         <div className="btn-group mr-2" role="group">
-                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionUpdateApplications}>Update software</button>
+                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionUpdateApplications}>{this.activeTranslation.upSoft}</button>
                         </div>
                     </div>
                 </div>
@@ -263,8 +269,8 @@ class TerminalActionsComponent extends Component {
                         <table className="table table-sm table-borderless table-striped">
                             <thead className="thead-dark">
                             <tr>
-                                <th>Command</th>
-                                <th>Status</th>
+                                <th>{this.activeTranslation.Command}</th>
+                                <th>{this.activeTranslation.Status}</th>
                                 <th>
                                     <div className="btn-toolbar">
                                         <div className="btn-group mr-2 ml-auto">
@@ -286,33 +292,33 @@ class TerminalActionsComponent extends Component {
                             </tr>
                             { this.state.inforesult &&
                                 <>
-                                <tr><th>Serial number:</th><td>{this.state.inforesult.sn}</td><td/></tr>
-                                <tr><th>Acquirer ID:</th><td>{this.state.inforesult.acqid}</td><td/></tr>
-                                <tr><th>Terminal ID:</th><td>{this.state.inforesult.tid}</td><td/></tr>
-                                <tr><th>Device ID:</th><td>{this.state.inforesult.devid}</td><td/></tr>
-                                <tr><th>Merchant ID:</th><td>{this.state.inforesult.mid}</td><td/></tr>
-                                <tr><th>Merchant name and location:</th><td>{this.state.inforesult.acqn}</td><td/></tr>
-                                <tr><th>Application version:</th><td>{this.state.inforesult.app}</td><td/></tr>
-                                <tr><th>Internal version:</th><td>{this.state.inforesult.iv}</td><td/></tr>
-                                <tr><th>OS:</th><td>{this.state.inforesult.os}</td><td/></tr>
-                                <tr><th>Security module:</th><td>{this.state.inforesult.mcu}</td><td/></tr>
-                                <tr><th>SDK:</th><td>{this.state.inforesult.sdk}</td><td/></tr>
-                                <tr><th>Terminal config name:</th><td>{this.state.inforesult.ntconf}</td><td/></tr>
-                                <tr><th>Terminal config stage:</th><td>{this.state.inforesult.tconf}</td><td/></tr>
-                                <tr><th>Common config name:</th><td>{this.state.inforesult.ncconf}</td><td/></tr>
-                                <tr><th>Common config stage:</th><td>{this.state.inforesult.cconf}</td><td/></tr>
-                                <tr><th>EMV config name:</th><td>{this.state.inforesult.neconf}</td><td/></tr>
-                                <tr><th>EMV config stage:</th><td>{this.state.inforesult.econf}</td><td/></tr>
-                                <tr><th>CAPK config name:</th><td>{this.state.inforesult.nkconf}</td><td/></tr>
-                                <tr><th>CAPK config stage:</th><td>{this.state.inforesult.kconf}</td><td/></tr>
-                                <tr><th>TMS host:</th><td>{this.state.inforesult.cshost}</td><td/></tr>
-                                <tr><th>TMS host CA:</th><td>{this.state.inforesult.csca}</td><td/></tr>
-                                <tr><th>TMS client cert:</th><td>{this.state.inforesult.cccert}</td><td/></tr>
-                                <tr><th>Acquirer host CA:</th><td>{this.state.inforesult.ashost}</td><td/></tr>
-                                <tr><th>Acquirer CA:</th><td>{this.state.inforesult.asca}</td><td/></tr>
-                                <tr><th>Acquirer client cert:</th><td>{this.state.inforesult.accert}</td><td/></tr>
-                                <tr><th>Keyloader CA:</th><td>{this.state.inforesult.ksca}</td><td/></tr>
-                                <tr><th>Keyloader client cert:</th><td>{this.state.inforesult.kccert}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.sn}</th><td>{this.state.inforesult.sn}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.aId}</th><td>{this.state.inforesult.acqid}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.tId}</th><td>{this.state.inforesult.tid}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.dId}</th><td>{this.state.inforesult.devid}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.mId}</th><td>{this.state.inforesult.mid}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.mnl}</th><td>{this.state.inforesult.acqn}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.appv}</th><td>{this.state.inforesult.app}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.intV}</th><td>{this.state.inforesult.iv}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.os}</th><td>{this.state.inforesult.os}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.secM}</th><td>{this.state.inforesult.mcu}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.sdk}</th><td>{this.state.inforesult.sdk}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.tcn}</th><td>{this.state.inforesult.ntconf}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.tcs}</th><td>{this.state.inforesult.tconf}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.ccn}</th><td>{this.state.inforesult.ncconf}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.ccs}</th><td>{this.state.inforesult.cconf}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.ecn}</th><td>{this.state.inforesult.neconf}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.ecs}</th><td>{this.state.inforesult.econf}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.Ccn}</th><td>{this.state.inforesult.nkconf}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.Ccs}</th><td>{this.state.inforesult.kconf}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.tmsH}</th><td>{this.state.inforesult.cshost}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.tmsca}</th><td>{this.state.inforesult.csca}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.tmscert}</th><td>{this.state.inforesult.cccert}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.ahca}</th><td>{this.state.inforesult.ashost}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.aca}</th><td>{this.state.inforesult.asca}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.acc}</th><td>{this.state.inforesult.accert}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.kca}</th><td>{this.state.inforesult.ksca}</td><td/></tr>
+                                <tr><th>{this.activeTranslation.kcc}</th><td>{this.state.inforesult.kccert}</td><td/></tr>
                                 </>
                                 }
                             </tbody>
@@ -321,7 +327,7 @@ class TerminalActionsComponent extends Component {
                 }
            </div>
            <Alert
-               title="Remove terminal from group"
+               title={this.activeTranslation.RemoveG}
                message={this.state.message}
                ok={this.removeGroupConfirmed}
                close={this.closeAlert}
