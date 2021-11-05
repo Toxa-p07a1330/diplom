@@ -129,7 +129,7 @@ class MerchantComponent extends Component {
     static contextType = LangSelectorContext;
     activeTranslation = {}
     componentDidMount() {
-        this.activeTranslation = getTranslations("merchantComponent", this.context.data.lang);
+            this.activeTranslation = getTranslations("merchantComponent", this.context.data.lang);
         UserDataService.retrieveAllAcquirers()
             .then((aresp) => {
                 if (parseInt(this.state.id) !== -1) {

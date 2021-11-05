@@ -1,9 +1,5 @@
-import GroupListComponent from "../component/GroupListComponent";
-import TerminalListComponent from "../component/TerminalListComponent";
-import TemplateListComponent from "../component/TemplateListComponent";
-import ConfigPackListComponent from "../component/ConfigPackListComponent";
-import MerchantListComponent from "../component/MerchantListComponent";
-import MyAccountComponent from "../component/MyAccountComponent";
+import GroupActionsComponent from "../component/GroupActionsComponent";
+
 
 let translations = {
     login: {
@@ -36,9 +32,9 @@ let translations = {
             users_title: "Users"
         },
         ru: {
-            conf_mult: "Пожайлуйста, подтвердите удаление ",
+            conf_mult: "Пожалуйста, подтвердите удаление ",
             users: " пользователей",
-            conf_single:"Пожайлуйста, подтвержите удаление  ",
+            conf_single:"Пожалуйста, подтвержите удаление  ",
             create: "Создать",
             delete: "Удалить",
             name: "Имя",
@@ -61,10 +57,29 @@ let translations = {
             repeat: "Repeat password",
             change: "Change password",
             save: "Save",
+            admin: "User is administrator",
+            ep: 'Please enter password',
+            rp: 'Please repeat password',
+            pl: 'Password length should be 8 or greater',
+            notMatch: 'Passwords do not match'
 
         },
         ru: {
-
+            name: 'Пожалуйста, введите имя',
+            enter_login: 'Пожалуйста, введите логин',
+            enter_email: 'Пожалуйста введите e-mail',
+            nm: "Имя",
+            login: "Логин",
+            email: "EMail",
+            pass: "Пароль",
+            repeat: "Повторите пароль",
+            change: "Изменить пароль",
+            save: "Сохранить",
+            admin: "Пользователь имеет права администратора",
+            ep: 'Введите пароль',
+            rp: 'Повторите пароль',
+            pl: 'Длина пароля не менее 8ми символов',
+            notMatch: 'Пароли не совпадают'
         }
     },
     groupListComponent: {
@@ -80,7 +95,14 @@ let translations = {
 
         },
         ru: {
-
+            conf_mult: "Пожалуйста, подтверлите удаление ",
+            groups: " групп",
+            conf1:  "Пожалуйста, подтвердите удаление группы ",
+            create: "Создать",
+            delete: "Удалить",
+            tag: "Тег",
+            name: "Имя",
+            Groups: "Группы"
         }
     },
     groupComponent: {
@@ -96,7 +118,32 @@ let translations = {
             sn: "Serial number",
             acquirer: "Acquirer",
             tid: "TID",
+            name: "Name",
+            Tag: "Tag",
+            Description: "Description",
+            titg: "Terminals in the group:",
+            removeT: "Remove terminal from group",
+            st: "Select terminal",
 
+        },
+        ru: {
+            enterName: 'Пожалуйста, введите название группы',
+            enterTag: 'Пожалуйста, введите тег',
+            title: "Группа",
+            back: "Назад",
+            save: "Сохранить",
+            append: "Добавить",
+            remove: "Удалить",
+            model: "Модель",
+            sn: "Серийный номер",
+            acquirer: "Покупатель",
+            tid: "TID",
+            name: "Название",
+            Tag: "Тэг",
+            Description: "Описание",
+            titg: "Шаблоны в группах",
+            removeT: "Удалить терминал из группы",
+            st: "Выберите терминал"
         }
     },
     terminalListComponent: {
@@ -117,7 +164,19 @@ let translations = {
 
         },
         ru: {
-
+            conf_m: "Пожалуйста, подтвердите удаление ",
+            terms: " терминалов",
+            conf1: "Пожалуйста, подтвердите удаление терминала ",
+            terminals: "Терминалы",
+            import: "Импортировать",
+            create: "Создать",
+            delete: "Удалить",
+            model: "Модель",
+            sn: "Серийный номер",
+            acquirer: "Покупатель",
+            tid: "TID",
+            Merchant: "Продавец",
+            Configuration: "Конфигурация",
         }
     },
 
@@ -163,7 +222,44 @@ let translations = {
             selectA: "Select application",
         },
         ru: {
-
+            enterSn: 'Пожалуйста, введите серийный номер терминала',
+            stageDef: '+++',
+            tidLen: 'Длина идентификатора терминала должна составлять 8 символов',
+            select_model: 'Пожалуйста, выберите модель терминала',
+            select_merch: 'Необходимо выбрать продавца',
+            ipCheck: 'Пожалуйста, введите действительный IP-адрес',
+            xmlCheck: "Недопустимый XML-файл. Пожалуйста, обратитесь к аннотациям в редакторе XML+++",
+            Actions: "Действия",
+            Back: "Назад",
+            sn: "Серийный номер",
+            tn: "Номер терминала",
+            Stage: "Стадия+++",
+            Description: "Описание",
+            ip: "IP-адрес",
+            conf: "Пакет конфигурации+++",
+            Merchant: "Продавец",
+            Certificate: "Сертификат",
+            Upload: "Загрузить",
+            private: "Личные данные",
+            edit_on: "Включить редактирование+++",
+            edit_off:  "Выключить редактирование+++",
+            Prettify: "Добавить+++",
+            Save: "Сохранить",
+            Create: "Создать",
+            delete: "Удалить",
+            Tag: "Тег",
+            Name: "Имя",
+            Add: "Добавить",
+            Remove: "Удалить",
+            participants: "",
+            addG: "Добавить в группу",
+            removeG: "Удалить из группы",
+            removeT: "Удалить терминал из группы",
+            deleteK: "Удалить ключ",
+            deleteA: "Удалить приложение",
+            selectM: "Выбрать продавца",
+            selectG :"Выбрать группу",
+            selectA: "Выбрать приложение",
         }
     },
     templateListComponent: {
@@ -184,7 +280,20 @@ let translations = {
             Delete: "Delete",
         },
         ru: {
-
+            conf_m:"Пожалуйста, подтвердите удаление ",
+            temps: " шаблонов",
+            conf1: "Пожалуйста, подтвердите удаление шаблона ",
+            title: "Шаблоны конфигурации",
+            Create: "Создать",
+            delete: "Удалить",
+            Tag: "Тег",
+            Name: "Имя",
+            Add: "Добавить",
+            Remove: "Удалить",
+            Stage: "Стадия+++",
+            Section: "Секция",
+            Description: "Описание",
+            Delete: "Удалить",
         }
     },
     templateComponent:{
@@ -203,10 +312,27 @@ let translations = {
             edit_off: " Turn editing off",
             Prettify: "Prettify",
             upload: "Upload configuration data",
+            Name: "Name",
+            Stage: "Stage",
 
         },
         ru: {
-
+            title: "Шаблон конфигурации",
+            Back: "Назад",
+            nameAlert: 'Имя шаблона должно быть заполнено',
+            sectionAlert: 'Раздел шаблона должен быть заполнен',
+            stageAlert: 'Стадия шаблона должна быть определена',
+            invXML: "Недопустимый XML-файл. Пожалуйста, обратитесь к аннотациям в редакторе XML",
+            Section: "Секция",
+            Description: "Описание",
+            Data: "Данные",
+            Save: "Сохранить",
+            edit_on: " Включить редактирование+++",
+            edit_off: "Выключить редактирование",
+            Prettify: "Добавить+++",
+            upload: "Загрузить данные конфигурации+++",
+            Name: "Имя",
+            Stage: "Стадия",
         },
     },
     configPackListComponent: {
@@ -221,7 +347,13 @@ let translations = {
 
         },
         ru: {
-
+            conf_m: "Пожалуйста, подтвердите удаление ",
+            confs: " конфигураций",
+            conf1: "Пожалуйста, подтвердите удаление конфигурации ",
+            title: "Пакет конфигурации",
+            Tag: "Тег",
+            Name: "Имя",
+            deleteP: "Удалить пакет+++",
         }
     },
     configPackComponent: {
@@ -246,7 +378,24 @@ let translations = {
             selectT: "Select template",
         },
         ru: {
-
+            conf_m: "Пожалуйста, подтвердите удаление ",
+            templated: " шаблоны",
+            conf1: "Пожалуйста, подтвердите удаление шаблонов",
+            enterName: 'Пожалуйста, введите имя пакета ',
+            enterTag: 'Пожалуйста, введите тег',
+            Back: "Назад",
+            Tag: "Тег",
+            Name: "Имя",
+            Description: "Описание",
+            Data: "Данные",
+            Save: "Сохранить",
+            title: "Включить шаблоны конфигурации:",
+            Add: "Добавить",
+            Remove: "Удалить",
+            Section: "Секция",
+            Stage: "Стадия",
+            removeT: "Удалить шаблон из пакета",
+            selectT: "Выбрать шаблон",
         }
     },
     merchantListComponent: {
@@ -265,7 +414,18 @@ let translations = {
             Merchants: "Merchants",
         },
         ru: {
-
+            conf_m: "Пожалуйста, подтвердите удаление ",
+            merchants: " продавцов",
+            conf_1: "Пожалуйста, подтвердите удаление продавца ",
+            Import: "Импортировать",
+            Create: "Создать",
+            Delete: "Удалить",
+            Tag: "Тег",
+            Name: "Имя",
+            Acquirer: "Покупатель",
+            Merchant: "ID продавца",
+            deleteM :"Удалить продавца",
+            Merchants: "Продавцы",
         }
     },
     merchantComponent: {
@@ -290,7 +450,24 @@ let translations = {
             TID: "TID",
         },
         ru: {
-
+            eName: 'Пожалуйста, введите имя продавца',
+            eTag: 'Пожалуйста, введите тег продавца',
+            idLen: 'Длина идентификатора продавца должна составлять 15 символов',
+            codeLen: 'Код категории продавца должен состоять из 2 символов',
+            selectA: 'Пожалуйста, выберите покупателя',
+            title: "Продавец",
+            Back: "Назад",
+            Name: "Имя",
+            Tag: "Тег",
+            id: "ID продавца",
+            code: "Код категории",
+            nl: "Имя и местонахождение продавца",
+            Description: "Описание",
+            Acquirer: "Покупатель",
+            terminals: "Терминалы продавца",
+            Model: "Модель",
+            sn: "Серийный номер",
+            TID: "TID",
         }
     },
     myAccountComponent: {
@@ -309,6 +486,27 @@ let translations = {
             repeatPass: "Repeat password",
             change: "Change password",
             save: "Save",
+        },
+        ru: {
+            pwdCheck: 'Пароль должен сотсоять не меньше чем из 8 символов',
+            repeat: 'Пожалуйста, повторите пароль',
+            match: 'Пароли не совпадают',
+            Back: "Назад",
+            title: "Мой аккаунт",
+            update: "Информация об учетной записи обновлена+++",
+            Name: "Имя",
+            Login: "Логин",
+            EMail: "EMail",
+            admin: "Пользователь является администратором",
+            Password: "Пароль",
+            repeatPass: "Повторите пароль",
+            change: "Изменить пароль",
+            save: "Сохранить",
+
+        }
+    },
+    groupActionsComponent: {
+        en: {
 
         }
     }

@@ -101,13 +101,13 @@ class UserComponent extends Component {
         else if (parseInt(values.id) === -1)
         {
             if (!values.pwd)
-                e = 'Please enter password'
+                e = this.activeTranslation.ep
             else if (!values.pwd2)
-                e = 'Please repeat password'
+                e = this.activeTranslation.rp
             else if (values.pwd2.length < 8)
-                e = 'Password length should be 8 or greater'
+                e = this.activeTranslation.pl
             else if (values.pwd !== values.pwd2)
-                e = 'Passwords do not match'
+                e = this.activeTranslation.nm
         }
         if (this.state.error != null)
             errors.error = "error"
@@ -148,7 +148,7 @@ class UserComponent extends Component {
                                 </fieldset>
                               <div className="form-group form-check">
                                   <Field type="checkbox" name="admin" className="form-check-input" />
-                                  <label htmlFor="admin" className="form-check-label">User is administrator</label>
+                                  <label htmlFor="admin" className="form-check-label">{this.activeTranslation.admin}</label>
                               </div>
 
                                 {

@@ -78,6 +78,7 @@ class KdsApp extends Component {
                                 <PrivateRoute path="/merchants/" exact component={MerchantListComponent} />
                                 <PrivateRoute path="/merchants/:id" exact component={MerchantComponent} />
                                 <PrivateRoute path="/accounts/:id" exact component={MyAccountComponent} />
+
                                 <PrivateRoute path="/groupactions/:id" exact component={GroupActionsComponent} />
                                 <PrivateRoute path="/terminalactions/:id" exact component={TerminalActionsComponent} />
                                 <PrivateRoute path="/activators/" exact component={ActivatorListComponent} />

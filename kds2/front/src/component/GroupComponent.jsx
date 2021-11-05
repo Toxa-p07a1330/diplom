@@ -211,6 +211,7 @@ class GroupComponent extends Component {
     static contextType = LangSelectorContext;
     activeTranslation = {}
     componentDidMount() {
+        this.forceUpdate()
         this.activeTranslation = getTranslations("groupComponent", this.context.data.lang);
         UserDataService.retrieveAllTerminals(this.state.termPage, this.state.termPageLimit)
         .then ((presp) => {
@@ -286,11 +287,11 @@ class GroupComponent extends Component {
                                     <Field className="form-control" type="text" name="legend" autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Tag</label>
+                                    <label>{this.activeTranslation.Tag}</label>
                                     <Field className="form-control" type="text" name="tag" autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Description</label>
+                                    <label>{this.activeTranslation.Description}</label>
                                     <Field className="form-control" type="text" name="description" autoComplete="off"/>
                                 </fieldset>
                                 <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}{this.activeTranslation.save}</button>
@@ -301,7 +302,7 @@ class GroupComponent extends Component {
                         { parseInt(this.state.id) !== -1 &&
                             <>
                                 <div className="row mt-4 mb-2 mr-0">
-                                    <h3>Terminals in the group:</h3>
+                                    <h3>{this.activeTranslation.titg}</h3>
                                     <button className="btn btn-outline-secondary ml-auto" onClick={this.selectTerminalClicked}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.append}</button>
                                     <button className="btn btn-outline-secondary ml-2" onClick={this.removeTerminalsClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.remove}</button>
                                 </div>
@@ -349,14 +350,14 @@ class GroupComponent extends Component {
                            }
             </div>
                        <Alert
-                           title="Remove terminal from group"
+                           title={this.activeTranslation.removeT}
                            message={this.state.message}
                            ok={this.removeTerminalConfirmed}
                            close={this.closeAlert}
                            modal={this.state.show_alert}
                            arg={this.state.selected_terminal}/>
                 <SelectObject
-                    title="Select terminal"
+                    title={this.activeTranslation.st}
                     headers = {['Model', 'Serial Number', 'Acquirer', 'Terminal ID']}
                     columns={ ['terminalModel.name', 'sn', 'merchant.acquirer.name', 'tid']}
                     ok={this.selectTerminal}

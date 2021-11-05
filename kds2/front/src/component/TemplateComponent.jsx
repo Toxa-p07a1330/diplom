@@ -151,6 +151,7 @@ class TemplateComponent extends Component {
 
     componentDidMount() {
         this.activeTranslation = getTranslations("templateComponent", this.context.data.lang);
+        this.forceUpdate()
         if (parseInt(this.state.id) === -1) {
             return;
         }
@@ -213,12 +214,12 @@ class TemplateComponent extends Component {
                         (props) => (
                             <Form>
                                 <fieldset className="form-pack">
-                                    <label>Name</label>
+                                    <label>{this.activeTranslation.Name}</label>
                                     <Field className="form-control" type="text" name="name" onChange={this.handleChange} value={this.state.name} autoComplete="off"/>
                                 </fieldset>
                                 { this.state.tag && this.state.tag !== "terminal" &&
                                     <fieldset className="form-group">
-                                        <label>Stage</label>
+                                        <label>{this.activeTranslation.Stage}</label>
                                         <div className="input-group">
                                             <Field className="form-control" type="text" name="stage"
                                                    onChange={this.handleChange} value={this.state.stage}

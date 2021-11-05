@@ -7,6 +7,8 @@ import PaginationComponent from "./PaginationComponent";
 import SelectObject from "./SelectObject";
 import Alert from "./Alert";
 import {Tab, Tabs} from "react-bootstrap";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class GroupActionsComponent extends Component {
 
@@ -277,7 +279,10 @@ class GroupActionsComponent extends Component {
         this.props.history.push(`/terminals/${terminal.id}`)
     }
 
+    activeTranslation = {};
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("merchantComponent", this.context.data.lang);
         UserDataService.retrieveGroupTerminals(this.state.id, this.state.groupTermPage, this.state.groupTermPageLimit)
             .then((tresp) => {
                 console.log(tresp)
