@@ -1,6 +1,7 @@
 import GroupActionsComponent from "../component/GroupActionsComponent";
 import TerminalActionsComponent from "../component/TerminalActionsComponent";
 import ActivatorListComponent from "../component/ActivatorListComponent";
+import ActivatorActionsComponent from "../component/ActivatorActionsComponent";
 
 
 let translations = {
@@ -646,6 +647,20 @@ let translations = {
             Save: "Save",
         },
         ru: {
+
+        }
+    },
+    activatorActionsComponent: {
+        en: {
+            ta: "Terminal activation",
+            Back: "Back",
+            name: "Name:",
+            Description:"Description:",
+            ip: "Terminal IP address:",
+            url: "Configuration URL:",
+            reset: "Run reset",
+            State: "State",
+            Result: "Result",
 
         }
     }

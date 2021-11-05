@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import UserDataService from '../service/UserDataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronLeft, faTimes} from '@fortawesome/fontawesome-free-solid'
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class ActivatorActionsComponent extends Component {
 
@@ -86,7 +88,12 @@ class ActivatorActionsComponent extends Component {
         }).catch()
     }
 
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("activatorActionsComponent", this.context.data.lang);
+        this.forceUpdate();
+
         if (parseInt(this.state.id) !== -1) {
             UserDataService.retrieveActivator(this.state.id)
                 .then((response) => {
@@ -116,23 +123,23 @@ class ActivatorActionsComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2">
-                    <h3>Terminal activation</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                    <h3>{this.activeTranslation.ta}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}</button>
                 </div>
                 <div className="row my-2">
                     <table className="table-borderless table-sm">
                         <tbody>
-                            <tr><th scope="row">Name:</th><td>{name}</td></tr>
-                            <tr><th scope="row">Description:</th><td>{description}</td></tr>
-                            <tr><th scope="row">Terminal IP address:</th><td>{terminalIp}</td></tr>
-                            <tr><th scope="row">Configuration URL:</th><td>{confUrl}</td></tr>
+                            <tr><th scope="row">{this.activeTranslation.name}</th><td>{name}</td></tr>
+                            <tr><th scope="row">{this.activeTranslation.Description}</th><td>{description}</td></tr>
+                            <tr><th scope="row">{this.activeTranslation.ip}</th><td>{terminalIp}</td></tr>
+                            <tr><th scope="row">{this.activeTranslation.url}</th><td>{confUrl}</td></tr>
                         </tbody>
                     </table>
                 </div>
                 <div className="row my-2">
                     <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div className="btn-group mr-2" role="group">
-                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionReset}>Run reset</button>
+                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionReset}>{this.activeTranslation.reset}</button>
                         </div>
                     </div>
                 </div>
@@ -141,8 +148,8 @@ class ActivatorActionsComponent extends Component {
                     <table className="table table-sm table-borderless table-striped">
                         <thead className="thead-dark">
                         <tr>
-                            <th>State</th>
-                            <th>Result</th>
+                            <th>{this.activeTranslation.State}</th>
+                            <th>{this.activeTranslation.Result}</th>
                             <th>
                                 <div
                                     className={this.state.enablePolling ? "btn-toolbar visible" : "btn-toolbar invisible"}>
