@@ -5,6 +5,7 @@ import ActivatorActionsComponent from "../component/ActivatorActionsComponent";
 import TerminalKeyListComponent from "../component/TerminalKeyListComponent";
 import KeyloaderListComponent from "../component/KeyloaderListComponent";
 import AcquirerListComponent from "../component/AcquirerListComponent";
+import KeyImportComponent from "../component/KeyImportComponent";
 
 
 let translations = {
@@ -28,7 +29,7 @@ let translations = {
         en: {
             conf_mult: "Please confirm you will delete ",
             users: " users",
-            conf_single:"Please confirm you will delete user ",
+            conf_single: "Please confirm you will delete user ",
             create: "Create",
             delete: "Delete",
             name: "Name",
@@ -40,7 +41,7 @@ let translations = {
         ru: {
             conf_mult: "Пожалуйста, подтвердите удаление ",
             users: " пользователей",
-            conf_single:"Пожалуйста, подтвержите удаление  ",
+            conf_single: "Пожалуйста, подтвержите удаление  ",
             create: "Создать",
             delete: "Удалить",
             name: "Имя",
@@ -92,7 +93,7 @@ let translations = {
         en: {
             conf_mult: "Please confirm you will remove ",
             groups: " groups",
-            conf1:  "Please confirm you will remove group ",
+            conf1: "Please confirm you will remove group ",
             create: "Create",
             delete: "Delete",
             tag: "Tag",
@@ -103,7 +104,7 @@ let translations = {
         ru: {
             conf_mult: "Пожалуйста, подтверлите удаление ",
             groups: " групп",
-            conf1:  "Пожалуйста, подтвердите удаление группы ",
+            conf1: "Пожалуйста, подтвердите удаление группы ",
             create: "Создать",
             delete: "Удалить",
             tag: "Тег",
@@ -208,7 +209,7 @@ let translations = {
             Upload: "Upload",
             private: "Private data",
             edit_on: " Turn editing on",
-            edit_off:  " Turn editing off",
+            edit_off: " Turn editing off",
             Prettify: "Prettify",
             Save: "Save",
             Create: "Create",
@@ -224,7 +225,7 @@ let translations = {
             deleteK: "Delete key",
             deleteA: "Delete application",
             selectM: "Select Merchant",
-            selectG :"Select group",
+            selectG: "Select group",
             selectA: "Select application",
         },
         ru: {
@@ -248,7 +249,7 @@ let translations = {
             Upload: "Загрузить",
             private: "Личные данные",
             edit_on: "Включить редактирование+++",
-            edit_off:  "Выключить редактирование+++",
+            edit_off: "Выключить редактирование+++",
             Prettify: "Добавить+++",
             Save: "Сохранить",
             Create: "Создать",
@@ -264,13 +265,13 @@ let translations = {
             deleteK: "Удалить ключ",
             deleteA: "Удалить приложение",
             selectM: "Выбрать продавца",
-            selectG :"Выбрать группу",
+            selectG: "Выбрать группу",
             selectA: "Выбрать приложение",
         }
     },
     templateListComponent: {
         en: {
-            conf_m:"Please confirm you will delete ",
+            conf_m: "Please confirm you will delete ",
             temps: " templates",
             conf1: "Please confirm you will delete template ",
             title: "Configuration templates",
@@ -286,7 +287,7 @@ let translations = {
             Delete: "Delete",
         },
         ru: {
-            conf_m:"Пожалуйста, подтвердите удаление ",
+            conf_m: "Пожалуйста, подтвердите удаление ",
             temps: " шаблонов",
             conf1: "Пожалуйста, подтвердите удаление шаблона ",
             title: "Шаблоны конфигурации",
@@ -302,7 +303,7 @@ let translations = {
             Delete: "Удалить",
         }
     },
-    templateComponent:{
+    templateComponent: {
         en: {
             title: "Configuration template",
             Back: "Back",
@@ -363,7 +364,7 @@ let translations = {
         }
     },
     configPackComponent: {
-        en :{
+        en: {
             conf_m: "Please confirm you will remove ",
             templated: " templates",
             conf1: "Please confirm you will remove template ",
@@ -416,7 +417,7 @@ let translations = {
             Name: "Name",
             Acquirer: "Acquirer",
             Merchant: "Merchant ID",
-            deleteM :"Delete merchant",
+            deleteM: "Delete merchant",
             Merchants: "Merchants",
         },
         ru: {
@@ -430,7 +431,7 @@ let translations = {
             Name: "Имя",
             Acquirer: "Покупатель",
             Merchant: "ID продавца",
-            deleteM :"Удалить продавца",
+            deleteM: "Удалить продавца",
             Merchants: "Продавцы",
         }
     },
@@ -512,10 +513,10 @@ let translations = {
     },
     groupActionsComponent: {
         en: {
-            updateT :"Update configuration",
-            updateM :"Please confirm you wish to update configuration for all terminals in the group",
+            updateT: "Update configuration",
+            updateM: "Please confirm you wish to update configuration for all terminals in the group",
             loadMk: "Load master keys",
-            loadMkM:"Please confirm you wish to upload master keys to all terminals in the group",
+            loadMkM: "Please confirm you wish to upload master keys to all terminals in the group",
             updateAT: "Update applications",
             updateAM: "Please confirm you wish to update applications for all terminals in the group",
             title: "Group",
@@ -535,7 +536,7 @@ let translations = {
             Acquirer: "Acquirer",
             TID: "TID",
             Status: "Status",
-            selectApp:"Select application",
+            selectApp: "Select application",
             Report: "Report",
             ttp: "Total terminals processed:",
             aaat: "Applications are added to:",
@@ -548,9 +549,7 @@ let translations = {
             Close: "Close",
 
         },
-        ru: {
-
-        },
+        ru: {},
     },
     terminalActionsComponent: {
         en: {
@@ -560,12 +559,12 @@ let translations = {
             sn: "Serial number:",
             Acquirer: "Acquirer:",
             tn: "Terminal number:",
-            Stage:"Stage:",
-            Description:"Description:",
+            Stage: "Stage:",
+            Description: "Description:",
             id: "Merchant ID:",
-            Configuration:"Configuration:",
+            Configuration: "Configuration:",
             keys: "Keys:",
-            Applications:"Applications:",
+            Applications: "Applications:",
             groups: "Groups:",
             get: "Get Info",
             update: "Update config",
@@ -617,11 +616,9 @@ let translations = {
             delete: "Delete activator",
 
         },
-        ru: {
-
-        }
+        ru: {}
     },
-        activatorComponent: {
+    activatorComponent: {
         en: {
             conf: "Please confirm you will remove ",
             fact: " from act",
@@ -630,8 +627,8 @@ let translations = {
             enterURL: 'Please enter configuration URL',
             upCCA: 'Please upload configuration CA bundle',
             upACA: 'Please upload acquirer CA bundle',
-            upKCA :  'Please upload keyloader CA bundle',
-            upTCA :'Please upload TMS CA',
+            upKCA: 'Please upload keyloader CA bundle',
+            upTCA: 'Please upload TMS CA',
             upTCAS: 'Please upload TMS CA signature',
             Activator: "Activator",
             Back: "Back",
@@ -648,16 +645,14 @@ let translations = {
             KCA: "Keyloader CA bundle",
             Save: "Save",
         },
-        ru: {
-
-        }
+        ru: {}
     },
     activatorActionsComponent: {
         en: {
             ta: "Terminal activation",
             Back: "Back",
             name: "Name:",
-            Description:"Description:",
+            Description: "Description:",
             ip: "Terminal IP address:",
             url: "Configuration URL:",
             reset: "Run reset",
@@ -665,9 +660,7 @@ let translations = {
             Result: "Result",
 
         },
-        ru: {
-
-        }
+        ru: {}
     },
     terminalKeyListComponent: {
         en: {
@@ -676,18 +669,16 @@ let translations = {
             conf1: "Please confirm you will delete key ",
             Import: "Import",
             Delete: "Delete",
-            Keys:"Keys",
+            Keys: "Keys",
             Model: "Model"
         },
-        ru: {
-
-        }
+        ru: {}
     },
     terminalKeyComponent: {
         en: {
             enterN: "Please enter key name",
             enterT: 'Please enter key tag',
-            enterM : 'Please enter key material',
+            enterM: 'Please enter key material',
             Key: "Key",
             Back: "Back",
             tn: "Terminal Model",
@@ -697,10 +688,8 @@ let translations = {
             Material: "Material",
             kl: "Key Loader",
             Save: "Save",
-        }   ,
-        ru: {
-
-        }
+        },
+        ru: {}
     },
     keyloaderListComponent: {
         en: {
@@ -714,14 +703,12 @@ let translations = {
             Delete: "Delete",
             deleteKload: "Delete keyloader",
         },
-        ru: {
-
-        }
+        ru: {}
     },
     keyloaderComponent: {
         en: {
             enterN: 'Please enter keyloader name',
-            enterU :'Please enter keyloader URL',
+            enterU: 'Please enter keyloader URL',
             enterSn: 'Please enter keyloader serial number',
             Keyloader: "Keyloader",
             Back: "Back",
@@ -732,28 +719,25 @@ let translations = {
             keytag: "Key tag",
             Save: "Save",
         },
-        ru: {
-        }
+        ru: {}
     },
-        acquirerListComponent: {
+    acquirerListComponent: {
         en: {
             confm: "Please confirm you will delete ",
-            acq:  " acquirers",
+            acq: " acquirers",
             conf1: "Please confirm you will delete acquirer ",
-            Acquirers:"Acquirers",
+            Acquirers: "Acquirers",
             Create: "Create",
             Delete: "Delete",
             Tag: "Tag",
             Name: "Name",
             deleteA: "Delete acquirer"
         },
-        ru: {
-
-        }
+        ru: {}
     },
     acquirerComponent: {
         en: {
-            enterN :'Please enter acquirer name',
+            enterN: 'Please enter acquirer name',
             enterT: 'Please enter acquirer tag',
             Back: "Back",
             Name: "Name",
@@ -762,9 +746,29 @@ let translations = {
             Save: "Save",
             Merchants: "Merchants",
             MID: "MID",
+            Acquirer: "Acquirer",
 
         },
+        ru: {},
+    },
+    keyImportComponent: {
+        en: {
+            title: "Key import",
+            Back: "Back",
+            uploadK :" Upload keys",
+            Report: "Report",
+            tkp: "Total keys processed:",
+            created: "Created:",
+            updated: "Updated:",
+            nur: "No update required:",
+            errors: "Errors:",
+            el: "Empty lines:",
+            comments: "Comments:",
+            tlp: "Total lines processed",
+        },
+        ru: {
 
+        }
     }
 }
 

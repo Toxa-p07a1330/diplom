@@ -126,7 +126,7 @@ class AcquirerComponent extends Component {
             <div>
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Acquirer</h3>
+                    <h3>{this.activeTranslation.Acquirer}</h3>
                     <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}</button>
                 </div>
                 <Formik
