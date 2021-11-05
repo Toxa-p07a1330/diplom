@@ -507,8 +507,45 @@ let translations = {
     },
     groupActionsComponent: {
         en: {
+            updateT :"Update configuration",
+            updateM :"Please confirm you wish to update configuration for all terminals in the group",
+            loadMk: "Load master keys",
+            loadMkM:"Please confirm you wish to upload master keys to all terminals in the group",
+            updateAT: "Update applications",
+            updateAM: "Please confirm you wish to update applications for all terminals in the group",
+            title: "Group",
+            Edit: "Edit",
+            Back: "Back",
+            Name: "Name:",
+            Description: "Description:",
+            Current: "Current action:",
+            Update: "Update",
+            umk: "Upload master keys",
+            Add: "Add",
+            Remove: "Remove",
+            dselAll: "Deselect all",
+            selAll: "Select all",
+            Model: "Model",
+            sn: "Serial number",
+            Acquirer: "Acquirer",
+            TID: "TID",
+            Status: "Status",
+            selectApp:"Select application",
+            Report: "Report",
+            ttp: "Total terminals processed:",
+            aaat: "Applications are added to:",
+            nurf: "No update required for:",
+            tmmi: "Terminal model mismatch in:",
+            errs: "Other errors:",
+            rao: "Remove applications on:",
+            anfo: "Applications not found on:",
+            errors: "Errors:",
+            Close: "Close",
 
-        }
+        },
+        ru: {
+
+        },
     }
 }
 

@@ -184,23 +184,23 @@ class GroupActionsComponent extends Component {
     }
 
     actionUpdate() {
-        this.showAlert("Update configuration",
-            "Please confirm you wish to update configuration for all terminals in the group",
+        this.showAlert(this.activeTranslation.updateT,
+            this.activeTranslation.updateM,
             "update")
         //this.startAction("update");
     }
 
     actionLoadKeys()
     {
-        this.showAlert("Load master keys",
-            "Please confirm you wish to upload master keys to all terminals in the group",
+        this.showAlert(this.activeTranslation.loadMk,
+            this.activeTranslation.loadMkM,
             "loadkeys")
         //this.startAction("loadkeys");
     }
 
     actionUpdateApps() {
-        this.showAlert("Update applications",
-            "Please confirm you wish to update applications for all terminals in the group",
+        this.showAlert(this.activeTranslation.updateAT,
+            this.activeTranslation.updateAM,
             "updatesoftware")
         //this.startAction("update");
     }
@@ -282,7 +282,7 @@ class GroupActionsComponent extends Component {
     activeTranslation = {};
     static contextType = LangSelectorContext;
     componentDidMount() {
-        this.activeTranslation = getTranslations("merchantComponent", this.context.data.lang);
+        this.activeTranslation = getTranslations("groupActionsComponent", this.context.data.lang);
         UserDataService.retrieveGroupTerminals(this.state.id, this.state.groupTermPage, this.state.groupTermPageLimit)
             .then((tresp) => {
                 console.log(tresp)
@@ -307,24 +307,24 @@ class GroupActionsComponent extends Component {
             <div>
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Group</h3>
+                    <h3>{this.activeTranslation.title}</h3>
                     <button
                         className="btn btn-outline-secondary ml-auto"
                         onClick={() => this.props.history.push(`../groups/${this.state.id}`)}>
-                        <FontAwesomeIcon icon={faEdit}/>{' '}Edit
+                        <FontAwesomeIcon icon={faEdit}/>{' '}{this.activeTranslation.Edit}
                     </button>
                     <button
                         className="btn btn-outline-secondary ml-2"
                         onClick={() => this.props.history.goBack()}>
-                        <FontAwesomeIcon icon={faChevronLeft}/>{' '}Back
+                        <FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}
                     </button>
                 </div>
                 <table className="table-borderless table-sm">
                     <tbody>
-                        <tr><th scope="row">Name:</th><td>{legend}</td></tr>
-                        <tr><th scope="row">Description:</th><td>{description}</td></tr>
+                        <tr><th scope="row">{this.activeTranslation.Name}</th><td>{legend}</td></tr>
+                        <tr><th scope="row">{this.activeTranslation.Description}</th><td>{description}</td></tr>
                         <tr><th scope="row"><span/>{ actionName &&
-                            <span>Current action:</span>}</th><td>{actionName}</td></tr>
+                            <span>{this.activeTranslation.Current}</span>}</th><td>{actionName}</td></tr>
                     </tbody>
                 </table>
                 <div>
@@ -336,7 +336,7 @@ class GroupActionsComponent extends Component {
                                         disabled={!this.state.terminals.length}
                                         type="button"
                                         className="btn btn-outline-secondary"
-                                        onClick={this.actionUpdate}>Update
+                                        onClick={this.actionUpdate}>{this.activeTranslation.Update}
                                     </button>
                                 </div>
                             </div>
@@ -348,7 +348,7 @@ class GroupActionsComponent extends Component {
                                             disabled={!this.state.terminals.length}
                                             type="button"
                                             className="btn btn-outline-secondary"
-                                            onClick={this.actionLoadKeys}>Upload master keys
+                                            onClick={this.actionLoadKeys}>{this.activeTranslation.umk}
                                         </button>
                                     </div>
                             </div>
@@ -360,7 +360,7 @@ class GroupActionsComponent extends Component {
                                         disabled={!this.state.terminals.length}
                                         type="button"
                                         className="btn btn-outline-secondary"
-                                        onClick={this.actionAddApps}>Add
+                                        onClick={this.actionAddApps}>{this.activeTranslation.Add}
                                     </button>
                                 </div>
                                 <div className="btn-group mr-2" role="group">
@@ -368,7 +368,7 @@ class GroupActionsComponent extends Component {
                                         disabled={!this.state.terminals.length}
                                         type="button"
                                         className="btn btn-outline-secondary"
-                                        onClick={this.actionRemoveApps}>Remove
+                                        onClick={this.actionRemoveApps}>{this.activeTranslation.Remove}
                                     </button>
                                 </div>
                                 <div className="btn-group mr-2" role="group">
@@ -376,7 +376,7 @@ class GroupActionsComponent extends Component {
                                         disabled={!this.state.terminals.length}
                                         type="button"
                                         className="btn btn-outline-secondary"
-                                        onClick={this.actionUpdateApps}>Update
+                                        onClick={this.actionUpdateApps}>{this.activeTranslation.Update}
                                     </button>
                                 </div>
                             </div>
@@ -393,8 +393,8 @@ class GroupActionsComponent extends Component {
                                     {this.state.selected &&
                                      <>
                                     <button className="btn btn-outline-secondary ml-auto"
-                                            onClick={this.deselectAll}>Deselect all</button>
-                                    < button className="btn btn-outline-secondary ml-2" onClick={this.selectAll}>Select all</button>
+                                            onClick={this.deselectAll}>{this.activeTranslation.dselAll}</button>
+                                    < button className="btn btn-outline-secondary ml-2" onClick={this.selectAll}>{this.activeTranslation.selAll}</button>
                                     </>
                                     }
                                 </div>
@@ -402,11 +402,11 @@ class GroupActionsComponent extends Component {
                                 <Table className="table-sm ml-2 table-light table-striped">
                                     <thead className="thead-dark">
                                         <tr>
-                                            <th>Model</th>
-                                            <th>Serial number</th>
-                                            <th>Acquirer</th>
-                                            <th>TID</th>
-                                            <th>Status</th>
+                                            <th>{this.activeTranslation.Model}</th>
+                                            <th>{this.activeTranslation.sn}</th>
+                                            <th>{this.activeTranslation.Acquirer}</th>
+                                            <th>{this.activeTranslation.TID}</th>
+                                            <th>{this.activeTranslation.Status}</th>
                                             <th>
                                                 <div className="btn-toolbar">
                                                     <div className="btn-group mr-2 ml-auto">
@@ -444,7 +444,7 @@ class GroupActionsComponent extends Component {
                            }
             </div>
                 <SelectObject
-                    title="Select application"
+                    title={this.activeTranslation.selectApp}
                     headers = {['Model', 'Name', 'Tag', 'Version']}
                     columns={ ['terminalModel.name', 'name', 'tag', 'version']}
                     ok={this.selectApplications}
@@ -462,15 +462,15 @@ class GroupActionsComponent extends Component {
                     modal={this.state.show_alert}
                     arg={this.state.alert_arg}/>
                 <Modal isOpen={this.state.show_report} fade={false}>
-                    <ModalHeader>Report</ModalHeader>
+                    <ModalHeader>{this.activeTranslation.Report}</ModalHeader>
                     <ModalBody>
                         <table className="table-sm ml-2 table-light">
                             <tbody>
-                                <tr><th>Total terminals processed:</th><td>{this.state.rep && this.state.rep.total}</td></tr>
-                                <tr><th>Applications are added to:</th><td>{this.state.rep && this.state.rep.installed}</td></tr>
-                                <tr><th>No update required for:</th><td>{this.state.rep && this.state.rep.uptodate}</td></tr>
-                                <tr><th>Terminal model mismatch in:</th><td>{this.state.rep && this.state.rep.modelmismatch}</td></tr>
-                                <tr><th>Other errors:</th><td>{this.state.rep && this.state.rep.errors}</td></tr>
+                                <tr><th>{this.activeTranslation.ttp}</th><td>{this.state.rep && this.state.rep.total}</td></tr>
+                                <tr><th>{this.activeTranslation.aaat}</th><td>{this.state.rep && this.state.rep.installed}</td></tr>
+                                <tr><th>{this.activeTranslation.nurf}</th><td>{this.state.rep && this.state.rep.uptodate}</td></tr>
+                                <tr><th>{this.activeTranslation.tmmi}</th><td>{this.state.rep && this.state.rep.modelmismatch}</td></tr>
+                                <tr><th>{this.activeTranslation.errs}</th><td>{this.state.rep && this.state.rep.errors}</td></tr>
                             </tbody>
                         </table>
                     </ModalBody>
@@ -479,19 +479,19 @@ class GroupActionsComponent extends Component {
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.state.show_remove_report} fade={false}>
-                    <ModalHeader>Report</ModalHeader>
+                    <ModalHeader>{this.activeTranslation.Report}</ModalHeader>
                     <ModalBody>
                         <table className="table-sm ml-2 table-light">
                             <tbody>
-                            <tr><th>Total terminals processed:</th><td>{this.state.rep && this.state.rep.total}</td></tr>
-                            <tr><th>Remove applications on:</th><td>{this.state.rep && this.state.rep.removed}</td></tr>
-                            <tr><th>Applications not found on:</th><td>{this.state.rep && this.state.rep.notfound}</td></tr>
-                            <tr><th>Errors:</th><td>{this.state.rep && this.state.rep.errors}</td></tr>
+                            <tr><th>{this.activeTranslation.ttp}</th><td>{this.state.rep && this.state.rep.total}</td></tr>
+                            <tr><th>{this.activeTranslation.rao}</th><td>{this.state.rep && this.state.rep.removed}</td></tr>
+                            <tr><th>{this.activeTranslation.anfo}</th><td>{this.state.rep && this.state.rep.notfound}</td></tr>
+                            <tr><th>{this.activeTranslation.errors}</th><td>{this.state.rep && this.state.rep.errors}</td></tr>
                             </tbody>
                         </table>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={()=> this.setState({ show_remove_report: false })}>Close</Button>{' '}
+                        <Button color="primary" onClick={()=> this.setState({ show_remove_report: false })}>{this.activeTranslation.Close}</Button>{' '}
                     </ModalFooter>
                 </Modal>
         </div>
