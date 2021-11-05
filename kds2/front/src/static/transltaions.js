@@ -750,6 +750,21 @@ let translations = {
         ru: {
 
         }
+    },
+    acquirerComponent: {
+        en: {
+            enterN :'Please enter acquirer name',
+            enterT: 'Please enter acquirer tag',
+            Back: "Back",
+            Name: "Name",
+            Tag: "Tag",
+            Description: "Description",
+            Save: "Save",
+            Merchants: "Merchants",
+            MID: "MID",
+
+        },
+
     }
 }
 

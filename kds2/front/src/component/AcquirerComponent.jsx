@@ -7,6 +7,8 @@ import { Table } from 'reactstrap';
 import PaginationComponent from "./PaginationComponent";
 import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class AcquirerComponent extends Component {
 
@@ -81,7 +83,11 @@ class AcquirerComponent extends Component {
         }
     }
 
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("acquirerComponent", this.context.data.lang);
+        this.forceUpdate();
         if (parseInt(this.state.id) !== -1) {
             UserDataService.retrieveAcquirer(this.state.id)
                 .then(response => {
@@ -101,10 +107,10 @@ class AcquirerComponent extends Component {
         let e = null
         let errors = {}
         if (!values.name) {
-            e = 'Please enter acquirer name'
+            e = this.activeTranslation.enterN
         }
         else if (!values.tag) {
-            e = 'Please enter acquirer tag'
+            e = this.activeTranslation.enterT
         }
         if (e != null)
             errors.error = "error"
@@ -121,7 +127,7 @@ class AcquirerComponent extends Component {
             <div className="container">
                 <div className="row my-2 mr-0">
                     <h3>Acquirer</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}</button>
                 </div>
                 <Formik
                     initialValues={{ id, name, description, tag }}
@@ -135,19 +141,19 @@ class AcquirerComponent extends Component {
                         (props) => (
                             <Form>
                                 <fieldset className="form-group">
-                                    <label>Name</label>
+                                    <label>{this.activeTranslation.Name}</label>
                                     <Field className="form-control" type="text" name="name" autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Tag</label>
+                                    <label>{this.activeTranslation.Tag}</label>
                                     <Field className="form-control" type="text" name="tag" autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Description</label>
+                                    <label>{this.activeTranslation.Description}</label>
                                     <Field className="form-control" type="text" name="description" autoComplete="off"/>
                                 </fieldset>
 
-                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}Save</button>
+                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}{this.activeTranslation.Save}</button>
                             </Form>
                         )
                     }
@@ -155,13 +161,13 @@ class AcquirerComponent extends Component {
                         { this.state.id !== -1 &&
                             <>
                             <div className="row mt-4">
-                                <h3>Merchants ({this.state.merchantCount}):</h3>
+                                <h3>{this.activeTranslation.Merchants} ({this.state.merchantCount}):</h3>
                                 <PaginationComponent totalRecords={this.state.merchantCount} pageLimit={this.state.mechantPageLimit} pageNeighbours={1} onPageChanged={this.onPageChanged} />
                                 <Table className="table-sm">
                                     <thead className="thead-light">
                                         <tr>
-                                            <th>MID</th>
-                                            <th>Name</th>
+                                            <th>{this.activeTranslation.MID}</th>
+                                            <th>{this.activeTranslation.Name}</th>
                                             <th></th>
                                         </tr>
                                     </thead>
