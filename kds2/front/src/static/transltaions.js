@@ -6,6 +6,7 @@ import TerminalKeyListComponent from "../component/TerminalKeyListComponent";
 import KeyloaderListComponent from "../component/KeyloaderListComponent";
 import AcquirerListComponent from "../component/AcquirerListComponent";
 import KeyImportComponent from "../component/KeyImportComponent";
+import TerminalImportComponent from "../component/TerminalImportComponent";
 
 
 let translations = {
@@ -767,6 +768,23 @@ let translations = {
             tlp: "Total lines processed",
         },
         ru: {
+
+        }
+    },
+    terminalImportComponent: {
+        en: {
+            ti: "Terminal Import",
+            Back: "Back",
+            uploadT: " Upload terminals",
+            Report: "Report",
+            ttp: "Total terminals processed:",
+            created: "Created:",
+            updated: "Updated:",
+            nur: "No update required:",
+            errors: "Errors:",
+            el: "Empty lines:",
+            comments: "Comments:",
+            tlp: "Total lines processed:",
 
         }
     }
