@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronLeft, faSave} from '@fortawesome/fontawesome-free-solid'
 import {alertActions} from "../rdx/rdx";
 import {connect} from "react-redux";
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 class ApplicationComponent extends Component {
 
@@ -85,7 +87,11 @@ class ApplicationComponent extends Component {
         }
     }
 
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("applicationComponent", this.context.data.lang);
+        this.forceUpdate();
         UserDataService.retrieveAllTerminalModels()
             .then((tresp) => {
                 if (parseInt(this.state.id) !== -1) {
@@ -117,19 +123,19 @@ class ApplicationComponent extends Component {
         let e = null
         let errors = {}
         if (!this.state.model) {
-            e = 'Please enter terminal model'
+            e = this.activeTranslation.enterM
         }
         else if (!this.state.name) {
-            e = 'Please enter application name'
+            e = this.activeTranslation.enterA
         }
         else if (!this.state.version) {
-            e = 'Please enter application version'
+            e = this.activeTranslation.enterV
         }
         else if (!this.state.tag) {
-            e = 'Please enter application tag'
+            e = this.activeTranslation.enterT
         }
         else if (!this.state.typeTag) {
-            e = 'Please enter application type tag'
+            e = this.activeTranslation.enterTT
         }
         if (e != null)
             errors.error = "error"
@@ -145,8 +151,8 @@ class ApplicationComponent extends Component {
             <div>
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Application</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                    <h3>{this.activeTranslation.Application}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}</button>
                 </div>
                 <Formik
                     initialValues={{ id, name, description, tag }}
@@ -160,7 +166,7 @@ class ApplicationComponent extends Component {
                         (props) => (
                             <Form>
                                 <fieldset className="form-group">
-                                    <label>Terminal model</label>
+                                    <label>{this.activeTranslation.tm}</label>
                                     <Field className="form-control" as="select" name="model"
                                            value={this.state.model && this.state.model.id}
                                            onChange={(v) => { this.setState( {model: {id: v.target.value, name: ''}})} }
@@ -174,7 +180,7 @@ class ApplicationComponent extends Component {
                                     </Field>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Application name</label>
+                                    <label>{this.activeTranslation.appName}</label>
                                     <Field className="form-control" type="text" name="name" onChange={this.handleChange} value={this.state.name}  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
@@ -183,28 +189,28 @@ class ApplicationComponent extends Component {
                                 </fieldset>
 
                                 <fieldset className="form-group">
-                                    <label>Application tag</label>
+                                    <label>{this.activeTranslation.appTag}</label>
                                     <Field className="form-control" type="text" name="tag" onChange={this.handleChange} value={this.state.tag}  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Application type tag</label>
+                                    <label>{this.activeTranslation.appTT}</label>
                                     <Field className="form-control" type="text" name="typeTag" onChange={this.handleChange} value={this.state.typeTag}  autoComplete="off"/>
                                 </fieldset>
 
                                 <fieldset className="form-group">
-                                    <label>Description</label>
+                                    <label>{this.activeTranslation.Description}</label>
                                     <Field className="form-control" type="text" name="description" onChange={this.handleChange} value={this.state.description}  autoComplete="off"/>
                                 </fieldset>
                                 {parseInt(this.state.id) !== -1 &&
                                 <fieldset className="form-group">
-                                    <label>Package</label>
+                                    <label>{this.activeTranslation.Package}</label>
                                     <div className="input-group">
                                     <Field className="form-control mb-2" type="text" name="packFile" disabled onChange={this.handleChange}
                                            value={this.state.fileName}
                                     />
                                     <div className="input-group-append">
                                     <label className="btn btn-outline-secondary" >
-                                    Upload
+                                        {this.activeTranslation.Upload}
                                     <input
                                     className="d-none"
                                     type="file"
@@ -215,7 +221,7 @@ class ApplicationComponent extends Component {
                                     </div>
                                     </fieldset>
                                 }
-                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}Save</button>
+                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}{this.activeTranslation.Save}</button>
                             </Form>
                         )
                     }

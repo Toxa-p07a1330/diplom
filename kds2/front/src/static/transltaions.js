@@ -8,6 +8,8 @@ import AcquirerListComponent from "../component/AcquirerListComponent";
 import KeyImportComponent from "../component/KeyImportComponent";
 import TerminalImportComponent from "../component/TerminalImportComponent";
 import MerchantImportComponent from "../component/MerchantImportComponent";
+import ApplicationListComponent from "../component/ApplicationListComponent";
+import ApplicationComponent from "../component/ApplicationComponent";
 
 
 let translations = {
@@ -806,6 +808,51 @@ let translations = {
             el: "Empty lines:",
             comms: "Comments:",
             tlp: "Total lines processed:",
+
+        },
+        ru: {
+
+        }
+    },
+    applicationListComponent: {
+        en: {
+            confM :"Please confirm you will delete ",
+            apps: " applications",
+            conf1: "Please confirm you will delete application ",
+            Applications: "Applications",
+            Create: "Create",
+            Delete: "Delete",
+            Model: "Model",
+            Tag: "Tag",
+            Name: "Name",
+            Version: "Version",
+            deleteA: "Delete application",
+
+        },
+        ru: {
+
+        }
+    },
+    applicationComponent: {
+        en: {
+            enterM: 'Please enter terminal model',
+            enterA: 'Please enter application name',
+            enterV: 'Please enter application version',
+            enterT: 'Please enter application tag',
+            enterTT: 'Please enter application type tag',
+            Application: "Application",
+            Back: "Back",
+            tm: "Terminal model",
+            appName:"Application name",
+            appTag: "Application tag",
+            appTT: "Application type tag",
+            Description: "Description",
+            Package: "Package",
+            Upload: "Upload",
+            Save: "Save",
+
+        },
+        ru: {
 
         }
     }
