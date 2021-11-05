@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faEdit, faPlus, faPlay } from '@fortawesome/fontawesome-free-solid'
 import { Table } from 'reactstrap';
 import Alert from './Alert'
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 class KeyloaderListComponent extends Component {
 
@@ -66,11 +68,11 @@ class KeyloaderListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
-                msg = "Please confirm you will delete " + x.length + " keyloaders";
+                msg = this.activeTranslation.confm + x.length + this.activeTranslation.kload;
             }
             else
             {
-                msg = "Please confirm you will delete keyloader " + x[0].name;
+                msg = this.activeTranslation.conf1 + x[0].name;
             }
             this.setState({ show_alert: true, selected_keyloaders: x, message: msg });
         }
@@ -90,8 +92,12 @@ class KeyloaderListComponent extends Component {
                 }
             ).catch(()=> this.setState({ hidden: true }))
     }
-
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("keyloaderListComponent", this.context.data.lang);
+        this.forceUpdate();
+
         this.refreshKeyloaders()
     }
 
@@ -139,16 +145,16 @@ class KeyloaderListComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Keyloaders</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addKeyloaderClicked}><FontAwesomeIcon icon={faPlus}/>{' '}Create</button>
-                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteKeyloadersClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Delete</button>
+                    <h3>{this.activeTranslation.Keyloaders}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addKeyloaderClicked}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.Create}</button>
+                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteKeyloadersClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.Delete}</button>
                 </div>
                 <div component="container">
                     <Table className="table-sm">
                         <thead className="thead-light">
                         <tr>
-                            <th>Tag</th>
-                            <th>Name</th>
+                            <th>{this.activeTranslation.Tag}</th>
+                            <th>{this.activeTranslation.Name}</th>
                             <th>
                                 <div className="btn-toolbar pb-1">
                                     <div className="btn-group  ml-auto">
@@ -188,7 +194,7 @@ class KeyloaderListComponent extends Component {
                     </Table>
                 </div>
                 <Alert
-                    title="Delete keyloader"
+                    title={this.activeTranslation.deleteKload}
                     message={this.state.message}
                     ok={this.OnDelete}
                     close={this.CloseAlert}

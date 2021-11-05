@@ -3,6 +3,7 @@ import TerminalActionsComponent from "../component/TerminalActionsComponent";
 import ActivatorListComponent from "../component/ActivatorListComponent";
 import ActivatorActionsComponent from "../component/ActivatorActionsComponent";
 import TerminalKeyListComponent from "../component/TerminalKeyListComponent";
+import KeyloaderListComponent from "../component/KeyloaderListComponent";
 
 
 let translations = {
@@ -696,10 +697,22 @@ let translations = {
             Material: "Material",
             kl: "Key Loader",
             Save: "Save",
-
         }   ,
         ru: {
 
+        }
+    },
+    keyloaderListComponent: {
+        en: {
+            confm: "Please confirm you will delete ",
+            kload: " keyloaders",
+            conf1: "Please confirm you will delete keyloader ",
+            Keyloaders: "Keyloaders",
+            Tag: "Tag",
+            Name: "Name",
+            Create: "Create",
+            Delete: "Delete",
+            deleteKload: "Delete keyloader",
         }
     }
 }
