@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 const LEFT_PAGE = 'LEFT';
 const RIGHT_PAGE = 'RIGHT';
@@ -91,8 +93,12 @@ class PaginationComponent extends Component {
         return range(1, totalPages);
 
     }
-
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("paginationComponent", this.context.data.lang);
+        this.forceUpdate();
+
         this.gotoPage(1);
     }
 
@@ -137,7 +143,7 @@ class PaginationComponent extends Component {
                                 <li key={index} className="page-item">
                                     <button className="page-link" aria-label="Previous" onClick={this.handleMoveLeft}>
                                         <span aria-hidden="true">&laquo;</span>
-                                        <span className="sr-only">Previous</span>
+                                        <span className="sr-only">{this.activeTranslation.Previous}</span>
                                     </button>
                                 </li>
                             );
@@ -146,7 +152,7 @@ class PaginationComponent extends Component {
                                 <li key={index} className="page-item">
                                     <button className="page-link" aria-label="Next" onClick={this.handleMoveRight}>
                                         <span aria-hidden="true">&raquo;</span>
-                                        <span className="sr-only">Next</span>
+                                        <span className="sr-only">{this.activeTranslation.Next}</span>
                                     </button>
                                 </li>
                             );

@@ -138,8 +138,8 @@ class ConfigPackListComponent extends Component {
             <div className="container">
                 <div className="row my-2 mr-0">
                     <h3>{this.activeTranslation.title}</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addConfigPackClicked}><FontAwesomeIcon icon={faPlus}/>{' '}Create</button>
-                    <button className="btn btn-outline-secondary ml-2" onClick={this.deletePacksClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Delete</button>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={this.addConfigPackClicked}><FontAwesomeIcon icon={faPlus}/>{' '}{this.activeTranslation.Create}</button>
+                    <button className="btn btn-outline-secondary ml-2" onClick={this.deletePacksClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.Delete}</button>
                 </div>
                 <div component="container">
                     <Table className="table-sm">

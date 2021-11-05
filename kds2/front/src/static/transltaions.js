@@ -11,6 +11,7 @@ import MerchantImportComponent from "../component/MerchantImportComponent";
 import ApplicationListComponent from "../component/ApplicationListComponent";
 import ApplicationComponent from "../component/ApplicationComponent";
 import LogListComponent from "../component/LogListComponent";
+import PaginationComponent from "../component/PaginationComponent";
 
 
 let translations = {
@@ -235,27 +236,27 @@ let translations = {
         },
         ru: {
             enterSn: 'Пожалуйста, введите серийный номер терминала',
-            stageDef: '+++',
+            stageDef: '',
             tidLen: 'Длина идентификатора терминала должна составлять 8 символов',
             select_model: 'Пожалуйста, выберите модель терминала',
             select_merch: 'Необходимо выбрать продавца',
             ipCheck: 'Пожалуйста, введите действительный IP-адрес',
-            xmlCheck: "Недопустимый XML-файл. Пожалуйста, обратитесь к аннотациям в редакторе XML+++",
+            xmlCheck: "Недопустимый XML-файл. Пожалуйста, обратитесь к аннотациям в редакторе XML",
             Actions: "Действия",
             Back: "Назад",
             sn: "Серийный номер",
             tn: "Номер терминала",
-            Stage: "Стадия+++",
+            Stage: "Стадия",
             Description: "Описание",
             ip: "IP-адрес",
-            conf: "Пакет конфигурации+++",
+            conf: "Пакет конфигурации",
             Merchant: "Продавец",
             Certificate: "Сертификат",
             Upload: "Загрузить",
             private: "Личные данные",
-            edit_on: "Включить редактирование+++",
-            edit_off: "Выключить редактирование+++",
-            Prettify: "Добавить+++",
+            edit_on: "Включить редактирование",
+            edit_off: "Выключить редактирование",
+            Prettify: "Добавить",
             Save: "Сохранить",
             Create: "Создать",
             delete: "Удалить",
@@ -302,7 +303,7 @@ let translations = {
             Name: "Имя",
             Add: "Добавить",
             Remove: "Удалить",
-            Stage: "Стадия+++",
+            Stage: "Стадия",
             Section: "Секция",
             Description: "Описание",
             Delete: "Удалить",
@@ -339,10 +340,10 @@ let translations = {
             Description: "Описание",
             Data: "Данные",
             Save: "Сохранить",
-            edit_on: " Включить редактирование+++",
+            edit_on: " Включить редактирование",
             edit_off: "Выключить редактирование",
-            Prettify: "Добавить+++",
-            upload: "Загрузить данные конфигурации+++",
+            Prettify: "Добавить",
+            upload: "Загрузить данные конфигурации",
             Name: "Имя",
             Stage: "Стадия",
         },
@@ -356,6 +357,9 @@ let translations = {
             Tag: "Tag",
             Name: "Name",
             deleteP: "Delete pack",
+            Create: "Create",
+            Delete: "Delete"
+
 
         },
         ru: {
@@ -365,7 +369,9 @@ let translations = {
             title: "Пакет конфигурации",
             Tag: "Тег",
             Name: "Имя",
-            deleteP: "Удалить пакет+++",
+            deleteP: "Удалить пакет",
+            Create: "Создать",
+            Delete: "Удалить"
         }
     },
     configPackComponent: {
@@ -505,7 +511,7 @@ let translations = {
             match: 'Пароли не совпадают',
             Back: "Назад",
             title: "Мой аккаунт",
-            update: "Информация об учетной записи обновлена+++",
+            update: "Информация об учетной записи обновлена",
             Name: "Имя",
             Login: "Логин",
             EMail: "EMail",
@@ -675,7 +681,10 @@ let translations = {
             Import: "Import",
             Delete: "Delete",
             Keys: "Keys",
-            Model: "Model"
+            Model: "Model",
+            sn: "Serial number",
+            Tag: "Tag",
+            Name: "Name",
         },
         ru: {}
     },
@@ -851,6 +860,7 @@ let translations = {
             Package: "Package",
             Upload: "Upload",
             Save: "Save",
+            version: "Version"
 
         },
         ru: {
@@ -887,6 +897,61 @@ let translations = {
         ru: {
             ok: "Принять",
             cancel:"Отменить"
+        }
+    },
+    notMatch: {
+        en: {
+            notFound:"Requested resource is not found",
+        },
+        ru: {
+
+        }
+    },
+    paginationComponent: {
+        en: {
+            Next: "Next",
+            Previous: "Previous"
+        },
+        ru: {
+
+        }
+    },
+    selectObject: {
+        en: {
+            Select: "Select",
+            Cancel: "Cancel",
+        },
+        ru: {
+
+        }
+    },
+    logoutBtn: {
+        en: {
+            Logout: "Logout"
+        },
+        ru: {
+
+        }
+    },
+    sideBar: {
+        en: {
+            Groups: "Groups",
+            Terminals: "Terminals",
+            Merchants: "Merchants",
+            Acquirers: "Acquirers",
+            ct: "Config templates",
+            cp: "Config packages",
+            Applications: "Applications",
+            Activation: "Activation",
+            Keys: "Keys",
+            kl: "Key Loaders",
+            Users: "Users",
+            Logs: "Logs",
+            acc: "My account",
+
+        },
+        ru: {
+
         }
     }
 

@@ -14,6 +14,8 @@ import {
 } from 'reactstrap';
 import MobileOnly from "./MobileOnly";
 import DesktopOnly from "./DesktopOnly";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class LogoutBtn extends React.Component {
 
@@ -21,8 +23,13 @@ class LogoutBtn extends React.Component {
         super(props);
         this.logout = this.logout.bind(this)
     }
-
-    logout()
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
+    componentDidMount() {
+        this.activeTranslation = getTranslations("logoutBtn", this.context.data.lang);
+        this.forceUpdate();
+    }
+        logout()
     {
         this.props.dispatch(userActions.logout());
     }
@@ -32,7 +39,7 @@ class LogoutBtn extends React.Component {
             <div>
                 <Navbar color="light" light expand="md">
                             <NavbarText>{this.props.user.login}</NavbarText>
-                            <NavLink href="#" onClick={this.logout}><FontAwesomeIcon icon={faPowerOff} fixedWidth />{' '}Logout</NavLink>
+                            <NavLink href="#" onClick={this.logout}><FontAwesomeIcon icon={faPowerOff} fixedWidth />{' '}{this.activeTranslation.Logout}</NavLink>
                 </Navbar>
             </div>
         );

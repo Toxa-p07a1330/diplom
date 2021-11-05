@@ -184,7 +184,7 @@ class ApplicationComponent extends Component {
                                     <Field className="form-control" type="text" name="name" onChange={this.handleChange} value={this.state.name}  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Version</label>
+                                    <label>{this.activeTranslation.version}</label>
                                     <Field className="form-control" type="text" name="version" onChange={this.handleChange} value={this.state.version}  autoComplete="off"/>
                                 </fieldset>
 

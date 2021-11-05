@@ -154,9 +154,9 @@ class TerminalKeyListComponent extends Component {
                         <thead className="thead-light">
                         <tr>
                             <th>{this.activeTranslation.Model}</th>
-                            <th>Serial number</th>
-                            <th>Tag</th>
-                            <th>Name</th>
+                            <th>{this.activeTranslation.sn}</th>
+                            <th>{this.activeTranslation.Tag}</th>
+                            <th>{this.activeTranslation.Name}</th>
                             <th>
                                 <div className="btn-toolbar pb-1">
                                     <div className="btn-group  ml-auto">

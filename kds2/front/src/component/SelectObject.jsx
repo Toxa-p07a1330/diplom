@@ -3,6 +3,8 @@ import {Modal, ModalBody, Table} from 'reactstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckSquare} from "@fortawesome/fontawesome-free-solid";
 import PaginationComponent from "./PaginationComponent";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 class SelectObject extends Component {
 
@@ -49,8 +51,13 @@ class SelectObject extends Component {
     //console.log()
     this.setState({ checkedItems: checkedCopy });
   }
-
-  handleGroupCheckChange(e)
+  activeTranslation = {}
+  static contextType = LangSelectorContext;
+  componentDidMount() {
+    this.activeTranslation = getTranslations("selectObject", this.context.data.lang);
+    this.forceUpdate();
+  }
+    handleGroupCheckChange(e)
   {
     const isChecked = e.target.checked;
     this.setChecked(isChecked);
@@ -112,11 +119,11 @@ class SelectObject extends Component {
                      placeholder={this.props.placeholder}/>
               {this.props.multiselect &&
                 <div className="input-group-append">
-                  <button className="btn btn-outline-secondary" onClick={() => this.onok(null)}>Select</button>
+                  <button className="btn btn-outline-secondary" onClick={() => this.onok(null)}>{this.activeTranslation.Select}</button>
                 </div>
               }
               <div className="input-group-append">
-                <button className="btn btn-outline-secondary" onClick={this.oncancel}>Cancel</button>
+                <button className="btn btn-outline-secondary" onClick={this.oncancel}>{this.activeTranslation.Cancel}</button>
               </div>
             </div>
           </div>
