@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const LangSelectorContext = React.createContext();
 let LangSelectorContextProvider = props => {
     const [state, setState] = useState({
-        lang: "en"
+        lang: "ru"
     });
     return (
         <LangSelectorContext.Provider value={{ data: state, setData: setState }}>

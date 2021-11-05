@@ -10,6 +10,7 @@ import TerminalImportComponent from "../component/TerminalImportComponent";
 import MerchantImportComponent from "../component/MerchantImportComponent";
 import ApplicationListComponent from "../component/ApplicationListComponent";
 import ApplicationComponent from "../component/ApplicationComponent";
+import LogListComponent from "../component/LogListComponent";
 
 
 let translations = {
@@ -855,7 +856,40 @@ let translations = {
         ru: {
 
         }
+    },
+    logListComponent: {
+        en: {
+            title: "Logs",
+            Time: "Time",
+            Level: "Level",
+            User: "User",
+            Message :"Message",
+
+        },
+        ru: {
+
+        }
+    },
+    home: {
+        en: {
+            title: "Terminal Management System",
+            copiright: "(C) Shtrih-M 2020",
+        },
+        ru: {
+
+        }
+    },
+    alert: {
+        en: {
+            ok: "Ok",
+            cancel:"Cancel"
+        },
+        ru: {
+            ok: "Принять",
+            cancel:"Отменить"
+        }
     }
+
 }
 
 let getTranslations = (page, lang) => {

@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {getTranslations} from "../static/transltaions";
 
 const Alert = (props) => {
-  const {
+  let langSelectContext = useContext(LangSelectorContext)
+  let activeTranslation = getTranslations("alert", langSelectContext.data.lang);
+
+    const {
     message,
     title,
     ok,
@@ -30,8 +35,8 @@ const Alert = (props) => {
         {message}
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={onok}>Ok</Button>{' '}
-          <Button color="secondary" onClick={oncancel}>Cancel</Button>
+          <Button color="primary" onClick={onok}>{activeTranslation.ok}</Button>{' '}
+          <Button color="secondary" onClick={oncancel}>{activeTranslation.cancel}</Button>
         </ModalFooter>
       </Modal>
     </div>

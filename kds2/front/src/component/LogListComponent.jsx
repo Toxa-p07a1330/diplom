@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import UserDataService from '../service/UserDataService';
 import { Table } from 'reactstrap';
 import PaginationComponent from "./PaginationComponent";
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 class LogListComponent extends Component {
 
@@ -38,8 +40,11 @@ class LogListComponent extends Component {
                 }
             ).catch(()=> this.setState({ hidden: true }))
     }
-
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("logListComponent", this.context.data.lang);
+        this.forceUpdate();
         this.refreshLogs()
     }
 
@@ -49,24 +54,27 @@ class LogListComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Logs</h3>
+                    <h3>{this.activeTranslation.title}</h3>
                 </div>
                 <div component="container">
                     <PaginationComponent totalRecords={this.state.logCount} pageLimit={this.state.pageLimit} pageNeighbours={2} onPageChanged={this.onPageChanged} />
                     <Table className="table-sm">
                         <thead className="thead-light">
                             <tr>
-                                <th>Time</th>
-                                <th>Level</th>
-                                <th>User</th>
-                                <th>Message</th>
+                                <th>{this.activeTranslation.Time}</th>
+                                <th>{this.activeTranslation.Level}</th>
+                                <th>{this.activeTranslation.User}</th>
+                                <th>{this.activeTranslation.Message}</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                              this.state.logs && this.state.logs.map(log =>
                                 <tr key={log.id}>
-                                    <td>{log.date}</td>
+                                    <td>{new Date(log.date).toLocaleTimeString()}
+                                        <br/>
+                                        {new Date(log.date).toLocaleDateString()}
+                                    </td>
                                     <td>{log.level}</td>
                                     <td>{log.user}</td>
                                     <td>{log.message}</td>
