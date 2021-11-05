@@ -73,11 +73,11 @@ class TerminalKeyListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
-                msg = "Please confirm you will delete " + x.length + " keys";
+                msg = this.activeTranslation.confm + x.length + this.activeTranslation.keys;
             }
             else
             {
-                msg = "Please confirm you will delete key " + x[0].name;
+                msg = this.activeTranslation.conf1 + x[0].name;
             }
             this.setState({ show_alert: true, selected_keys: x, message: msg });
         }
@@ -97,7 +97,11 @@ class TerminalKeyListComponent extends Component {
             ).catch(()=> { this.setState( { hidden : true })})
     }
 
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
+        this.activeTranslation = getTranslations("terminalKeyListComponent", this.context.data.lang);
+        this.forceUpdate();
         this.refreshKeys()
     }
 
@@ -138,16 +142,16 @@ class TerminalKeyListComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Keys</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() =>  this.props.history.push(`/import/keys`)}><FontAwesomeIcon icon={faCube}/>{' '}Import</button>
-                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteKeysClicked}><FontAwesomeIcon icon={faTrash}/>{' '}Delete</button>
+                    <h3>{this.activeTranslation.Keys}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() =>  this.props.history.push(`/import/keys`)}><FontAwesomeIcon icon={faCube}/>{' '}{this.activeTranslation.Import}</button>
+                    <button className="btn btn-outline-secondary ml-2" onClick={this.deleteKeysClicked}><FontAwesomeIcon icon={faTrash}/>{' '}{this.activeTranslation.Delete}</button>
                 </div>
                 <div component="container">
                     <PaginationComponent totalRecords={this.state.keyCount} pageLimit={this.state.pageLimit} pageNeighbours={1} onPageChanged={this.onPageChanged} />
                     <Table className="table-sm">
                         <thead className="thead-light">
                         <tr>
-                            <th>Model</th>
+                            <th>{this.activeTranslation.Model}</th>
                             <th>Serial number</th>
                             <th>Tag</th>
                             <th>Name</th>

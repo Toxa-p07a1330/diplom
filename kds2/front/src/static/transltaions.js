@@ -2,6 +2,7 @@ import GroupActionsComponent from "../component/GroupActionsComponent";
 import TerminalActionsComponent from "../component/TerminalActionsComponent";
 import ActivatorListComponent from "../component/ActivatorListComponent";
 import ActivatorActionsComponent from "../component/ActivatorActionsComponent";
+import TerminalKeyListComponent from "../component/TerminalKeyListComponent";
 
 
 let translations = {
@@ -661,6 +662,43 @@ let translations = {
             reset: "Run reset",
             State: "State",
             Result: "Result",
+
+        },
+        ru: {
+
+        }
+    },
+    terminalKeyListComponent: {
+        en: {
+            confm: "Please confirm you will delete ",
+            keys: " keys",
+            conf1: "Please confirm you will delete key ",
+            Import: "Import",
+            Delete: "Delete",
+            Keys:"Keys",
+            Model: "Model"
+        },
+        ru: {
+
+        }
+    },
+    terminalKeyComponent: {
+        en: {
+            enterN: "Please enter key name",
+            enterT: 'Please enter key tag',
+            enterM : 'Please enter key material',
+            Key: "Key",
+            Back: "Back",
+            tn: "Terminal Model",
+            tsm: "Terminal Serial Number",
+            kn: "Key Name",
+            Tag: "Tag",
+            Material: "Material",
+            kl: "Key Loader",
+            Save: "Save",
+
+        }   ,
+        ru: {
 
         }
     }

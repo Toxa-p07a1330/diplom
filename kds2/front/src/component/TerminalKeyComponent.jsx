@@ -6,6 +6,8 @@ import {faChevronLeft, faEdit, faEye, faSave} from '@fortawesome/fontawesome-fre
 import SelectObject from "./SelectObject";
 import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
+import {getTranslations} from "../static/transltaions";
+import {LangSelectorContext} from "../context/LangSelectorContextProvider";
 
 class TerminalKeyComponent extends Component {
 
@@ -94,8 +96,11 @@ class TerminalKeyComponent extends Component {
         }
     }
 
+    activeTranslation = {}
+    static contextType = LangSelectorContext;
     componentDidMount() {
-
+        this.activeTranslation = getTranslations("terminalKeyComponent", this.context.data.lang);
+        this.forceUpdate();
         UserDataService.retrieveAllKeyloaders()
             .then((kresp) => {
                 if (parseInt(this.state.id) !== -1) {
@@ -130,13 +135,13 @@ class TerminalKeyComponent extends Component {
         let e = null
         let errors = {}
         if (!values.name) {
-            e = 'Please enter key name'
+            e = this.activeTranslation.enterN
         }
         else if (!values.tag) {
-            e = 'Please enter key tag'
+            e = this.activeTranslation.enterT
         }
         else if (!values.material) {
-            e = 'Please enter key material'
+            e = this.activeTranslation.enterM
         }
         if (e != null)
             errors.error = "error"
@@ -154,8 +159,8 @@ class TerminalKeyComponent extends Component {
         return (
             <div className="container">
                 <div className="row my-2 mr-0">
-                    <h3>Key</h3>
-                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}Back</button>
+                    <h3>{this.activeTranslation.Key}</h3>
+                    <button className="btn btn-outline-secondary ml-auto" onClick={() => this.props.history.goBack()}><FontAwesomeIcon icon={faChevronLeft}/>{' '}{this.activeTranslation.Back}</button>
                 </div>
                 <Formik
                     initialValues={ {id, name, material, keyloader, terminal, tag, model, sn }}
@@ -169,30 +174,30 @@ class TerminalKeyComponent extends Component {
                         (props) => (
                             <Form>
                                 <fieldset className="form-group">
-                                    <label>Terminal Model</label>
+                                    <label>{this.activeTranslation.tn}</label>
                                     <Field className="form-control" type="text" name="model" disabled/>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label>Terminal Serial Number</label>
+                                    <label>{this.activeTranslation.tsm}</label>
                                     <Field className="form-control" type="text" name="sn" disabled/>
                                 </fieldset>
 
                                 <fieldset className="form-group">
-                                    <label>Key Name</label>
+                                    <label>{this.activeTranslation.kn}</label>
                                     <Field className="form-control" type="text" name="name" onChange={this.handleChange} value={this.state.name}  autoComplete="off"/>
                                 </fieldset>
 
                                 <fieldset className="form-group">
-                                    <label>Tag</label>
+                                    <label>{this.activeTranslation.Tag}</label>
                                     <Field className="form-control" type="text" name="tag" onChange={this.handleChange} value={this.state.tag}  autoComplete="off"/>
                                 </fieldset>
                                 <fieldset>
-                                    <label>Material</label>
+                                    <label>{this.activeTranslation.Material}</label>
                                     <Field className="form-control" type="text" name="material" onChange={this.handleChange} value={this.state.material}  autoComplete="off"/>
                                 </fieldset>
 
                                 <fieldset className="my-3">
-                                <label>Key Loader</label>
+                                <label>{this.activeTranslation.kl}</label>
                                     <div className="input-group">
                                         <Field className="form-control" type="text" name="keyloader" value={this.state.keyloader ? this.state.keyloader.name : ''} disabled/>
                                         <div className="input-group-append">
@@ -201,7 +206,7 @@ class TerminalKeyComponent extends Component {
                                         </div>
                                     </div>
                                 </fieldset>
-                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}Save</button>
+                                <button className="btn btn-outline-secondary" type="submit"><FontAwesomeIcon icon={faSave}/>{' '}{this.activeTranslation.Save}</button>
                             </Form>
                         )
                     }
