@@ -7,6 +7,7 @@ import KeyloaderListComponent from "../component/KeyloaderListComponent";
 import AcquirerListComponent from "../component/AcquirerListComponent";
 import KeyImportComponent from "../component/KeyImportComponent";
 import TerminalImportComponent from "../component/TerminalImportComponent";
+import MerchantImportComponent from "../component/MerchantImportComponent";
 
 
 let translations = {
@@ -784,6 +785,26 @@ let translations = {
             errors: "Errors:",
             el: "Empty lines:",
             comments: "Comments:",
+            tlp: "Total lines processed:",
+
+        },
+        ru: {
+
+        }
+    },
+    merchantImportComponent: {
+        en: {
+            title: "Merchant import",
+            Back: "Back",
+            uploadM: "Upload merchants",
+            Report: "Report",
+            tmp: "Total merchants processed:",
+            created: "Created:",
+            update: "Updated:",
+            nur: "No update required:",
+            errors: "Errors:",
+            el: "Empty lines:",
+            comms: "Comments:",
             tlp: "Total lines processed:",
 
         }
