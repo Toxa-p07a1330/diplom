@@ -7,6 +7,8 @@ let LangSelectorContextProvider = props => {
         window.navigator.systemLanguage ||
         window.navigator.userLanguage): "ru"
     language = language.substr(0, 2).toLowerCase();
+    if (language !== "ru" || language !== "en")
+        language="en"
     const [state, setState] = useState({
         lang: language
     });
