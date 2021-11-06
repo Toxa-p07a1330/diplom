@@ -47,7 +47,7 @@ let translations = {
         ru: {
             conf_mult: "Пожалуйста, подтвердите удаление ",
             users: " пользователей",
-            conf_single: "Пожалуйста, подтвержите удаление  ",
+            conf_single: "Пожалуйста, подтвержите удаление  ",//уверен что там не должно быть пользователей?
             create: "Создать",
             delete: "Удалить",
             name: "Имя",
@@ -152,7 +152,7 @@ let translations = {
             acquirer: "Покупатель",
             tid: "TID",
             name: "Название",
-            Tag: "Тэг",
+            Tag: "Тег",// гугл сказал писать через е
             Description: "Описание",
             titg: "Шаблоны в группах",
             removeT: "Удалить терминал из группы",
@@ -236,7 +236,7 @@ let translations = {
         },
         ru: {
             enterSn: 'Пожалуйста, введите серийный номер терминала',
-            stageDef: '',
+            stageDef: 'Стадия должна быть определена',
             tidLen: 'Длина идентификатора терминала должна составлять 8 символов',
             select_model: 'Пожалуйста, выберите модель терминала',
             select_merch: 'Необходимо выбрать продавца',
@@ -248,7 +248,7 @@ let translations = {
             tn: "Номер терминала",
             Stage: "Стадия",
             Description: "Описание",
-            ip: "IP-адрес",
+            ip: "IP адрес",
             conf: "Пакет конфигурации",
             Merchant: "Продавец",
             Certificate: "Сертификат",
@@ -264,7 +264,7 @@ let translations = {
             Name: "Имя",
             Add: "Добавить",
             Remove: "Удалить",
-            participants: "",
+            participants: "Участники в группах",
             addG: "Добавить в группу",
             removeG: "Удалить из группы",
             removeT: "Удалить терминал из группы",
@@ -506,7 +506,7 @@ let translations = {
             save: "Save",
         },
         ru: {
-            pwdCheck: 'Пароль должен сотсоять не меньше чем из 8 символов',
+            pwdCheck: 'Пароль должен состоять не меньше чем из 8 символов',
             repeat: 'Пожалуйста, повторите пароль',
             match: 'Пароли не совпадают',
             Back: "Назад",
@@ -560,7 +560,42 @@ let translations = {
             Close: "Close",
 
         },
-        ru: {},
+        ru: {
+            updateT: "Обновление конфигурации",
+            updateM: "Пожалуйста, подтвердите желание обновить конфигурацию для всех терминалов в группе",
+            loadMk: "Загрузить мастер-ключи",
+            loadMkM: "Пожалуйста, подтвердите желание загрузить мастер-ключи на все терминалы в группе",
+            updateAT: "Обновление приложений",
+            updateAM: "Пожалуйста, подтвердите желание обновить приложения для всех теминалов в группе ",
+            title: "Группа",
+            Edit: "Редактировать",
+            Back: "Назад",
+            Name: "Имя:",
+            Description: "Описание:",
+            Current: "Текущее действие:",
+            Update: "Обновить",
+            umk: "Загрузить мастер-ключи",
+            Add: "Добавить",
+            Remove: "Удалить",
+            dselAll: "Отменить выбор всех",
+            selAll: "ВЫбрать все",
+            Model: "Модель",
+            sn: "Серийный номер",
+            Acquirer: "Покупатель",
+            TID: "TID",
+            Status: "Статус",
+            selectApp: "Выбрать приложение",
+            Report: "Отчет",
+            ttp: "Количество обработанных терминалов:",
+            aaat: "Приложения добавляются в:",
+            nurf: "Обновление не требуется для:",
+            tmmi: "Несоответствие модели терминала в:",
+            errs: "Другие ошибки:",
+            rao: "Удалить приложения в:",
+            anfo: "Приложения не найдены в:",
+            errors: "Ошибки:",
+            Close: "закрыть",
+        },
     },
     terminalActionsComponent: {
         en: {
@@ -611,7 +646,56 @@ let translations = {
             kca: "Keyloader CA:",
             kcc: "Keyloader client cert:",
             RemoveG: "Remove terminal from group",
-        }
+        },
+        ru: {
+            Terminal: "Терминал",
+            Back: "Назад",
+            Model: "Модель:",
+            sn: "Серийный нормер:",
+            Acquirer: "Покупатель:",
+            tn: "Номер терминала:",
+            Stage: "Стадия:",
+            Description: "Описание:",
+            id: "ID продавца:",
+            Configuration: "Конфигурация:",
+            keys: "Ключи:",
+            Applications: "Приложения:",
+            groups: "Группы:",
+            get: "Получить информацию",
+            update: "Обновить конфигурацию",
+            getLog: "Получить логи",
+            loadKey: "Загрузить ключи",
+            upSoft: "Обновление программного обеспечения",
+            Command: "Команда",
+            Status: "Статус",
+            aId: "ID покупателя:",
+            tId: "ID терминала:",
+            dId: "ID устройства:",
+            mId: "ID продавца:",
+            mnl: "Имя и местонахождение продавца:",
+            appv: "Версия приложения:",
+            intV: "Внутренняя версия:",
+            os: "OC:",
+            secM: "Модуль безопасности:",
+            sdk: "Пакет SDK:",
+            tcn: "Имя конфигурации терминала:",
+            tcs: "Стадия настройки терминала:",
+            ccn: "Общее имя конфигурации:",
+            ccs: "Общая стадия настройки:",
+            ecn: "Имя конфигурации EMV:",
+            ecs: "Стадия настройки EMV:",
+            Ccn: "Имя конфигурации CAPK:",
+            Ccs: "Стадия настройки CAPK:",
+            tmsH: "Хост TMS:",
+            tmsca: "Центр сертификации хоста TMS:",
+            tmscert: "Сертификат клиента TMS:",
+            ahca: "CA сертификат эквайера:",
+            aca: "Покупатель CA:",
+            acc: "Клиентский сертификат эквайера:",
+            kca: "Загрузчик ключей CA:",
+            kcc: "Клиентский сертификат загрузчика ключей:",
+            RemoveG: "Удалить терминал из группы",
+        },
     },
     activatorListComponent: {
         en: {
@@ -627,7 +711,18 @@ let translations = {
             delete: "Delete activator",
 
         },
-        ru: {}
+        ru: {
+            confm: "Пожалуйста, подтвердите удаление ",
+            activators: " активаторы",
+            conf1: "Пожалуйста, подтвердите удаление активатора ",
+            Create: "Создать",
+            Delete: "Удалить",
+            Activators: "Активаторы",
+            Name: "Имя",
+            tm: "Модель терминала",
+            Description: "Описание",
+            delete: "Удалить активатор",
+        }
     },
     activatorComponent: {
         en: {
@@ -656,7 +751,32 @@ let translations = {
             KCA: "Keyloader CA bundle",
             Save: "Save",
         },
-        ru: {}
+        ru: {
+            conf: "Пожалуйста, подтвердите удаление",
+            fact: " из акта",
+            enterN: 'Пожалуйста, введите имя терминала',
+            enterIp: 'Пожалуйста, введите IP адрес терминала ',
+            enterURL: 'Пожалуйста, введите URL конфигурации',
+            upCCA: 'Пожалуйста, загрузите пакет CA конфигурации',
+            upACA: 'Пожалуйста, загрузите пакет CA для покупателя',
+            upKCA: 'Пожалуйста, загрузите пакет CA загрузчика ключей',
+            upTCA: 'Пожалуйста, загрузите TMS CA',
+            upTCAS: 'Пожалуйста, загрузите подпись TMS CA ',
+            Activator: "Активатор",
+            Back: "Назад",
+            Name: "Имя",
+            Description: "Описание",
+            ip: "IP адрес терминала",
+            url: "URL конфигурации",
+            tm: "Модель конфигурации",
+            CSCA: "Сервер конфигурации CA",
+            CSCAS: "Подпись CA сервера конфигурации ",
+            Upload: "Загрузить",
+            CCA: "Комплект CA конфигурации",
+            ACA: "Пакет CA для покупателя",
+            KCA: "Пакет CA для загрузчика ключей",
+            Save: "Сохранить",
+        }
     },
     activatorActionsComponent: {
         en: {
@@ -671,7 +791,17 @@ let translations = {
             Result: "Result",
 
         },
-        ru: {}
+        ru: {
+            ta: "Активация терминала",
+            Back: "Назад",
+            name: "Имя:",
+            Description: "Описание:",
+            ip: "IP адрес терминала:",
+            url: "URL конфигурации:",
+            reset: "Выполнить сброс",
+            State: "Состояние",
+            Result: "Результат",
+        }
     },
     terminalKeyListComponent: {
         en: {
@@ -686,7 +816,18 @@ let translations = {
             Tag: "Tag",
             Name: "Name",
         },
-        ru: {}
+        ru: {
+            confm: "Пожалуйста, подтвердите удаление",
+            keys: " ключи",
+            conf1: "Пожалуйста, подтвердите удаление ключей ",
+            Import: "Импортировать",
+            Delete: "Удалить",
+            Keys: "Ключи",
+            Model: "Модель",
+            sn: "Серийный нормер",
+            Tag: "Тег",
+            Name: "Имя",
+        }
     },
     terminalKeyComponent: {
         en: {
@@ -703,7 +844,20 @@ let translations = {
             kl: "Key Loader",
             Save: "Save",
         },
-        ru: {}
+        ru: {
+            enterN: "Пожалуйста, введите имя ключа",
+            enterT: 'Пожалуйста, введите тег ключа',
+            enterM: 'Пожалуйста, введите материальный ключ',
+            Key: "Ключ",
+            Back: "Назад",
+            tn: "Модель терминала",
+            tsm: "Серийный номер терминала",
+            kn: "Имя ключа",
+            Tag: "Тег",
+            Material: "Материал",
+            kl: "Загрузчик ключей",
+            Save: "Сохранить",
+        }
     },
     keyloaderListComponent: {
         en: {
@@ -717,7 +871,17 @@ let translations = {
             Delete: "Delete",
             deleteKload: "Delete keyloader",
         },
-        ru: {}
+        ru: {
+            confm: "Пожалуйста, подтвердите удаление ",
+            kload: " загрузчики ключей",
+            conf1: "Пожалуйста, подтвердите удаление загрузчика ключей ",
+            Keyloaders: "Загрузчики ключей",
+            Tag: "Тег",
+            Name: "Имя",
+            Create: "Создать",
+            Delete: "Удалить",
+            deleteKload: "Удалить загрузчик ключей",
+        }
     },
     keyloaderComponent: {
         en: {
@@ -733,7 +897,19 @@ let translations = {
             keytag: "Key tag",
             Save: "Save",
         },
-        ru: {}
+        ru: {
+            enterN: 'Пожалуйста, введите имя загрузчика ключей',
+            enterU: 'Пожалуйста, введите URL загрузчика ключей',
+            enterSn: 'Пожалуйста, введите серийный номер загрузчика ключей',
+            Keyloader: "Загрузчик ключей",
+            Back: "Назад",
+            Name: "Имя",
+            Description: "Описание",
+            ip: "IP адрес",
+            sn: "Серийный номер",
+            keytag: "Тег ключа",
+            Save: "Сохранить",
+        }
     },
     acquirerListComponent: {
         en: {
@@ -747,7 +923,17 @@ let translations = {
             Name: "Name",
             deleteA: "Delete acquirer"
         },
-        ru: {}
+        ru: {
+            confm: "Пожалуйста, подтвердите удаление покупателя ",
+            acq: " покупатели",
+            conf1: "Пожалуйста, подтвердите удаление покупателя ",
+            Acquirers: "Покупатели",
+            Create: "Создать",
+            Delete: "Удалить",
+            Tag: "Тег",
+            Name: "Имя",
+            deleteA: "Удалить покупателя"
+        }
     },
     acquirerComponent: {
         en: {
@@ -763,7 +949,18 @@ let translations = {
             Acquirer: "Acquirer",
 
         },
-        ru: {},
+        ru: {
+            enterN: 'Пожалуйста, введите имя покупаталя',
+            enterT: 'Пожалуйста, введите тег покупателя',
+            Back: "Назад",
+            Name: "Имя",
+            Tag: "Тег",
+            Description: "Описание",
+            Save: "Сохранить",
+            Merchants: "Продавец",
+            MID: "MID",
+            Acquirer: "Покупатель",
+        },
     },
     keyImportComponent: {
         en: {
@@ -781,7 +978,18 @@ let translations = {
             tlp: "Total lines processed",
         },
         ru: {
-
+            title: "Импортировать ключ",
+            Back: "Назад",
+            uploadK :" Загрузить ключи",
+            Report: "Отчет",
+            tkp: "Общее количество обработанных ключей:",
+            created: "Созданных:",
+            updated: "Обновленных:",
+            nur: "Не требующих обновления:",
+            errors: "Ошибки:",
+            el: "Пустые строки:",
+            comments: "Комментарии:",
+            tlp: "Общее количество обработанных строк",
         }
     },
     terminalImportComponent: {
@@ -801,7 +1009,18 @@ let translations = {
 
         },
         ru: {
-
+            ti: "Импортировать терминал",
+            Back: "Назад",
+            uploadT: " Загрузить терминалы",
+            Report: "Отчет",
+            ttp: "Общее количество обработанных терминалов:",
+            created: "созданных:",
+            updated: "Обновленных:",
+            nur: "Не требующих обновления:",
+            errors: "Ошибки:",
+            el: "Пустые строки:",
+            comments: "Комментарии:",
+            tlp: "Total lines processed:",
         }
     },
     merchantImportComponent: {
@@ -821,7 +1040,18 @@ let translations = {
 
         },
         ru: {
-
+            title: "Merchant import",
+            Back: "Back",
+            uploadM: "Upload merchants",
+            Report: "Report",
+            tmp: "Total merchants processed:",
+            created: "Created:",
+            update: "Updated:",
+            nur: "No update required:",
+            errors: "Errors:",
+            el: "Empty lines:",
+            comms: "Comments:",
+            tlp: "Общее количество обработанных строк:",
         }
     },
     applicationListComponent: {
@@ -840,7 +1070,17 @@ let translations = {
 
         },
         ru: {
-
+            confM :"Пожалуйста, подтвердите удаление ",
+            apps: " приложения",
+            conf1: "Пожалуйста, подтвердите удаление приложения",
+            Applications: "Приложения",
+            Create: "Создать",
+            Delete: "Удалить",
+            Model: "Модель",
+            Tag: "Тег",
+            Name: "Имя",
+            Version: "Версия",
+            deleteA: "Удалить приложение",
         }
     },
     applicationComponent: {
@@ -864,7 +1104,22 @@ let translations = {
 
         },
         ru: {
-
+            enterM: 'Пожалуйста, введите имя терминала',
+            enterA: 'Пожалуйста, введите имя приложения',
+            enterV: 'Пожалуйста, введите версию приложения',
+            enterT: 'Пожалуйста, введите тег приложения',
+            enterTT: 'Пожалуйста, введите тип тега приложения',
+            Application: "Приложение",
+            Back: "Назад",
+            tm: "Модель приложения",
+            appName:"Имя приложения",
+            appTag: "Тег приложения",
+            appTT: "Тег типа приложения",
+            Description: "Описание",
+            Package: "Пакет",
+            Upload: "Обновить",
+            Save: "Сохранить",
+            version: "Версия"
         }
     },
     logListComponent: {
@@ -877,7 +1132,11 @@ let translations = {
 
         },
         ru: {
-
+            title: "Логи",
+            Time: "Время",
+            Level: "Уровень",
+            User: "Пользователь",
+            Message: "Сообщение",
         }
     },
     home: {
@@ -886,7 +1145,8 @@ let translations = {
             copiright: "(C) Shtrih-M 2020",
         },
         ru: {
-
+            title: "Система Управления Терминалом",
+            copiright: "(C) Shtrih-M 2020",
         }
     },
     alert: {
@@ -904,7 +1164,7 @@ let translations = {
             notFound:"Requested resource is not found",
         },
         ru: {
-
+            notFound:"Запрошенный ресурс не найден",
         }
     },
     paginationComponent: {
@@ -913,7 +1173,8 @@ let translations = {
             Previous: "Previous"
         },
         ru: {
-
+            Next: "Следующий",
+            Previous: "Предыдущий"
         }
     },
     selectObject: {
@@ -922,7 +1183,8 @@ let translations = {
             Cancel: "Cancel",
         },
         ru: {
-
+            Select: "ВЫбрать",
+            Cancel: "Закрыть",
         }
     },
     logoutBtn: {
@@ -930,7 +1192,7 @@ let translations = {
             Logout: "Logout"
         },
         ru: {
-
+            Logout: "Выйти из системы"
         }
     },
     sideBar: {
@@ -951,7 +1213,19 @@ let translations = {
 
         },
         ru: {
-
+            Groups: "Группы",
+            Terminals: "Терминалы",
+            Merchants: "Продавцы",
+            Acquirers: "Покупатели",
+            ct: "Шаблоны конфигурации",
+            cp: "Пакеты конфигурации",
+            Applications: "Приложения",
+            Activation: "Активация",
+            Keys: "Ключи",
+            kl: "Загрузчики ключей",
+            Users: "Пользователи",
+            Logs: "Логи",
+            acc: "Мой аккаунт",
         }
     }
 
