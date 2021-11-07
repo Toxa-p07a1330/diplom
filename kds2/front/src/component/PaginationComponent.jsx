@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import {getTranslations} from "../static/transltaions";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 
 const LEFT_PAGE = 'LEFT';
 const RIGHT_PAGE = 'RIGHT';

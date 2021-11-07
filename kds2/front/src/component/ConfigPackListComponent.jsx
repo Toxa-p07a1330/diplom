@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faEdit, faPlus } from '@fortawesome/fontawesome-free-solid'
 import { Table } from 'reactstrap';
 import Alert from './Alert'
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
 
 class ConfigPackListComponent extends Component {

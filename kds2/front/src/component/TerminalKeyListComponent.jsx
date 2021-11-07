@@ -6,7 +6,7 @@ import { Table } from 'reactstrap';
 import Alert from './Alert'
 import PaginationComponent from './PaginationComponent'
 import {getTranslations} from "../static/transltaions";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 
 class TerminalKeyListComponent extends Component {
 

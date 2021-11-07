@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
 
 export default class Home extends React.Component {

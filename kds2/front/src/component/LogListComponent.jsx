@@ -3,7 +3,7 @@ import UserDataService from '../service/UserDataService';
 import { Table } from 'reactstrap';
 import PaginationComponent from "./PaginationComponent";
 import {getTranslations} from "../static/transltaions";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 
 class LogListComponent extends Component {
 

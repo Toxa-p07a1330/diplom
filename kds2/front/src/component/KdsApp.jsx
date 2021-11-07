@@ -67,7 +67,7 @@ class KdsApp extends Component {
                         <Switch>
                                 <PrivateRoute path="/users/" exact component={UserListComponent} />
                                 <PrivateRoute path="/users/:id" exact component={UserComponent} />
-                                <PrivateRoute path="/groups/" exact component={GroupListComponent} />
+                                <PrivateRoute path="/groups/" exact component={GroupListComponent} rtb={"test"}/>
                                 <PrivateRoute path="/groups/:id" exact component={GroupComponent} />
                                 <PrivateRoute path="/terminals" exact component={TerminalListComponent} />
                                 <PrivateRoute path="/terminals/:id" exact component={TerminalComponent} />

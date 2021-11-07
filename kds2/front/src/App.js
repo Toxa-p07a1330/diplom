@@ -3,20 +3,17 @@ import './App.css';
 import { KdsApp } from './component/KdsApp';
 import MobileSideMenuContextProvider from "./context/MobileSideMenuContextProvider";
 import FunctionalKdsWrapper from "./component/FunctionalKdsWrapper";
-import LangSelectorContextProvider from "./context/LangSelectorContextProvider";
-import PageVisitedBeforeLoginContextProvider from "./context/PageVisitedBeforeLoginContext";
+import GlobalContextProvider from "./context/GlobalContextProvider";
 
 class App extends Component {
   render() {
     return (
         <MobileSideMenuContextProvider>
-            <LangSelectorContextProvider>
-                <PageVisitedBeforeLoginContextProvider>
+            <GlobalContextProvider>
                 <FunctionalKdsWrapper>
-                        <KdsApp/>
+                    <KdsApp/>
                 </FunctionalKdsWrapper>
-            </PageVisitedBeforeLoginContextProvider>
-            </LangSelectorContextProvider>
+            </GlobalContextProvider>
         </MobileSideMenuContextProvider>
     );
   }

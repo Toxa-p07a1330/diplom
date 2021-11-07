@@ -8,7 +8,7 @@ import SelectObject from "./SelectObject";
 import PaginationComponent from "./PaginationComponent";
 import {alertActions} from "../rdx/rdx";
 import {connect} from "react-redux";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
 
 class MerchantComponent extends Component {

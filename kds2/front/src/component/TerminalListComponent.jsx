@@ -5,7 +5,7 @@ import {faTrash, faEdit, faPlus, faPlay, faCube} from '@fortawesome/fontawesome-
 import { Table } from 'reactstrap';
 import Alert from './Alert'
 import PaginationComponent from "./PaginationComponent";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
 
 class TerminalListComponent extends Component {

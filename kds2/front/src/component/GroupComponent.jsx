@@ -10,13 +10,12 @@ import PaginationComponent from "./PaginationComponent";
 import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
 import {getTranslations} from "../static/transltaions";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 
 class GroupComponent extends Component {
 
     constructor(props) {
         super(props)
-
        this.state = {
             id: this.props.match.params.id,
             legend: '',
@@ -171,6 +170,26 @@ class GroupComponent extends Component {
             tag: values.tag,
             description: values.description,
         }
+
+        try {
+            fetch(this.context.data.way_to_logging_backend, {
+                method: "POST",
+                body: JSON.stringify({
+                        date: new Date().toISOString(),
+                        user: document.getElementById("current_user_login").innerText,
+                        level: "info",
+                        message: "Group " + values.legend + " was created"
+                    }),
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                }
+            })
+        }
+        catch (e){
+            console.log(e)
+        }
+
         if (parseInt(values.id) === -1) {
             UserDataService.createGroup(group)
                 .then((resp) => {
@@ -178,7 +197,7 @@ class GroupComponent extends Component {
                             this.props.dispatch(alertActions.error(resp.data.error))
                         else {
                             this.props.history.push(`/groups/${resp.data.id}`)
-                            window.location.reload();
+                            //window.location.reload();
                         }
                 })
                 .catch(error => {})

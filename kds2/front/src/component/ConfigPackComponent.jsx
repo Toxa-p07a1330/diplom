@@ -8,7 +8,7 @@ import Alert from './Alert'
 import SelectObject from "./SelectObject";
 import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
 
 class ConfigPackComponent extends Component {

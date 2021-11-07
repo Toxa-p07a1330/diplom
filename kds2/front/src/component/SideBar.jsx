@@ -23,7 +23,7 @@ import MobileOnly from "./MobileOnly";
 import DesktopOnly from "./DesktopOnly";
 import LogoutBtn from "./LogoutBtn";
 import {getTranslations} from "../static/transltaions";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 
 class SideBar extends React.Component {
 

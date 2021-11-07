@@ -7,7 +7,7 @@ import PaginationComponent from "./PaginationComponent";
 import SelectObject from "./SelectObject";
 import Alert from "./Alert";
 import {Tab, Tabs} from "react-bootstrap";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
 
 class GroupActionsComponent extends Component {

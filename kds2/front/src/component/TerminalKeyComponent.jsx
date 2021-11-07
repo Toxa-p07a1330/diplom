@@ -7,7 +7,7 @@ import SelectObject from "./SelectObject";
 import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
 import {getTranslations} from "../static/transltaions";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 
 class TerminalKeyComponent extends Component {
 

@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import UserDataService from '../service/UserDataService';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft} from "@fortawesome/fontawesome-free-solid";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
 
 class MyAccountComponent extends Component {

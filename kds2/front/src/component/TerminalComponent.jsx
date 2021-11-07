@@ -18,7 +18,7 @@ import SelectObject from "./SelectObject";
 import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
 import AceEditor from "react-ace";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
 
 class TerminalComponent extends Component {

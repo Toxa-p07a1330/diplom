@@ -5,7 +5,7 @@ import { faTrash, faEdit, faPlus, faPlay } from '@fortawesome/fontawesome-free-s
 import { Table } from 'reactstrap';
 import Alert from './Alert'
 import {getTranslations} from "../static/transltaions";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 
 class KeyloaderListComponent extends Component {
 

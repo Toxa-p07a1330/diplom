@@ -6,7 +6,7 @@ import {faChevronLeft, faSave} from '@fortawesome/fontawesome-free-solid'
 import {alertActions} from "../rdx/rdx";
 import { connect } from "react-redux";
 import {getTranslations} from "../static/transltaions";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 
 class ActivatorComponent extends Component {
 

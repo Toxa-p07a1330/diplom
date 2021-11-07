@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {getTranslations} from "../static/transltaions";
 import { userActions } from '../rdx/rdx';
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 
 class LoginPage extends React.Component {
 

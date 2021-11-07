@@ -3,7 +3,7 @@ import UserDataService from '../service/UserDataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faTimes  } from '@fortawesome/fontawesome-free-solid'
 import Alert from './Alert'
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
 
 class TerminalActionsComponent extends Component {

@@ -3,7 +3,7 @@ import {Modal, ModalBody, Table} from 'reactstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckSquare} from "@fortawesome/fontawesome-free-solid";
 import PaginationComponent from "./PaginationComponent";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
 
 class SelectObject extends Component {

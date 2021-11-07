@@ -1,6 +1,9 @@
 const mysql = require("mysql2");
 const express = require("express");
+const bodyParser = require('body-parser')
 const app = express();
+const cors = require('cors');
+
 
 const connection = mysql.createConnection({     //настройки покключения
     host: "localhost",
@@ -17,10 +20,12 @@ connection.connect(function(err){       //подключение к базе д�
     }
 });
 
-
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors());
+app.options('*', cors());
 app.listen(8081);   //настройки сокета
-app.use(express.json())
+
 
 
 app.post("/api/log", function(request, response){

@@ -14,7 +14,7 @@ import {
 } from 'reactstrap';
 import MobileOnly from "./MobileOnly";
 import DesktopOnly from "./DesktopOnly";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
 
 class LogoutBtn extends React.Component {
@@ -38,7 +38,7 @@ class LogoutBtn extends React.Component {
         return (
             <div>
                 <Navbar color="light" light expand="md">
-                            <NavbarText>{this.props.user.login}</NavbarText>
+                    <NavbarText><span id={"current_user_login"}>{this.props.user.login}</span></NavbarText>
                             <NavLink href="#" onClick={this.logout}><FontAwesomeIcon icon={faPowerOff} fixedWidth />{' '}{this.activeTranslation.Logout}</NavLink>
                 </Navbar>
             </div>

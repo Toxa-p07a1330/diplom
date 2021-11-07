@@ -11,7 +11,7 @@ import "ace-builds/src-noconflict/theme-textmate";
 import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
 import {getTranslations} from "../static/transltaions";
-import {LangSelectorContext} from "../context/LangSelectorContextProvider";
+import {LangSelectorContext} from "../context/GlobalContextProvider";
 
 // const customTheme = {
 //   "tagColor": "#2980b9",
