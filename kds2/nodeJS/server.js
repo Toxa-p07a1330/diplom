@@ -30,8 +30,9 @@ app.listen(8081);   //настройки сокета
 
 app.post("/api/log", function(request, response){
     console.log(request.body)
+    let date = new Date().toISOString().split(".")[0]
     try {
-        writeNewLogToDatabase(request.body.date, request.body.level, request.body.user, request.body.message, response)
+        writeNewLogToDatabase(date, request.body.level, request.body.user, request.body.message, response)
     }
     catch (e){
         console.log(e);
@@ -48,6 +49,7 @@ let writeNewLogToDatabase = async (date, level, user, message, responce)=>{     
         function(err, results, fields) {
             if (err){
                 responce.send(JSON.stringify(err))
+                console.log(err)
             }
             else {
                 responce.send(results)

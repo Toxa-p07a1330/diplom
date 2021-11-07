@@ -11,6 +11,7 @@ import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
 import {getTranslations} from "../static/transltaions";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
+import {sendLogToBack} from "../service/loggingService";
 
 class GroupComponent extends Component {
 
@@ -171,24 +172,7 @@ class GroupComponent extends Component {
             description: values.description,
         }
 
-        try {
-            fetch(this.context.data.way_to_logging_backend, {
-                method: "POST",
-                body: JSON.stringify({
-                        date: new Date().toISOString(),
-                        user: document.getElementById("current_user_login").innerText,
-                        level: "info",
-                        message: "Group " + values.legend + " was created"
-                    }),
-                headers: {
-                    "Content-Type": "application/json",
-                    "accept": "application/json",
-                }
-            })
-        }
-        catch (e){
-            console.log(e)
-        }
+        sendLogToBack(this.context.data.way_to_logging_backend, "info", "Group "+values.legend+" was created")
 
         if (parseInt(values.id) === -1) {
             UserDataService.createGroup(group)
@@ -197,7 +181,7 @@ class GroupComponent extends Component {
                             this.props.dispatch(alertActions.error(resp.data.error))
                         else {
                             this.props.history.push(`/groups/${resp.data.id}`)
-                            //window.location.reload();
+                            window.location.href = "http://localhost:3000/groups/";
                         }
                 })
                 .catch(error => {})
