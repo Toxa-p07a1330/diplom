@@ -48,7 +48,7 @@ let writeNewLogToDatabase = async (date, level, user, message, responce)=>{     
                 responce.send(results)
             }
         });
- 
+
 }
 
 

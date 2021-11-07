@@ -41,6 +41,9 @@ function login(username, password) {
                     let user = JSON.parse(localStorage.getItem('user'));
                     dispatch(success(user));
                     history.push('/');
+                    if (window.lastVisitedPage){
+                        window.location.pathname = window.lastVisitedPage
+                    }
                 }
             )
             .catch( () => {

@@ -40,9 +40,6 @@ class LoginPage extends React.Component {
         if (username && password) {
             dispatch(userActions.login(username, password));
         }
-        if (window.lastVisitedPage){
-            window.location.pathname = window.lastVisitedPage
-        }
     }
 
     render() {
