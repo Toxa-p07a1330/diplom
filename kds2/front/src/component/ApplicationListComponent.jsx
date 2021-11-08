@@ -6,6 +6,7 @@ import { Table } from 'reactstrap';
 import Alert from './Alert'
 import {getTranslations} from "../static/transltaions";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
+import {sendLogToBack} from "../service/loggingService";
 
 class ApplicationListComponent extends Component {
 
@@ -67,10 +68,12 @@ class ApplicationListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Application "+x.length+" was deleted")
                 msg = this.activeTranslation.confM + x.length + this.activeTranslation.apps;
             }
             else
             {
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Application "+x[0].name+" was deleted")
                 msg = this.activeTranslation.conf1 + x[0].name;
             }
             this.setState({ show_alert: true, selected_applications: x, message: msg });

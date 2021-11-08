@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronLeft, faUpload} from '@fortawesome/fontawesome-free-solid'
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 class KeyImportComponent extends Component {
 
@@ -21,6 +22,7 @@ class KeyImportComponent extends Component {
         if (!e.target.files) {
             return;
         }
+        sendLogToBack(this.context.data.way_to_logging_backend, "info", "Key was uploaded")
         let data = e.target.files[0];
         UserDataService.uploadKeyFile(data).then(
             (resp) => {

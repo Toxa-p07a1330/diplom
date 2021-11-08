@@ -6,6 +6,7 @@ import { Table } from 'reactstrap';
 import Alert from './Alert'
 import {getTranslations} from "../static/transltaions";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
+import {sendLogToBack} from "../service/loggingService";
 
 class KeyloaderListComponent extends Component {
 
@@ -68,11 +69,13 @@ class KeyloaderListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Key loader "+x.length+" was deleted")
                 msg = this.activeTranslation.confm + x.length + this.activeTranslation.kload;
             }
             else
             {
                 msg = this.activeTranslation.conf1 + x[0].name;
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Key loader "+x[0].name+" was deleted")
             }
             this.setState({ show_alert: true, selected_keyloaders: x, message: msg });
         }

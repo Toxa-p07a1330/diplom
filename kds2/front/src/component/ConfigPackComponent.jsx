@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 class ConfigPackComponent extends Component {
 
@@ -145,6 +146,7 @@ class ConfigPackComponent extends Component {
             description: values.description,
         }
         if (parseInt(values.id) === -1) {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "conf Pack "+pack.name+" was created")
             UserDataService.createConfigPack(pack)
                 .then((resp) => {
                     if (resp.data.error !== undefined)
@@ -159,6 +161,7 @@ class ConfigPackComponent extends Component {
                 })
                 .catch(()=>{})
         } else {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Conf pack "+pack.name+" was updated")
             UserDataService.updateConfigPack(this.state.id, pack)
                 .then(() => this.props.history.push('/confpacks'))
                 .catch(()=>{})

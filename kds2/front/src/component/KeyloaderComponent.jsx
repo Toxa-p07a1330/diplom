@@ -7,6 +7,7 @@ import {alertActions} from "../rdx/rdx";
 import {connect} from "react-redux";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 class KeyloaderComponent extends Component {
 
@@ -39,6 +40,7 @@ class KeyloaderComponent extends Component {
         }
 
         if (parseInt(act.id) === -1) {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Key loader "+act.name+" was created")
             UserDataService.createKeyloader(act)
                 .then((resp) => {
                     if (resp.data.error !== undefined)
@@ -52,6 +54,7 @@ class KeyloaderComponent extends Component {
                 })
                 .catch(()=>{})
         } else {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Key loader "+act.name+" was updated")
             UserDataService.updateKeyloader(this.state.id, act)
                 .then(() => this.props.history.push('/keyloaders'))
                 .catch(()=>{})

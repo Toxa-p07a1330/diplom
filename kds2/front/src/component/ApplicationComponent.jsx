@@ -7,6 +7,7 @@ import {alertActions} from "../rdx/rdx";
 import {connect} from "react-redux";
 import {getTranslations} from "../static/transltaions";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
+import {sendLogToBack} from "../service/loggingService";
 
 class ApplicationComponent extends Component {
 
@@ -68,6 +69,7 @@ class ApplicationComponent extends Component {
             typeTag: this.state.typeTag
         }
         if (parseInt(values.id) === -1) {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Application "+application.name+" was created")
             UserDataService.createApplication(application)
                 .then((resp) => {
                     if (resp.data.error !== undefined)
@@ -81,6 +83,7 @@ class ApplicationComponent extends Component {
                 })
                 .catch(()=>{})
         } else {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Application "+application.name+" was updated")
             UserDataService.updateApplication(this.state.id, application)
                 .then(() => this.props.history.push('/applications'))
                 .catch(()=>{})

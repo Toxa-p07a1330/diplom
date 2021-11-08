@@ -6,6 +6,7 @@ import { Table } from 'reactstrap';
 import Alert from './Alert'
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 class ConfigPackListComponent extends Component {
 
@@ -66,10 +67,12 @@ class ConfigPackListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Conf pack "+x.length+" was deleted")
                 msg = this.activeTranslation.conf_m + x.length + this.activeTranslation.confs;
             }
             else
             {
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Conf pack "+x[0].name+" was deleted")
                 msg = this.activeTranslation.conf1 + x[0].name;
             }
             this.setState({ show_alert: true, selected_packs: x, message: msg });
