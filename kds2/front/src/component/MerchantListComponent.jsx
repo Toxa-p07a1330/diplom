@@ -7,6 +7,7 @@ import Alert from './Alert'
 import PaginationComponent from './PaginationComponent'
 import {getTranslations} from "../static/transltaions";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
+import {sendLogToBack} from "../service/loggingService";
 
 
 class MerchantListComponent extends Component {
@@ -76,11 +77,13 @@ class MerchantListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Merchant "+x.length+" was deleted")
                 msg = this.activeTranslation.conf_m + x.length + this.activeTranslation.merchants;
             }
             else
             {
                 msg = this.activeTranslation.conf_1 + x[0].name;
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Merchant "+x[0].name+" was created")
             }
             this.setState({ show_alert: true, selected_merchants: x, message: msg });
         }

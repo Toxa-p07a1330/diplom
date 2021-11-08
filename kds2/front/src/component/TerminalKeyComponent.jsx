@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
 import {getTranslations} from "../static/transltaions";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
+import {sendLogToBack} from "../service/loggingService";
 
 class TerminalKeyComponent extends Component {
 
@@ -76,6 +77,7 @@ class TerminalKeyComponent extends Component {
             tag: values.tag,
         }
         if (parseInt(key.id) === -1) {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Terminal key "+key.name+" was create")
             UserDataService.createKey(key)
                 .then((resp) => {
                     if (resp.data.error !== undefined)
@@ -90,6 +92,7 @@ class TerminalKeyComponent extends Component {
                 })
                 .catch(() => {})
         } else {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Terminal key "+key.name+" was updated")
             UserDataService.updateKey(this.state.id, key)
                 .then(() => this.props.history.goBack())
                 .catch(()=>{})

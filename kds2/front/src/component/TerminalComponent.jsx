@@ -20,6 +20,7 @@ import {alertActions} from "../rdx/rdx";
 import AceEditor from "react-ace";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 class TerminalComponent extends Component {
 
@@ -179,10 +180,12 @@ class TerminalComponent extends Component {
             var msg;
             if (x.length > 1)
             {
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Application "+x.length+" was deleted")
                 msg = "Please confirm you will remove " + x.length + " applications";
             }
             else
             {
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Application "+x[0].name+" was deleted")
                 msg = "Please confirm you will remove application " + x[0].name;
             }
 
@@ -265,10 +268,14 @@ class TerminalComponent extends Component {
             if (x.length > 1)
             {
                 msg = "Please confirm you will delete " + x.length + " keys";
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Keys "+x.length+" was deleted")
+
             }
             else
             {
                 msg = "Please confirm you will delete key " + x[0].name;
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Key "+x[0].name+" was deleted")
+
             }
 
             this.setState({ show_tkey_alert: true, selected_tkeys: x, message: msg });
@@ -310,10 +317,14 @@ class TerminalComponent extends Component {
             if (x.length > 1)
             {
                 msg = "Please confirm you will remove terminal from  " + x.length + " groups";
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Terminal "+x.length+" was deleted")
+
             }
             else
             {
                 msg = "Please confirm you will remove terminal from group " + x[0].legend;
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Application "+x[0].legend+" was deleted")
+
             }
 
             this.setState({ show_alert: true, selected_groups: x, message: msg });
@@ -492,6 +503,7 @@ class TerminalComponent extends Component {
 
         }
         if (parseInt(this.state.id) === -1) {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Terminal "+terminal.tid+" was created")
             UserDataService.createTerminal(terminal)
                 .then((resp) => {
                     if (resp.data.error) {
@@ -504,6 +516,7 @@ class TerminalComponent extends Component {
                 })
                 .catch(() => {})
         } else {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Terminal "+terminal.tid+" was updated")
             UserDataService.updateTerminal(this.state.id, terminal)
                 .then((resp) => {
                     if (resp.data.error) {

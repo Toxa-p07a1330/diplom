@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronLeft, faUpload} from '@fortawesome/fontawesome-free-solid'
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 
 class TerminalImportComponent extends Component {
@@ -22,6 +23,7 @@ class TerminalImportComponent extends Component {
         if (!e.target.files) {
             return;
         }
+        sendLogToBack(this.context.data.way_to_logging_backend, "info", "Terminal was imported")
         let data = e.target.files[0];
         UserDataService.uploadTerminalFile(data).then(
             (resp) => {

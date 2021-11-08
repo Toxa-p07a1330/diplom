@@ -7,6 +7,7 @@ import Alert from './Alert'
 import PaginationComponent from "./PaginationComponent";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 class TerminalListComponent extends Component {
 
@@ -74,10 +75,14 @@ class TerminalListComponent extends Component {
             if (x.length > 1)
             {
                 msg = this.activeTranslation.conf_m + x.length + this.activeTranslation.terms;
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Terminal "+x.length+" was deleted")
+
             }
             else
             {
                 msg = this.activeTranslation.conf1+ x[0].sn;
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Terminal key "+x[0].name+" was deleted")
+
             }
             this.setState({ show_alert: true, selected_terminals: x, message: msg });
         }

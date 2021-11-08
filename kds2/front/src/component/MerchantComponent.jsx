@@ -10,6 +10,7 @@ import {alertActions} from "../rdx/rdx";
 import {connect} from "react-redux";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 class MerchantComponent extends Component {
 
@@ -96,6 +97,7 @@ class MerchantComponent extends Component {
             merchantTermPageLimit: 100,
         }
         if (parseInt(values.id) === -1) {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Merchant "+values.name+" was created")
             UserDataService.createMerchant(merchant)
                 .then((resp) => {
                     if (resp.data.error !== undefined)
@@ -109,6 +111,7 @@ class MerchantComponent extends Component {
                 })
                 .catch(() => this.setState({ error: "error"}))
         } else {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Merchant "+values.name+" was updated")
             UserDataService.updateMerchant(this.state.id, merchant)
                 .then(() => this.props.history.push('/merchants'))
         }

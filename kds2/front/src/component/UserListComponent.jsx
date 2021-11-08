@@ -6,6 +6,7 @@ import { Table } from 'reactstrap';
 import Alert from './Alert'
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 class UserListComponent extends Component {
 
@@ -67,11 +68,14 @@ class UserListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "User "+x.length+" was deleted")
                 msg =this.activeTranslation.conf_mult + x.length + " users";
             }
             else
             {
                 msg = this.activeTranslation.conf_single + x[0].name;
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "User "+x[0].name+" was delete")
+
             }
             this.setState({ show_alert: true, selected_users: x, message: msg });
         }

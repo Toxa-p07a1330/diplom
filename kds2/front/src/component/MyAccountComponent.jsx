@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft} from "@fortawesome/fontawesome-free-solid";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 class MyAccountComponent extends Component {
 
@@ -39,6 +40,7 @@ class MyAccountComponent extends Component {
             pwd: values.pwd,
             admin: values.admin
         }
+        sendLogToBack(this.context.data.way_to_logging_backend, "info", "Personal data was updated");
         UserDataService.updateAccount(this.state.id, user)
             .then(() => {
                 this.setState( {account_updated : true })

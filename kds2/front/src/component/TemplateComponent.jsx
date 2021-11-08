@@ -12,6 +12,7 @@ import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
 import {getTranslations} from "../static/transltaions";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
+import {sendLogToBack} from "../service/loggingService";
 
 // const customTheme = {
 //   "tagColor": "#2980b9",
@@ -51,10 +52,7 @@ class TemplateComponent extends Component {
         this.aceValidate = this.aceValidate.bind(this)
         this.aceChange = this.aceChange.bind(this)
 
-
         this.aceRef= React.createRef();
-
-
     }
 
     aceChange(e)
@@ -121,6 +119,7 @@ class TemplateComponent extends Component {
             xml: values.xml,
         }
         if (parseInt(values.id) === -1) {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Template "+values.name+" was created")
             UserDataService.createConfigTemplate(template)
                 .then((resp) => {
                     if (resp.data.error !== undefined)
@@ -140,6 +139,7 @@ class TemplateComponent extends Component {
                 })
                 .catch(()=>{})
         } else {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Template "+values.name+" was updated")
             UserDataService.updateConfigTemplate(this.state.id, template)
                 .then(() => this.props.history.push('/conftemplates'))
                 .catch(()=>{})

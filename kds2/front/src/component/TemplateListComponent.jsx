@@ -6,6 +6,7 @@ import { Table } from 'reactstrap';
 import Alert from './Alert'
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 class TemplateListComponent extends Component {
 
@@ -73,10 +74,12 @@ class TemplateListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Template "+x.length+" was delete")
                 msg = this.activeTranslation.conf_m + x.length + this.activeTranslation.temps;
             }
             else
             {
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Template "+x[0].name+" was deleted")
                 msg = this.activeTranslation.conf1 + x[0].name;
             }
             this.setState({ show_alert: true, selected_templates: x, message: msg });

@@ -7,6 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSave} from "@fortawesome/fontawesome-free-solid";
 import {getTranslations} from "../static/transltaions";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
+import {sendLogToBack} from "../service/loggingService";
 
 class UserComponent extends Component {
 
@@ -42,6 +43,7 @@ class UserComponent extends Component {
             admin: values.admin
         }
         if (parseInt(values.id) === -1) {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "User "+user.name+" was created")
             UserDataService.createUser(user)
                 .then((resp) => {
                     if (resp.data.error !== undefined)
@@ -55,6 +57,7 @@ class UserComponent extends Component {
                 })
                 .catch(()=>{})
         } else {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "User "+user.name+" was updated")
             UserDataService.updateUser(this.state.id, user)
                 .then(() => this.props.history.push('/users'))
                 .catch(()=>{})

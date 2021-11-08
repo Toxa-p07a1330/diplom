@@ -29,7 +29,6 @@ class LogListComponent extends Component {
         UserDataService.retrieveAllLogs(this.state.currentPage, this.state.pageLimit)
             .then(
                 result => {
-                    console.log(result)
                     if (result.message !== undefined)
                         this.setState({ message: result.error });
                     else
