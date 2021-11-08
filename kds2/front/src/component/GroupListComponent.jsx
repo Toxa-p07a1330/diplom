@@ -9,6 +9,7 @@ import {alertActions} from "../rdx/rdx";
 import {connect} from "react-redux";
 import {getTranslations} from "../static/transltaions";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
+import {sendLogToBack} from "../service/loggingService";
 
 class GroupListComponent extends Component {
 
@@ -76,10 +77,13 @@ class GroupListComponent extends Component {
             if (x.length > 1)
             {
                 msg = this.activeTranslation.conf_mult + x.length + this.activeTranslation.groups;
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Group "+ x.length +" was deleted")
+
             }
             else
             {
                 msg = this.activeTranslation.conf1 + x[0].legend;
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Group "+ x[0].legend +" was deleted")
             }
             this.setState({ show_alert: true, selected_groups: x, message: msg });
         }

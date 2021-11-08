@@ -188,6 +188,7 @@ class GroupComponent extends Component {
         } else {
             UserDataService.updateGroup(this.state.id, group)
                 .then((resp) => {
+                    sendLogToBack(this.context.data.way_to_logging_backend, "info", "Group "+values.legend+" was updated")
                     if (resp.data.error)
                         this.props.dispatch(alertActions.error(resp.data.error))
                     else
