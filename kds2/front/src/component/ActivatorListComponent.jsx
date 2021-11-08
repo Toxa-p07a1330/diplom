@@ -6,6 +6,7 @@ import { Table } from 'reactstrap';
 import Alert from './Alert'
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 class ActivatorListComponent extends Component {
 
@@ -67,11 +68,14 @@ class ActivatorListComponent extends Component {
             var msg;
             if (x.length > 1)
             {
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Acquirer "+x.length+" was deleted")
                 msg = this.activeTranslation.confm + x.length + this.activeTranslation.activators;
             }
             else
             {
                 msg = this.activeTranslation.conf1 + x[0].name;
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Acquirer "+x[0].name+" was deleted")
+
             }
             this.setState({ show_alert: true, selected_acts: x, message: msg });
         }

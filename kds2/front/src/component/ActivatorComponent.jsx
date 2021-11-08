@@ -7,6 +7,7 @@ import {alertActions} from "../rdx/rdx";
 import { connect } from "react-redux";
 import {getTranslations} from "../static/transltaions";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
+import {sendLogToBack} from "../service/loggingService";
 
 class ActivatorComponent extends Component {
 
@@ -170,6 +171,7 @@ class ActivatorComponent extends Component {
         }
 
         if (parseInt(act.id) === -1) {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Activator "+values.name+" was created")
             UserDataService.createActivator(act)
                 .then((resp) => {
                     if (resp.data.error !== undefined)
@@ -183,6 +185,7 @@ class ActivatorComponent extends Component {
                 })
                 .catch(() => {})
         } else {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Activator "+values.name+" was updated")
             UserDataService.updateActivator(this.state.id, act)
                 .then(() => this.props.history.push('/activators'))
                 .catch(() => {})

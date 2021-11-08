@@ -9,6 +9,7 @@ import {connect} from "react-redux";
 import {alertActions} from "../rdx/rdx";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendLogToBack} from "../service/loggingService";
 
 class AcquirerComponent extends Component {
 
@@ -64,8 +65,10 @@ class AcquirerComponent extends Component {
             description: values.description,
         }
         if (parseInt(values.id) === -1) {
+
             UserDataService.createAcquirer(acquirer)
                 .then((resp) => {
+                    sendLogToBack(this.context.data.way_to_logging_backend, "info", "Acquirer "+values.name+" was created")
                     if (resp.data.error !== undefined)
                     {
                         this.setState({ error: resp.data.error })
@@ -77,6 +80,7 @@ class AcquirerComponent extends Component {
                 })
                 .catch(() => {})
         } else {
+            sendLogToBack(this.context.data.way_to_logging_backend, "info", "Acquirer "+values.name+" was updated")
             UserDataService.updateAcquirer(this.state.id, acquirer)
                 .then(() => this.props.history.push('/acquirers'))
                 .catch(() => {})

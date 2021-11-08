@@ -6,6 +6,7 @@ import { Table } from 'reactstrap';
 import Alert from './Alert'
 import {getTranslations} from "../static/transltaions";
 import {LangSelectorContext} from "../context/GlobalContextProvider";
+import {sendLogToBack} from "../service/loggingService";
 
 class AcquirerListComponent extends Component {
 
@@ -68,10 +69,14 @@ class AcquirerListComponent extends Component {
             if (x.length > 1)
             {
                 msg = this.activeTranslation.confm + x.length + this.activeTranslation.acq;
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Acquirer "+x.length+" was deleted")
+
             }
             else
             {
                 msg = this.activeTranslation.conf1 + x[0].name;
+                sendLogToBack(this.context.data.way_to_logging_backend, "info", "Acquirer "+x[0].name+" was deleted")
+
             }
             this.setState({ show_alert: true, selected_acquirers: x, message: msg });
         }
