@@ -69,8 +69,8 @@ app.get('*/sendCommand', (req, res) => {
         }
     }))*/
     let socket = TID_connections.filter((value)=>{return value.TID == parsedQs.TID})[0].socket;
-    socket.emit("update", "some msg");
+    socket.emit(parsedQs.command, "some msg");
 
-    res.send('Hello World!')
+    res.send(JSON.stringify({success: true}));
 })
 app.listen(expressPort)

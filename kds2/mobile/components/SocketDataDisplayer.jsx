@@ -18,6 +18,10 @@ export default function SocketDataDisplayer() {
         alert("update");
     })
 
+    socket.on("reset", msg=>{  //различные типы команд
+        alert("Device reset emulation");
+    })
+
     useEffect(()=>{
         socket.emit("init", JSON.stringify({
             TID: TID,
