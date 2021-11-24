@@ -7,14 +7,14 @@ import {TextInput} from "react-native";
 
 export default function SocketDataDisplayer() {
     let [state, setState] = useState("start")
-    const TID = 123456; //Math.floor(Math.random()*100000);       //имитация ID терминала
+    const TID = Math.floor(Math.random()*100000);       //имитация ID терминала
 
     let socket = io(wayToSocket);
     socket.on("message", msg => {
         console.log(msg)
         setState(msg);
     });
-    socket.on("update", msg=>{
+    socket.on("update", msg=>{  //различные типы команд
         alert("update");
     })
 
@@ -26,10 +26,10 @@ export default function SocketDataDisplayer() {
     return (
         <View>
             <Text>
-                {state}
-            </Text>
+                My TID: {TID}
 
-            <Button
+            </Text>
+            {/*<Button
                 onPress={()=>{
                     socket.emit('init',JSON.stringify({
                         TID: TID,
@@ -38,7 +38,7 @@ export default function SocketDataDisplayer() {
                 title="button test"
                 color="#841584"
                 accessibilityLabel="Learn more about this purple button"
-            />
+            />*/}
         </View>
     );
 }

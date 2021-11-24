@@ -59,9 +59,16 @@ app.get('*/sendCommand', (req, res) => {
     let parsedUrl = url.parse(req.url);
     let parsedQs = querystring.parse(parsedUrl.query);
 
-    console.log(parsedQs)
-
-    let socket = TID_connections.filter((value)=>{return value.TID === parsedQs.TID})[0].socket;
+    /*console.log(parsedQs)
+    console.log("TID")
+    console.log(parsedQs.TID);
+    console.log(TID_connections.map((value)=>{
+        return {
+            id: value.id,
+            TID: value.TID
+        }
+    }))*/
+    let socket = TID_connections.filter((value)=>{return value.TID == parsedQs.TID})[0].socket;
     socket.emit("update", "some msg");
 
     res.send('Hello World!')
