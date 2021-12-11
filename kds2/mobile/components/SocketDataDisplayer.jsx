@@ -6,21 +6,34 @@ import io from "socket.io-client";
 import {TextInput} from "react-native";
 
 export default function SocketDataDisplayer() {
-    let [state, setState] = useState("start")
-    const TID = Math.floor(Math.random()*100000);       //имитация ID терминала
+    let [title, setTitle] = useState("Ожидание команды")
+    let [command, setCommand] = useState("________")
+    let [TID, setTid] = useState(Math.floor(Math.random()*100000));       //имитация ID терминала
 
     let socket = io(wayToSocket);
-    socket.on("message", msg => {
-        console.log(msg)
-        setState(msg);
-    });
-    socket.on("update", msg=>{  //различные типы команд
-        alert("update");
+
+
+    socket.on("login", msg=>{  //вход в режим администратора
+        setTitle("получена команда авторизации")
+        setCommand(msg)
+        setTimeout(()=>{
+            setTitle("Авторизация завершена. Выслан ответ")
+            setCommand("" +
+                "<login>\n" +
+                "<status>ok</status>\n" +
+                "<token>DE9773A8CB888560AB0F89C07623FE03</token>\n" +
+                "</login>" +
+                "")
+        }, 5000)
+
+        setTimeout(()=>{
+            setTitle("Ожидание команды")
+            setCommand("")
+        }, 10000)
     })
 
-    socket.on("reset", msg=>{  //различные типы команд
-        alert("Device reset emulation");
-    })
+
+
 
     useEffect(()=>{
         socket.emit("init", JSON.stringify({
@@ -31,7 +44,16 @@ export default function SocketDataDisplayer() {
         <View>
             <Text>
                 My TID: {TID}
-
+            </Text>
+            <Text style = {{
+                marginTop: "3%"
+            }}>
+                {title}
+            </Text>
+            <Text style = {{
+                marginTop: "2%"
+            }}>
+                {command}
             </Text>
             {/*<Button
                 onPress={()=>{

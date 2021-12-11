@@ -69,7 +69,7 @@ app.get('*/sendCommand', (req, res) => {
         }
     }))*/
     let socket = TID_connections.filter((value)=>{return value.TID == parsedQs.TID})[0].socket;
-    socket.emit(parsedQs.command, "some msg");
+    socket.emit(parsedQs.command, "<login><password>123456</password></login>");
 
     res.send(JSON.stringify({success: true}));
 })
