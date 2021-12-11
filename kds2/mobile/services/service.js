@@ -7,7 +7,7 @@ let getLocation = async ()=>{
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    alert(JSON.stringify(location));
+    return JSON.stringify(location);
 
 }
 export {getLocation}

@@ -34,7 +34,7 @@ const commandMessageMapping = {
     'test': "<testconnection>\n" +
         "<token>DE9773A8CB888560AB0F89C07623FE03</token>\n" +
         "</testconnection>",
-    'params': "<getparameters>\n" +
+    'param': "<getparameters>\n" +
         "<token>DE9773A8CB888560AB0F89C07623FE03</token>\n" +
         "8\n" +
         "</getparameters>",

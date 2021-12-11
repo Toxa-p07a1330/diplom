@@ -37,6 +37,7 @@ const testResp = "<testconnection>\n" +
 const paramsResp = '<getparameters>\n' +
     '<status>ok</status>\n' +
     '<parameters>\n' +
+    '<geolocation>mockedGeolocationInformation</geolocation>\n' +
     '<sn>000000000009</sn>\n' +
     '<app>1.0.67.6</app>\n' +
     '<firmware-mcu>1.5.3</firmware-mcu>\n' +
@@ -63,7 +64,7 @@ const paramsResp = '<getparameters>\n' +
     '<kccert>24.03.2027</kccert>\n' +
     '<ksca>none</ksca>\n' +
     '<devid>M2100-0000005164</devid>\n' +
-    '</parameters>\n' +
+    '</geolocation>\n' +
     '</getparameters>'
 const clearResp = '<clear>\n' +
     '<status>ok</status>\n' +

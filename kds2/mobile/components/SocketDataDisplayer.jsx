@@ -29,10 +29,6 @@ export default function SocketDataDisplayer() {
     socket.on("login", msg=>{  //вход в режим администратора
         setTitle("получена команда авторизации")
         setCommand(msg)
-
-        /*debug*/
-        getLocation()
-        /*EO debig*/
         setTimeout(()=>{
             socket.emit("responce", loginResp)
             setTitle("Авторизация завершена. Выслан ответ")
@@ -136,16 +132,20 @@ export default function SocketDataDisplayer() {
     socket.on("param", msg=>{  //смена пароля
         setTitle("Запрос параметров")
         setCommand(msg)
-        setTimeout(()=>{
-            socket.emit("responce", paramsResp)
-            setTitle("Получение параметров заверщено. Выслан ответ")
-            setCommand(paramsResp)
-        }, 5000)
+        getLocation().then((geo)=>{
+            setTimeout(()=>{
+                let params_ = JSON.parse(JSON.stringify(params_))
+                params_ = params_.replace("mockedGeolocationInformation", geo)
+                socket.emit("responce", params_)
+                setTitle("Получение параметров заверщено. Выслан ответ")
+                setCommand(paramsResp)
+            }, 5000)
 
-        setTimeout(()=>{
-            setTitle("Ожидание команды")
-            setCommand("")
-        }, 10000)
+            setTimeout(()=>{
+                setTitle("Ожидание команды")
+                setCommand("")
+            }, 10000)
+        })
     })
     socket.on("clear", msg=>{  //смена пароля
         setTitle("Запрос очистки журнала")
