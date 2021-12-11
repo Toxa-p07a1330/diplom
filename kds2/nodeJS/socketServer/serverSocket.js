@@ -10,6 +10,40 @@ const port = 8082
 const io = new Server(server);
 let TID_connections = []
 
+const commandMessageMapping = {
+    "login": "<login>\n" +
+        "<password>12345678</password>\n" +
+        "</login>",
+    "logount": "<logout>\n" +
+        "<token>DE9773A8CB888560AB0F89C07623FE03</token>\n" +
+        "</logout>",
+    'change': "<changepassword>\n" +
+        "<token>DE9773A8CB888560AB0F89C07623FE03</token>\n" +
+        "<password>12345678</password>\n" +
+        "<newpassword>12345678</newpassword>\n" +
+        "</changepassword>",
+    'update': '<updateconfiguration>\n' +
+        '<token>DE9773A8CB888560AB0F89C07623FE03</token>\n' +
+        '</updateconfiguration>',
+    'lwk':"<loadworkkeys>\n" +
+        "<token>DE9773A8CB888560AB0F89C07623FE03</token>\n" +
+        "</loadworkkeys>",
+    'lmk':"<loadmasterkeys>\n" +
+        "<token>DE9773A8CB888560AB0F89C07623FE03</token>\n" +
+        "</loadmasterkeys>",
+    'test': "<testconnection>\n" +
+        "<token>DE9773A8CB888560AB0F89C07623FE03</token>\n" +
+        "</testconnection>",
+    'params': "<getparameters>\n" +
+        "<token>DE9773A8CB888560AB0F89C07623FE03</token>\n" +
+        "8\n" +
+        "</getparameters>",
+    'clear':'<clear>\n' +
+        '<password>12345678</password>\n' +
+        '</clear>',
+    'reset':'<resetpassword/>'
+}
+
 let find_TID = (TID)=>{
     let rez = TID_connections.filter((value)=>{
         return value.TID === TID
@@ -59,18 +93,13 @@ app.get('*/sendCommand', (req, res) => {
     let parsedUrl = url.parse(req.url);
     let parsedQs = querystring.parse(parsedUrl.query);
 
-    /*console.log(parsedQs)
-    console.log("TID")
-    console.log(parsedQs.TID);
-    console.log(TID_connections.map((value)=>{
-        return {
-            id: value.id,
-            TID: value.TID
-        }
-    }))*/
-    let socket = TID_connections.filter((value)=>{return value.TID == parsedQs.TID})[0].socket;
-    socket.emit(parsedQs.command, "<login><password>123456</password></login>");
 
-    res.send(JSON.stringify({success: true}));
+    let socket = TID_connections.filter((value)=>{return value.TID == parsedQs.TID})[0].socket;
+    socket.emit(parsedQs.command, commandMessageMapping[parsedQs.command]);
+    socket.on("responce", (msg)=>{
+        res.send(msg);
+        res.send = ()=>{}
+    })
+
 })
 app.listen(expressPort)
