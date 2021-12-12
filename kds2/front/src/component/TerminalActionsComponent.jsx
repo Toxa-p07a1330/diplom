@@ -5,10 +5,23 @@ import { faChevronLeft, faTimes  } from '@fortawesome/fontawesome-free-solid'
 import Alert from './Alert'
 import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
+import {sendCommandToSocket} from "../service/socketService";
+import XMLViewer from "react-xml-viewer";
+const commands = [
+    "",
+    "login",
+    "logout",
+    "change",
+    "update",
+    "lmk",
+    'lwk',
+    "test",
+    "param",
+    "clear",
+    "reset"
+]
 
 class TerminalActionsComponent extends Component {
-
-
     constructor(props) {
         super(props);
 
@@ -38,11 +51,14 @@ class TerminalActionsComponent extends Component {
            tkeys: [],
            acquirer: undefined,
            cmd: -1,
+           shouldShowMap: false,
+           selectedCommand: 0,
+           serverResponce: ""
        }
        this.timer = null
 
         this.closeAlert = this.closeAlert.bind(this)
-        this.actionGetInfo = this.actionGetInfo.bind(this)
+        this.sendCommand = this.sendCommand.bind(this)
         this.cancelAction = this.cancelAction.bind(this)
         this.pollActionStatus = this.pollActionStatus.bind(this)
         this.parsePayload = this.parsePayload.bind(this)
@@ -149,9 +165,17 @@ class TerminalActionsComponent extends Component {
         });
     }
 
-    actionGetInfo()
+    sendCommand()
     {
-        this.startAction("info");
+        (async ()=>{
+
+            let tid = this.state.tid;
+            let command = commands[this.state.selectedCommand]
+
+            let xml = await sendCommandToSocket(this.context.way_to_logging_backend, tid, command);
+            this.setState({serverResponce: xml})
+            this.forceUpdate();
+        })()
     }
 
     actionGetLog() {
@@ -247,22 +271,38 @@ class TerminalActionsComponent extends Component {
                 </div>
                 <div className="row my-2">
                     <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <select className="form-select" aria-label="Default select example" style={{marginRight: "5px"}}
+                        onChange={(e)=>{this.setState({
+                            selectedCommand: +e.target.value
+                        })}}>
+                            <option value="0" selected>Выберите выполняемую команду</option>
+                            <option value="1">Авторизация</option>
+                            <option value="2">Выход из режима администратора</option>
+                            <option value="3">Смена пароля</option>
+                            <option value="4">Проверка и загрузка обновления</option>
+                            <option value="5">Загрузка ключей-хозяев</option>
+                            <option value="6">Загрузка рабочих ключей</option>
+                            <option value="7">Проверка связи с сервером</option>
+                            <option value="8">Сведения о терминале</option>
+                            <option value="9">Очистка журнала</option>
+                            <option value="10">Сброс пароля</option>
+                        </select>
+                        {(this.state.selectedCommand === 3 || this.state.selectedCommand === 1 || this.state.selectedCommand === 9)
+                            ?<input type="text" className="form-control" placeholder={"Введите пароль"}/>:""}
+                        {this.state.selectedCommand === 3?<input type="text" className="form-control" placeholder={"Введите новый пароль"}/>:""}
                         <div className="btn-group mr-2" role="group">
-                                <button type="button" className="btn btn-outline-secondary" onClick={this.actionGetInfo}>{this.activeTranslation.get}</button>
-                        </div>
-                        <div className="btn-group mr-2" role="group">
-                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionUpdate}>{this.activeTranslation.update}</button>
-                        </div>
-                        <div className="btn-group mr-2" role="group">
-                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionGetLog}>{this.activeTranslation.getLog}</button>
-                        </div>
-                        <div className="btn-group mr-2" role="group">
-                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionLoadKeys}>{this.activeTranslation.loadKey}</button>
-                        </div>
-                        <div className="btn-group mr-2" role="group">
-                            <button type="button" className="btn btn-outline-secondary" onClick={this.actionUpdateApplications}>{this.activeTranslation.upSoft}</button>
+                                <button disabled={this.state.selectedCommand==0} type="button" className="btn btn-outline-secondary" onClick={this.sendCommand}>Отправить</button>
                         </div>
                     </div>
+                </div>
+                <div>
+                    {this.state.serverResponce?
+                        <textarea defaultValue={this.state.serverResponce} style={{
+                            width: "100%",
+                            height: "8em"
+                        }}/>
+                        :""
+                    }
                 </div>
                 { (this.state.enablePolling || this.state.hasResult) &&
                     <div className="row my-2">

@@ -1,10 +1,15 @@
 const express = require('express');
 const app = express();
+
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const url = require('url');
 const querystring = require('querystring');
+const cors = require('cors');
+
+app.use(cors());
+app.options('*', cors());
 
 const port = 8082
 const io = new Server(server);

@@ -11,7 +11,8 @@ let GlobalContextProvider = props => {
         language="ru"
     const [state, setState] = useState({
         lang: language,
-        way_to_logging_backend: "http://localhost:8081/api/log"
+        way_to_logging_backend: "http://localhost:8081/api/log",
+        way_to_socket_backend: "http://localhost:8083/sendCommand"
     });
     return (
         <LangSelectorContext.Provider value={{ data: state, setData: setState }}>

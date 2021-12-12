@@ -22,7 +22,7 @@ export default function SocketDataDisplayer() {
     let [title, setTitle] = useState("Ожидание команды")
     let [command, setCommand] = useState("________")
     let [TID, setTid] = useState(Math.floor(Math.random()*100000));       //имитация ID терминала
-
+    let [connected, setConnected] = useState(false)
     let socket = io(wayToSocket);
 
 
@@ -40,7 +40,6 @@ export default function SocketDataDisplayer() {
             setCommand("")
         }, 10000)
     })
-
     socket.on("logout", msg=>{  //выхода из режима администратора
         setTitle("получена команда разавторизации")
         setCommand(msg)
@@ -55,8 +54,6 @@ export default function SocketDataDisplayer() {
             setCommand("")
         }, 10000)
     })
-
-
     socket.on("change", msg=>{  //смена пароля
         setTitle("получена команда смены пароля")
         setCommand(msg)
@@ -71,7 +68,6 @@ export default function SocketDataDisplayer() {
             setCommand("")
         }, 10000)
     })
-
     socket.on("update", msg=>{  //смена пароля
         setTitle("получена команда обновления")
         setCommand(msg)
@@ -86,7 +82,6 @@ export default function SocketDataDisplayer() {
             setCommand("")
         }, 10000)
     })
-
     socket.on("lwk", msg=>{  //смена пароля
         setTitle("получена команда обновления рабочих ключей")
         setCommand(msg)
@@ -132,13 +127,11 @@ export default function SocketDataDisplayer() {
     socket.on("param", msg=>{  //смена пароля
         setTitle("Запрос параметров")
         setCommand(msg)
-        getLocation().then((geo)=>{
+        getLocation(paramsResp).then((paramsWithGeo)=>{
             setTimeout(()=>{
-                let params_ = JSON.parse(JSON.stringify(params_))
-                params_ = params_.replace("mockedGeolocationInformation", geo)
-                socket.emit("responce", params_)
+                socket.emit("responce", paramsWithGeo)
                 setTitle("Получение параметров заверщено. Выслан ответ")
-                setCommand(paramsResp)
+                setCommand(paramsWithGeo)
             }, 5000)
 
             setTimeout(()=>{
@@ -179,15 +172,24 @@ export default function SocketDataDisplayer() {
 
 
     useEffect(()=>{
-        socket.emit("init", JSON.stringify({
-            TID: TID,
-        }))
+
     }, [])
     return (
         <View>
-            <Text>
-                My TID: {TID}
-            </Text>
+            {!connected?<Text>Ввести мой TID</Text>
+            :<Text>Мой TID {TID}</Text>}
+            {!connected?<TextInput
+                onChangeText={setTid}
+                value={TID}
+            />:null}
+            {!connected?<Button onPress = {()=>{
+                socket.emit("init", JSON.stringify({
+                    TID: TID,
+                }))
+                alert("Подключение Осуществлено")
+                setConnected(true)
+            }}
+            title={"Подключиться к серверу"}/>:null}
             <Text style = {{
                 marginTop: "3%",
                 //fontSize: 36      для видеозаписей
@@ -200,16 +202,7 @@ export default function SocketDataDisplayer() {
             }}>
                 {command}
             </Text>
-            {/*<Button
-                onPress={()=>{
-                    socket.emit('init',JSON.stringify({
-                        TID: TID,
-                    }));
-                }}
-                title="button test"
-                color="#841584"
-                accessibilityLabel="Learn more about this purple button"
-            />*/}
+
         </View>
     );
 }

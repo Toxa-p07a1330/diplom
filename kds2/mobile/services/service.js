@@ -1,5 +1,6 @@
 import * as Location from 'expo-location';
-let getLocation = async ()=>{
+import {paramsResp} from "../mocked/answers";
+let getLocation = async (params)=>{
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== 'granted') {
         alert('Permission to access location was denied');
@@ -7,7 +8,10 @@ let getLocation = async ()=>{
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    return JSON.stringify(location);
+    let locationString =  JSON.stringify(location);
+    let params_ = params+""
+    params_ = params_.replace("mockedGeolocationInformation", locationString)
+    return params_;
 
 }
 export {getLocation}
