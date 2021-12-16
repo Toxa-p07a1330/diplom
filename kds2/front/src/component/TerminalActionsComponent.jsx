@@ -7,6 +7,8 @@ import {LangSelectorContext} from "../context/GlobalContextProvider";
 import {getTranslations} from "../static/transltaions";
 import {sendCommandToSocket} from "../service/socketService";
 import XMLViewer from "react-xml-viewer";
+import {param} from "express/lib/router";
+import TerminalOnMap from "./TerminalOnMap";
 const commands = [
     "",
     "login",
@@ -48,12 +50,12 @@ class TerminalActionsComponent extends Component {
             enablePolling: false,
             inforesult: undefined,
             hasResult: false,
-           tkeys: [],
-           acquirer: undefined,
-           cmd: -1,
-           shouldShowMap: false,
-           selectedCommand: 0,
-           serverResponce: ""
+            tkeys: [],
+            acquirer: undefined,
+            cmd: -1,
+            shouldShowMap: false,
+            selectedCommand: 0,
+            serverResponce: ""
        }
        this.timer = null
 
@@ -165,18 +167,37 @@ class TerminalActionsComponent extends Component {
         });
     }
 
+    xml = null;
+    shouldShowMap = null;
     sendCommand()
     {
         (async ()=>{
 
+            this.xml = null;
+            this.shouldShowMap = null;
+
             let tid = this.state.tid;
             let command = commands[this.state.selectedCommand]
 
-            let xml = await sendCommandToSocket(this.context.way_to_logging_backend, tid, command);
-            this.setState({serverResponce: xml})
+            this.xml = await sendCommandToSocket(this.context.way_to_logging_backend, tid, command);
+            this.setState({serverResponce: this.xml})
+            document.getElementById("xmlShowTextArea").value = this.xml;
+            if (command === "param"){
+                const parser = new DOMParser();
+                let xml = parser.parseFromString(this.xml, "application/xml");
+                let parameters = xml.getElementsByTagName("geolocation")[0].innerHTML;
+                let js_Object = JSON.parse(parameters);
+                console.log(js_Object);
+                let latitude = js_Object.coords.latitude;
+                let longitude = js_Object.coords.longitude;
+                console.log(longitude)
+                console.log(latitude)
+                this.shouldShowMap = js_Object.coords;
+            }
             this.forceUpdate();
         })()
     }
+
 
     actionGetLog() {
         this.startAction("getlog");
@@ -296,12 +317,18 @@ class TerminalActionsComponent extends Component {
                     </div>
                 </div>
                 <div>
-                    {this.state.serverResponce?
-                        <textarea defaultValue={this.state.serverResponce} style={{
+                    {this.xml?
+                        <textarea id={"xmlShowTextArea"} disabled={true} style={{
                             width: "100%",
                             height: "8em"
                         }}/>
                         :""
+                    }
+                    {
+                        this.shouldShowMap?<>
+                            <TerminalOnMap coords = {this.shouldShowMap}/>
+                            <br/><br/>
+                        </>:""
                     }
                 </div>
                 { (this.state.enablePolling || this.state.hasResult) &&

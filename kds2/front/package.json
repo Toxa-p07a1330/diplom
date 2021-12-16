@@ -64,7 +64,9 @@
     ]
   },
   "devDependencies": {
+    "@2gis/mapgl": "^1.21.0",
     "cors": "^2.8.5",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "react-yandex-maps": "^4.6.0"
   }
 }
