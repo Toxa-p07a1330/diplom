@@ -19,7 +19,7 @@ const commandMessageMapping = {
     "login": "<login>\n" +
         "<password>12345678</password>\n" +
         "</login>",
-    "logount": "<logout>\n" +
+    "logout": "<logout>\n" +
         "<token>DE9773A8CB888560AB0F89C07623FE03</token>\n" +
         "</logout>",
     'change': "<changepassword>\n" +
